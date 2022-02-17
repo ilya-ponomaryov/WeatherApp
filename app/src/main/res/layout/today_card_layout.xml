@@ -8,7 +8,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/button_blue"/>
+        android:background="@drawable/today_card_layout_bg"/>
 
     <TextView
         android:id="@+id/date_today_card_text"
