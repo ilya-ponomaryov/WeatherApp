@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" >
 
         <ImageButton
+            android:id="@+id/location_toolbar_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_corner"
@@ -36,6 +37,18 @@
             android:layout_gravity="center"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp"/>
+
+        <ImageButton
+            android:id="@+id/search_toolbar_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_search_24"
+            android:background="@drawable/round_corner"
+            android:minHeight="32dp"
+            android:minWidth="32dp"
+            android:contentDescription="@string/search"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"/>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView
