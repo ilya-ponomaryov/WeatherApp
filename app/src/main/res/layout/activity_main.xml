@@ -37,6 +37,22 @@
             android:layout_gravity="center"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_wb_sunny_24"
+            android:background="@drawable/round_corner"
+            android:minWidth="32dp"
+            android:minHeight="32dp"
+            android:contentDescription="@string/themes_mode"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"/>
 
         <ImageButton
             android:id="@+id/search_toolbar_btn"
@@ -49,6 +65,7 @@
             android:contentDescription="@string/search"
             android:layout_gravity="end"
             android:layout_marginEnd="16dp"/>
+        </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView
