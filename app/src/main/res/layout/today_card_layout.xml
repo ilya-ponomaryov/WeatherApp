@@ -27,6 +27,7 @@
         android:layout_marginBottom="24dp">
 
     <TextView
+        android:id="@+id/temp_today_card_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="30°"
@@ -35,6 +36,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="2dp"/>
     <TextView
+        android:id="@+id/desc_today_card_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ясно, ощущается как 32°"

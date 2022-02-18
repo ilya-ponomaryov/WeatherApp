@@ -4,4 +4,7 @@
     <string name="search">Search</string>
     <string name="themes_mode">Themes mode</string>
     <string name="weather_icon">Weather icon</string>
+    <string name="wind">Ветер</string>
+    <string name="humidity">Влажность</string>
+    <string name="precipitation">Осадки</string>
 </resources>
