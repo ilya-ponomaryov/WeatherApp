@@ -8,7 +8,7 @@ data class Hourly(
     val humidity: Int,
     val pop: Int,
     val pressure: Int,
-    val snow: SnowX,
+    val snow: Snow,
     val temp: Double,
     val uvi: Double,
     val visibility: Int,

@@ -1,10 +1,7 @@
 package com.example.weatherapp.data.network
 
-import com.example.weatherapp.data.models.Weather
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.example.weatherapp.data.models.WeatherData
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -16,7 +13,7 @@ interface WeatherService {
         @Path("exclude")exclude: String,
         @Path("units")units: String,
         @Path("appid")appid: String,
-    ): Response<Weather>
+    ): Response<WeatherData>
 
     /*companion object {
         fun create() : WeatherService {

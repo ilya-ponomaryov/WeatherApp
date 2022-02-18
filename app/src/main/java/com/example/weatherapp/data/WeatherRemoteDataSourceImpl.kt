@@ -1,7 +1,7 @@
 package com.example.weatherapp.data
 
 import com.example.weatherapp.Result
-import com.example.weatherapp.data.models.Weather
+import com.example.weatherapp.data.models.WeatherData
 import com.example.weatherapp.data.models.WeatherRequest
 import com.example.weatherapp.data.network.WeatherService
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ class WeatherRemoteDataSourceImpl @Inject constructor(
     private val weatherService: WeatherService
 ) : WeatherRemoteDataSource {
 
-    override suspend fun getWeather(weatherRequest: WeatherRequest): Result<Weather>
+    override suspend fun getWeather(weatherRequest: WeatherRequest): Result<WeatherData>
     = withContext(Dispatchers.IO) {
         try {
             val response = weatherService.getWeather(
