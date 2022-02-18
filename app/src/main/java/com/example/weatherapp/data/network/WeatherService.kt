@@ -1,6 +1,6 @@
-package com.example.weatherapp.network
+package com.example.weatherapp.data.network
 
-import com.example.weatherapp.models.Weather
+import com.example.weatherapp.data.models.Weather
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Response
 import retrofit2.Retrofit

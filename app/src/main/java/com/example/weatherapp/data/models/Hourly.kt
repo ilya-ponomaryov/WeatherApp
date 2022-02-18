@@ -1,4 +1,4 @@
-package com.example.weatherapp.models
+package com.example.weatherapp.data.models
 
 data class Hourly(
     val clouds: Int,
