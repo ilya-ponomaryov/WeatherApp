@@ -6,4 +6,5 @@
     <color name="toolbar_button_gray">#F3F5F8</color>
     <color name="text_color">#2A2D33</color>
     <color name="another_text_color">#8F96A1</color>
+    <color name="hour_card_color">#EAECEF</color>
 </resources>
