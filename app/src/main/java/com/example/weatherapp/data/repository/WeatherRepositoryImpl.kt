@@ -6,9 +6,7 @@ import com.example.weatherapp.data.models.*
 import com.example.weatherapp.domain.WeatherRepository
 import javax.inject.Inject
 
-class WeatherRepositoryImpl @Inject constructor(
-    private val weatherRemoteDataSource: WeatherRemoteDataSource
-) : WeatherRepository {
+class WeatherRepositoryImpl (private val weatherRemoteDataSource: WeatherRemoteDataSource) : WeatherRepository {
 
     /*override suspend fun getCurrentWeather(): Result<Current> {
 

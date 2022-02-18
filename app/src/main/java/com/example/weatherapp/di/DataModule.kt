@@ -1,5 +1,6 @@
 package com.example.weatherapp.di
 
+import com.example.weatherapp.data.WeatherRemoteDataSource
 import com.example.weatherapp.data.network.WeatherService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -28,5 +29,6 @@ class DataModule {
     @Provides
     @Singleton
     fun provideWeatherService(retrofit: Retrofit) : WeatherService = retrofit.create(WeatherService::class.java)
+
 
 }
