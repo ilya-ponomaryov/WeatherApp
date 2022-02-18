@@ -1,5 +1,5 @@
 package com.example.weatherapp.data.models
 
 data class Snow(
-    val `1h`: Double
+    val oneHour: Double
 )
