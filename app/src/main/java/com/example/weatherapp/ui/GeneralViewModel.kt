@@ -32,8 +32,6 @@ class GeneralViewModel @Inject constructor(
     get() = _weatherLiveData
 
     private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
-
-
         viewModelScope.launch {
             when(val weatherResult = getWeatherFromNetworkUseCase.invoke(weatherRequest)) {
                 is Result.Loading -> {
@@ -42,7 +40,6 @@ class GeneralViewModel @Inject constructor(
                 is Result.Success -> {
                     Log.d("ViewModelLog", "Success")
                     _weatherLiveData.postValue(weatherResult.data!!)
-                    Log.d("ViewModelLog", weatherResult.data.toString())
                 }
                 is Result.Error -> {
                     Log.d("ViewModelLog", "Error: ${weatherResult.exception}")

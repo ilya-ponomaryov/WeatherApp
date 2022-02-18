@@ -18,7 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DataModule {
     @Provides
-    fun provideBaseUrl() : String = ""
+    fun provideBaseUrl() : String = "https://api.openweathermap.org"
 
     @Provides
     @Singleton
