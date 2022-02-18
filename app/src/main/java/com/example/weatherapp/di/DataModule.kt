@@ -1,7 +1,7 @@
 package com.example.weatherapp.di
 
-import com.example.weatherapp.data.WeatherRemoteDataSource
-import com.example.weatherapp.data.WeatherRemoteDataSourceImpl
+import com.example.weatherapp.data.network.source.WeatherRemoteDataSource
+import com.example.weatherapp.data.network.source.WeatherRemoteDataSourceImpl
 import com.example.weatherapp.data.network.WeatherService
 import com.example.weatherapp.data.repository.WeatherRepositoryImpl
 import com.example.weatherapp.domain.WeatherRepository
