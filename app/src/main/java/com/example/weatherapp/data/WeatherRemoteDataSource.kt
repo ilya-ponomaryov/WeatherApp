@@ -1,6 +1,6 @@
 package com.example.weatherapp.data
 
-interface WeatherSource {
+interface WeatherRemoteDataSource {
 
     fun getWeather()
 }
