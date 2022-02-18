@@ -18,7 +18,7 @@ interface WeatherService {
         @Path("appid")appid: String,
     ): Response<Weather>
 
-    companion object {
+    /*companion object {
         fun create() : WeatherService {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -27,5 +27,5 @@ interface WeatherService {
                 .build()
             return retrofit.create(WeatherService::class.java)
         }
-    }
+    }*/
 }
