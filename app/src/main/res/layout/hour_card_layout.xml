@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/icon_hour_card_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="26dp"
         android:contentDescription="@string/weather_icon"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="9dp"/>

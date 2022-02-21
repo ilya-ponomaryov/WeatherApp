@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.data.models.Current
@@ -82,9 +83,13 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
 
     inner class DayViewHolder(private val binding: DayCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(daily: Daily) {
+            val adapter = HourlyRvAdapter(context)
+            adapter.getHourlyData(weatherDataList[0].hourly)
             binding.dateDayCardText.text = "00.00.00"
             binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
+            binding.hourListDayCardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.hourListDayCardRv.adapter = adapter
         }
     }
 
