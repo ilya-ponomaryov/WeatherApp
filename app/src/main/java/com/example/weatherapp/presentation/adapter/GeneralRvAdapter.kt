@@ -93,6 +93,9 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
             binding.hourListDayCardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.hourListDayCardRv.adapter = adapter
+            Glide.with(context)
+                .load("http://openweathermap.org/img/w/" + daily.weather[0].icon + ".png")
+                .into(binding.iconDayCardImg)
         }
     }
 
