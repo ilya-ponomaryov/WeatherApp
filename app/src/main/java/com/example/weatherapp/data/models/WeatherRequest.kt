@@ -7,5 +7,6 @@ data class WeatherRequest(
     val lon: Double,
     val exclude: String,
     val units: String,
+    val lang: String,
     val appid: String
 )

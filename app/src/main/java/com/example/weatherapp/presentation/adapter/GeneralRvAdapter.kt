@@ -12,6 +12,7 @@ import com.example.weatherapp.data.models.Daily
 import com.example.weatherapp.data.models.WeatherData
 import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.databinding.TodayCardLayoutBinding
+import java.util.*
 
 class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val weatherDataList = arrayListOf<WeatherData>()
@@ -67,10 +68,11 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
 
     inner class TodayViewHolder(private val binding: TodayCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(current: Current) {
-            binding.dateTodayCardText.text = "00.00.00"
+            val date = Date(current.dt.toLong() * 1000)
+            binding.dateTodayCardText.text = "Сегодня, " + date.toLocaleString()
             binding.tempTodayCardText.text = current.temp.toInt().toString() + "°"
             binding.descTodayCardText.text=
-                current.weather[0].main + " ощущается как " + current.feels_like.toInt().toString()
+                current.weather[0].description + ", ощущается как " + current.feels_like.toInt().toString()
 
             Glide.with(context)
                 .load("http://openweathermap.org/img/w/" + current.weather[0].icon + ".png")
@@ -85,7 +87,8 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
         fun bind(daily: Daily) {
             val adapter = HourlyRvAdapter(context)
             adapter.getHourlyData(weatherDataList[0].hourly)
-            binding.dateDayCardText.text = "00.00.00"
+            val date = Date(daily.dt.toLong() * 1000)
+            binding.dateDayCardText.text = date.toLocaleString()
             binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
             binding.hourListDayCardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

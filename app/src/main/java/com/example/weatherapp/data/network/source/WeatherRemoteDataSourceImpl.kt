@@ -20,6 +20,7 @@ class WeatherRemoteDataSourceImpl @Inject constructor(
                 weatherRequest.lon,
                 weatherRequest.exclude,
                 weatherRequest.units,
+                weatherRequest.lang,
                 weatherRequest.appid)
             if (response.isSuccessful) {
                 return@withContext Result.Success(response.body()!!)
