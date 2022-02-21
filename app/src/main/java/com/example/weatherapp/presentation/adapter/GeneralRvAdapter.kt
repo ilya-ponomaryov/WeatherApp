@@ -10,7 +10,7 @@ import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.databinding.TodayCardLayoutBinding
 
 class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var weatherData: WeatherData
+    private val weatherDataList = arrayListOf<WeatherData>()
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) {
@@ -52,11 +52,11 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     private fun initTodayViewHolder(holder: TodayViewHolder) {
-        holder.bind(weatherData.current)
+        holder.bind(weatherDataList[0].current)
     }
 
     private fun initDayViewHolder(holder: DayViewHolder, position: Int) {
-        holder.bind(weatherData.daily[position])
+        holder.bind(weatherDataList[0].daily[position])
     }
 
     override fun getItemCount(): Int = 5
@@ -65,7 +65,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(current: Current) {
             binding.dateTodayCardText.text = "00.00.00"
             binding.tempTodayCardText.text = current.temp.toInt().toString()
-            binding.descTodayCardText.text = current.weather[0].main + "ощущается как" + current.feels_like.toInt().toString()
+            binding.descTodayCardText.text = current.weather[0].main + " ощущается как " + current.feels_like.toInt().toString()
         }
 
     }
@@ -79,6 +79,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun getWeatherData(data: WeatherData) {
-        weatherData = data
+        weatherDataList.clear()
+        weatherDataList.add(data)
     }
 }
