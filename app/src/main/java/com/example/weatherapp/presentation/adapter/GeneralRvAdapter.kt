@@ -77,4 +77,8 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.tempNightCardText.text = daily.temp.night.toInt().toString()
         }
     }
+
+    fun getWeatherData(data: WeatherData) {
+        weatherData = data
+    }
 }
