@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapp.R
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.presentation.adapter.GeneralRvAdapter
 
@@ -22,6 +25,7 @@ class GeneralFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var generalRvAdapter: GeneralRvAdapter
+    private lateinit var navController: NavController
 
     companion object {
         fun newInstance() = GeneralFragment()
@@ -33,8 +37,13 @@ class GeneralFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        navController = findNavController()
         _binding = GeneralFragmentBinding.inflate(inflater, container, false)
         recyclerView = binding.generalRv
+
+        binding.locationToolbarBtn.setOnClickListener {
+            navController.navigate(R.id.action_generalFragment_to_generalTodayFragment)
+        }
         return binding.root
     }
 
