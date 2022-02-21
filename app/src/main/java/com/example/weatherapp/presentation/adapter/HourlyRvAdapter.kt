@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.data.models.Hourly
 import com.example.weatherapp.databinding.HourCardLayoutBinding
+import java.util.*
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
 
 class HourlyRvAdapter(private val context: Context) : RecyclerView.Adapter<HourlyRvAdapter.ViewHolder>() {
     private val hourlyList = arrayListOf<Hourly>()
@@ -24,8 +27,9 @@ class HourlyRvAdapter(private val context: Context) : RecyclerView.Adapter<Hourl
 
     inner class ViewHolder(private val binding: HourCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Hourly) {
+            val date = Date(item.dt.toLong() * 1000)
             binding.tempHourCardText.text = item.temp.toInt().toString() + "°"
-            binding.timeHourCardText.text = "00:00"
+            binding.timeHourCardText.text = date.hours.toString() + ":" + date.minutes + "0"
             Glide.with(context)
                 .load("http://openweathermap.org/img/w/" + item.weather[0].icon + ".png")
                 .into(binding.iconHourCardImg)
