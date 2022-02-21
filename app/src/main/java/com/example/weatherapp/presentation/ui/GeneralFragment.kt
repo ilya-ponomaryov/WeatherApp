@@ -43,9 +43,8 @@ class GeneralFragment : Fragment() {
         navController = findNavController()
         _binding = GeneralFragmentBinding.inflate(inflater, container, false)
         recyclerView = binding.generalRv
-
         binding.locationToolbarBtn.setOnClickListener {
-            navController.navigate(R.id.action_generalFragment_to_generalTodayFragment)
+            navController.navigate(R.id.action_generalFragment_to_locationFragment)
         }
         return binding.root
     }
