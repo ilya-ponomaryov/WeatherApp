@@ -5,9 +5,34 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.LocationFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="match_parent" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/location_alpha_bg">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom">
+        <Button
+            android:id="@+id/add_city_location_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_city"
+            android:textAllCaps="false"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center_horizontal"/>
+        <ImageButton
+            android:id="@+id/location_city_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_outline_location_on_24"
+            android:background="@drawable/round_corner"/>
+        </LinearLayout>
 
+    </FrameLayout>
 </FrameLayout>
