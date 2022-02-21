@@ -54,7 +54,7 @@ class GeneralFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        generalRvAdapter = GeneralRvAdapter()
+        generalRvAdapter = GeneralRvAdapter(requireContext())
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = generalRvAdapter
     }
