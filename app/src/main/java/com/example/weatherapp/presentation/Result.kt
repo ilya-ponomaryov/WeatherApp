@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.presentation
 
 sealed class Result<out T>(
     val data: T? = null

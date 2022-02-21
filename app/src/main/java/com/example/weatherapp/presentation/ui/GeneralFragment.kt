@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui
+package com.example.weatherapp.presentation.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.weatherapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -36,7 +35,7 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
-            Log.d("GeneralFragmentLog", it.current.temp.toString())
+            Log.d("GeneralFragmentLog", it.current.temp.toInt().toString())
         })
     }
 

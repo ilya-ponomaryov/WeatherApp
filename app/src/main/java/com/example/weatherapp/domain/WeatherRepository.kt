@@ -1,6 +1,6 @@
 package com.example.weatherapp.domain
 
-import com.example.weatherapp.Result
+import com.example.weatherapp.presentation.Result
 import com.example.weatherapp.data.models.*
 
 interface WeatherRepository {

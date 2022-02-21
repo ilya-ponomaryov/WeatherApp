@@ -1,11 +1,11 @@
-package com.example.weatherapp.ui
+package com.example.weatherapp.presentation.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.Result
+import com.example.weatherapp.presentation.Result
 import com.example.weatherapp.data.models.WeatherData
 import com.example.weatherapp.data.models.WeatherRequest
 import com.example.weatherapp.domain.usecases.GetWeatherFromNetworkUseCase

@@ -1,6 +1,6 @@
 package com.example.weatherapp.data.repository
 
-import com.example.weatherapp.Result
+import com.example.weatherapp.presentation.Result
 import com.example.weatherapp.data.network.source.WeatherRemoteDataSource
 import com.example.weatherapp.data.models.*
 import com.example.weatherapp.domain.WeatherRepository
