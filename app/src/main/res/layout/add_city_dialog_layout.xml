@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            style="@style/SearchAutoCompleteTextView"
             android:layout_marginTop="16dp"/>
 
         <LinearLayout
@@ -32,7 +33,12 @@
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
                 android:layout_marginEnd="9dp"
-                android:backgroundTint="@color/toolbar_button_gray"
+                android:paddingStart="42dp"
+                android:paddingEnd="42dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/cancel_round_button"
+                app:backgroundTint="@null"
                 android:textColor="@color/text_gray"
                 android:text="@string/cancel"/>
 
@@ -40,6 +46,11 @@
                 android:id="@+id/add_city_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/add_round_button"
+                android:paddingStart="42dp"
+                android:paddingEnd="42dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:textAllCaps="false"
                 android:text="@string/add"/>
 

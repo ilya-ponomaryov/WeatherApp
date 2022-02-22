@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/add_round_button.xml" value="0.173" />
+        <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/cancel_round_button.xml" value="0.173" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/insert_dialog.xml" value="0.173" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/location_offset_bg.xml" value="0.1735" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/round_corner.xml" value="0.172" />
