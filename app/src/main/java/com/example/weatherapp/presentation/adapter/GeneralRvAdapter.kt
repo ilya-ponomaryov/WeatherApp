@@ -69,10 +69,8 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
 
     inner class TodayViewHolder(private val binding: TodayCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(current: Current) {
-            val date = Date(current.dt.toLong() * 1000)
-            //binding.dateTodayCardText.text = "Сегодня, " + date.toLocaleString()
             val converter = DateConverter()
-            binding.dateTodayCardText.text = converter.getTodayDateAsString(current.dt)
+            binding.dateTodayCardText.text = "Сегодня, "+ converter.getDateAsString(current.dt)
             binding.tempTodayCardText.text = current.temp.toInt().toString() + "°"
             binding.descTodayCardText.text=
                 current.weather[0].description + ", ощущается как " + current.feels_like.toInt().toString()
@@ -90,8 +88,8 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
         fun bind(daily: Daily) {
             val adapter = HourlyRvAdapter(context)
             adapter.getHourlyData(weatherDataList[0].hourly)
-            val date = Date(daily.dt.toLong() * 1000)
-            binding.dateDayCardText.text = date.toLocaleString()
+            val converter = DateConverter()
+            binding.dateDayCardText.text = converter.getDateAsString(daily.dt)
             binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
             binding.hourListDayCardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

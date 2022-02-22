@@ -6,12 +6,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DateConverter {
-    fun getTodayDateAsString(unix: Int): String{
+    fun getDateAsString(unix: Int): String{
         val date = getDateFromUnix(unix)
         val weekDay = SimpleDateFormat("EE", Locale("ru")).format(date.time)
         val day = SimpleDateFormat("dd", Locale("ru")).format(date.time)
         val month = SimpleDateFormat("MMMM", Locale("ru")).format(date.time)
-        return "Сегодня, $day $month, $weekDay"
+        return "$day $month, $weekDay"
     }
 
     private fun getDateFromUnix(unix: Int): Date {
