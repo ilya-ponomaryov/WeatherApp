@@ -8,4 +8,5 @@
     <color name="another_text_color">#8F96A1</color>
     <color name="hour_card_color">#EAECEF</color>
     <color name="text_gray">#707782</color>
+    <color name="border_gray">#E7ECF3</color>
 </resources>

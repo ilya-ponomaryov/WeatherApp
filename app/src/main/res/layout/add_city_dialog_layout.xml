@@ -11,6 +11,7 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_add_city_view"
+            android:background="@drawable/search_view_round"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
