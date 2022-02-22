@@ -7,4 +7,5 @@
     <color name="text_color">#2A2D33</color>
     <color name="another_text_color">#8F96A1</color>
     <color name="hour_card_color">#EAECEF</color>
+    <color name="text_gray">#707782</color>
 </resources>

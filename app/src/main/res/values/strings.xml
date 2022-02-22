@@ -8,4 +8,6 @@
     <string name="humidity">Влажность</string>
     <string name="precipitation">Осадки</string>
     <string name="add_city">Добавить город</string>
+    <string name="cancel">Отменить</string>
+    <string name="add">Добавить</string>
 </resources>
