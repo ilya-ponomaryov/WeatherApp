@@ -11,17 +11,9 @@
         android:label="general_fragment"
         tools:layout="@layout/general_fragment" >
         <action
-            android:id="@+id/action_generalFragment_to_generalTodayFragment"
-            app:destination="@id/generalTodayFragment" />
-        <action
             android:id="@+id/action_generalFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/generalTodayFragment"
-        android:name="com.example.weatherapp.presentation.ui.GeneralTodayFragment"
-        android:label="general_today_fragment"
-        tools:layout="@layout/general_today_fragment" />
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.weatherapp.presentation.ui.LocationFragment"
