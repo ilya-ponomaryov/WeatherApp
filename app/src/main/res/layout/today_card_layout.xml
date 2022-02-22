@@ -10,6 +10,12 @@
         android:layout_height="match_parent"
         android:background="@drawable/today_card_layout_bg"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/intersect"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
