@@ -28,7 +28,8 @@ class LocationFragment : Fragment() {
     ): View? {
         _binding = LocationFragmentBinding.inflate(inflater, container, false)
         binding.addCityLocationBtn.setOnClickListener {
-
+            val addCityDialog = AddCityDialog()
+            fragmentManager?.let { it1 -> addCityDialog.show(it1, "Dialog") }
         }
         return binding.root
     }

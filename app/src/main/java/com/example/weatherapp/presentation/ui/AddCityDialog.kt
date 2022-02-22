@@ -36,5 +36,6 @@ class AddCityDialog : DialogFragment() {
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.insert_dialog)
     }
 }
