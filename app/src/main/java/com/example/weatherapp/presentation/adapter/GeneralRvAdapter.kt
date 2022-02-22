@@ -12,6 +12,7 @@ import com.example.weatherapp.data.models.Daily
 import com.example.weatherapp.data.models.WeatherData
 import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.databinding.TodayCardLayoutBinding
+import com.example.weatherapp.domain.DateConverter
 import java.util.*
 
 class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -69,7 +70,9 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
     inner class TodayViewHolder(private val binding: TodayCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(current: Current) {
             val date = Date(current.dt.toLong() * 1000)
-            binding.dateTodayCardText.text = "Сегодня, " + date.toLocaleString()
+            //binding.dateTodayCardText.text = "Сегодня, " + date.toLocaleString()
+            val converter = DateConverter()
+            binding.dateTodayCardText.text = converter.getTodayDateAsString(current.dt)
             binding.tempTodayCardText.text = current.temp.toInt().toString() + "°"
             binding.descTodayCardText.text=
                 current.weather[0].description + ", ощущается как " + current.feels_like.toInt().toString()
