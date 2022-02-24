@@ -9,14 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.data.models.Current
 import com.example.weatherapp.data.models.Daily
+import com.example.weatherapp.data.models.Hourly
 import com.example.weatherapp.data.models.WeatherData
 import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.databinding.TodayCardLayoutBinding
 import com.example.weatherapp.domain.DateConverter
-import java.util.*
+import com.example.weatherapp.domain.HourlyDataConverter
 
 class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val weatherDataList = arrayListOf<WeatherData>()
+    private val hourList = arrayListOf<List<Hourly>>()
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) {
@@ -62,7 +64,7 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
     }
 
     private fun initDayViewHolder(holder: DayViewHolder, position: Int) {
-        holder.bind(weatherDataList[0].daily[position])
+        holder.bind(weatherDataList[0].daily[position], position)
     }
 
     override fun getItemCount(): Int = 5
@@ -85,9 +87,12 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
     }
 
     inner class DayViewHolder(private val binding: DayCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(daily: Daily) {
+        fun bind(daily: Daily, p: Int) {
             val adapter = HourlyRvAdapter(context)
-            adapter.getHourlyData(weatherDataList[0].hourly)
+            //adapter.getHourlyData(weatherDataList[0].hourly)
+            val c = HourlyDataConverter()
+            hourList.addAll(c.getHourlyData(weatherDataList[0].hourly))
+                adapter.getHourlyData(hourList[p-1])
             val converter = DateConverter()
             binding.dateDayCardText.text = converter.getDateAsString(daily.dt)
             binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"

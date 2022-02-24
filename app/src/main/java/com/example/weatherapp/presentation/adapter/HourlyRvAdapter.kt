@@ -14,6 +14,7 @@ import kotlin.time.Duration.Companion.minutes
 class HourlyRvAdapter(private val context: Context) : RecyclerView.Adapter<HourlyRvAdapter.ViewHolder>() {
     private val hourlyList = arrayListOf<Hourly>()
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = HourCardLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
@@ -23,7 +24,7 @@ class HourlyRvAdapter(private val context: Context) : RecyclerView.Adapter<Hourl
         holder.bind(hourlyList[position])
     }
 
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = hourlyList.size
 
     inner class ViewHolder(private val binding: HourCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Hourly) {
