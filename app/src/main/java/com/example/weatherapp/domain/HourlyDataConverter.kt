@@ -9,7 +9,6 @@ class HourlyDataConverter {
     fun getHourlyData(hourlyList: List<Hourly>): List<List<Hourly>> {
         val hours = arrayListOf(0, 3, 6, 9, 12, 15, 18, 21)
         val newList = arrayListOf<Hourly>()
-        val bufferList = arrayListOf<Hourly>()
         val data = arrayListOf<ArrayList<Hourly>>()
         val data1 = arrayListOf<Hourly>()
         val data2 = arrayListOf<Hourly>()
@@ -34,7 +33,6 @@ class HourlyDataConverter {
             if (bDay == localDate.day) {
                 for (h in hours) {
                     if (localDate.hours == h) {
-                        //bufferList.add(n)
                         if (bData != null) {
                                 when(p) {
                                     0 -> data1.add(bData)
@@ -58,56 +56,13 @@ class HourlyDataConverter {
             } else {
                 bData = n
                 bDay = localDate.day
-                Log.d("AddToData", "Add to data")
                 p=+1
             }
-
         }
-
-
         data.add(data1)
         data.add(data2)
         data.add(data3)
         data.add(data4)
-
-
-        //Log.d("Today", today.toString())
-        /*for (i in hourlyList) {
-            val date = Date(i.dt.toLong() * 1000)
-            val bufferDay = date.day
-            Log.d("Date", date.day.toString())
-            Log.d("bufferDay", bufferDay.toString())
-            if (bufferDay != today.day) {
-                var p = 0
-                for (j in hourlyList) {
-                    Log.d("J", j.toString())
-                    val ld = Date(j.dt.toLong() * 1000)
-                    if (ld.day == bufferDay) {
-                        for (h in hours) {
-                            //Log.d("Ld", ld.hours.toString())
-                            if (ld.hours == h.toInt()) {
-                                Log.d("h", h.toString())
-                                Log.d("ldh", ld.hours.toString())
-                                bufferList.add(j)
-                                Log.d("Add", "Add")
-                                Log.d("P", p.toString())
-
-                            }
-                        }
-                    } else  if (ld.day != today.day && p < 4){
-                        data.add(bufferList)
-                        Log.d("DataSize", data.size.toString())
-                        bufferList.clear()
-                        Log.d("Add", "Add to list")
-                        p += 1
-                    }
-
-                }
-            }
-        }*/
-
-        Log.d("data", data.toString())
-        Log.d("dataSize", data.size.toString())
         return data
     }
 }

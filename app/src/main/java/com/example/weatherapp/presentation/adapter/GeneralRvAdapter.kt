@@ -80,7 +80,6 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
             Glide.with(context)
                 .load("http://openweathermap.org/img/w/" + current.weather[0].icon + ".png")
                 .into(binding.iconTodayCardImg)
-            Log.d("Image", current.weather[0].icon)
 
         }
 
@@ -89,7 +88,6 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
     inner class DayViewHolder(private val binding: DayCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(daily: Daily, p: Int) {
             val adapter = HourlyRvAdapter(context)
-            //adapter.getHourlyData(weatherDataList[0].hourly)
             val c = HourlyDataConverter()
             hourList.addAll(c.getHourlyData(weatherDataList[0].hourly))
                 adapter.getHourlyData(hourList[p-1])
