@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="location">Location</string>
+    <string name="search">Search</string>
+    <string name="themes_mode">Themes mode</string>
+    <string name="weather_icon">Weather icon</string>
+    <string name="wind">Ветер</string>
+    <string name="humidity">Влажность</string>
+    <string name="precipitation">Осадки</string>
+    <string name="add_city">Добавить город</string>
+    <string name="cancel">Отменить</string>
+    <string name="add">Добавить</string>
+</resources>
