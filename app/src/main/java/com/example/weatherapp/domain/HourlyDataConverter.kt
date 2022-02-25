@@ -28,12 +28,22 @@ class HourlyDataConverter {
         val b = Date(newList[0].dt.toLong() * 1000)
         var bDay = b.day
         var p = 0
+        var bData: Hourly? = null
         for (n in newList) {
             val localDate = Date(n.dt.toLong() * 1000)
             if (bDay == localDate.day) {
                 for (h in hours) {
                     if (localDate.hours == h) {
                         //bufferList.add(n)
+                        if (bData != null) {
+                                when(p) {
+                                    0 -> data1.add(bData)
+                                    1 -> data2.add(bData)
+                                    2 -> data3.add(bData)
+                                    3 -> data4.add(bData)
+                                }
+                            bData = null
+                        }
                         Log.d("Hour", h.toString())
                         when(p) {
                             0 -> data1.add(n)
@@ -41,9 +51,12 @@ class HourlyDataConverter {
                             2 -> data3.add(n)
                             3 -> data4.add(n)
                         }
+
+
                     }
                 }
             } else {
+                bData = n
                 bDay = localDate.day
                 Log.d("AddToData", "Add to data")
                 p=+1
