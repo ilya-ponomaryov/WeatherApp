@@ -17,6 +17,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.common.SharingViewModel
 import com.example.weatherapp.general.presenter.adapters.GeneralRvAdapter
+import com.example.weatherapp.location.presenter.ui.AddCityDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -33,8 +34,6 @@ class GeneralFragment : Fragment() {
         fun newInstance() = GeneralFragment()
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,8 +41,10 @@ class GeneralFragment : Fragment() {
         navController = findNavController()
         _binding = GeneralFragmentBinding.inflate(inflater, container, false)
         recyclerView = binding.generalRv
-        binding.locationToolbarBtn.setOnClickListener {
-            navController.navigate(R.id.action_generalFragment_to_locationFragment)
+        binding.searchToolbarBtn.setOnClickListener {
+            val addCityDialog = AddCityDialog()
+            fragmentManager?.let { it1 -> addCityDialog.show(it1, "Dialog") }
+
         }
         return binding.root
     }
