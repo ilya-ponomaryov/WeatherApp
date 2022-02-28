@@ -1,10 +1,10 @@
 package com.example.weatherapp.common.di
 
-import com.example.weatherapp.features.general.data.network.sources.WeatherRemoteDataSource
-import com.example.weatherapp.features.general.data.network.sources.WeatherRemoteDataSourceImpl
-import com.example.weatherapp.features.general.data.network.WeatherService
-import com.example.weatherapp.features.general.data.network.repository.WeatherRepositoryImpl
-import com.example.weatherapp.features.general.domain.WeatherRepository
+import com.example.weatherapp.general.data.network.sources.WeatherRemoteDataSource
+import com.example.weatherapp.general.data.network.sources.WeatherRemoteDataSourceImpl
+import com.example.weatherapp.general.data.network.WeatherService
+import com.example.weatherapp.general.data.network.repository.WeatherRepositoryImpl
+import com.example.weatherapp.general.domain.WeatherRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
