@@ -6,6 +6,7 @@ import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
 import com.example.weatherapp.common.SharingViewModel
 import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
@@ -18,7 +19,7 @@ class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LocationViewModel by viewModels()
-    private val sharingViewModel: SharingViewModel by viewModels()
+    //private val sharingViewModel: SharingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +58,7 @@ class AddCityDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sharingViewModel = ViewModelProvider(requireActivity()).get(SharingViewModel::class.java)
         viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("AddCityDialog", it.toString())
             sharingViewModel.setShareLiveData(it)

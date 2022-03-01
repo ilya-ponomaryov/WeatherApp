@@ -56,8 +56,12 @@ class GeneralFragment : Fragment() {
             Log.d("GeneralFragmentLog", it.current.temp.toInt().toString())
             setupRecyclerView()
             generalRvAdapter.getWeatherData(it)
-            sharingViewModel.setShareLiveData(it)
+            //sharingViewModel.setShareLiveData(it)
         })
+        sharingViewModel.shareLiveData.observe(viewLifecycleOwner, Observer {
+            Log.d("Fetch", "Fetch: $it")
+        })
+
     }
 
     override fun onDestroyView() {
