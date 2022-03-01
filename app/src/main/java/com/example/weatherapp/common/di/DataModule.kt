@@ -57,6 +57,8 @@ class DataModule {
     fun provideLocationRemoteDataSource(locationService: LocationService) : LocationRemoteDataSource
     = LocationRemoteDataSourceImpl(locationService)
 
+    @Provides
+    @Singleton
     fun provideLocationRepository(locationRemoteDataSource: LocationRemoteDataSource): LocationRepository
     = LocationRepositoryImpl(locationRemoteDataSource)
 

@@ -10,6 +10,7 @@ import com.example.weatherapp.location.data.models.Location
 import com.example.weatherapp.location.data.models.LocationRequest
 import com.example.weatherapp.location.domain.usecases.GetLocationFromNetworkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +30,7 @@ class LocationViewModel @Inject constructor(
 
 
     fun getLocationFromNetwork() {
-        viewModelScope.launch {
+        viewModelScope.async {
             when (val locationResult = getLocationFromNetworkUseCase
                 .invoke(LocationRequest("Moscow", 1, "b4ffacf20b03eabce37d537a7d83a675"))) {
                 is Result.Success ->{
