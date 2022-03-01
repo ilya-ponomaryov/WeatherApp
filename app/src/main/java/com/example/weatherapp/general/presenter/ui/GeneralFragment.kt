@@ -17,6 +17,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.common.SharingViewModel
 import com.example.weatherapp.general.presenter.adapters.GeneralRvAdapter
+import com.example.weatherapp.location.data.models.Location
 import com.example.weatherapp.location.presenter.ui.AddCityDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,6 +60,7 @@ class GeneralFragment : Fragment() {
         })
         sharingViewModel.shareLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("Fetch", "Fetch: $it")
+            viewModel.setLocation(it as Location)
         })
 
     }

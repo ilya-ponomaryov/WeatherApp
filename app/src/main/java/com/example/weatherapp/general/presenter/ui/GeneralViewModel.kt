@@ -9,6 +9,7 @@ import com.example.weatherapp.common.Result
 import com.example.weatherapp.general.data.models.WeatherData
 import com.example.weatherapp.general.data.models.WeatherRequest
 import com.example.weatherapp.general.domain.usecases.GetWeatherFromNetworkUseCase
+import com.example.weatherapp.location.data.models.Location
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,6 +39,10 @@ class GeneralViewModel @Inject constructor(
     val weatherRequestLiveData : LiveData<WeatherRequest>
         get() = _weatherRequestLiveData
 
+    private val _locationLiveData = MutableLiveData<Location>()
+    val locationLiveData : LiveData<Location>
+        get() = _locationLiveData
+
     private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
         viewModelScope.launch {
             when(val weatherResult = getWeatherFromNetworkUseCase.invoke(weatherRequest)) {
@@ -53,6 +58,14 @@ class GeneralViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun setWeatherRequest(data: WeatherRequest) {
+        _weatherRequestLiveData.value = data
+    }
+
+    fun setLocation(data: Location) {
+        _locationLiveData.value = data
     }
 
 }
