@@ -3,16 +3,18 @@ package com.example.weatherapp.location.presenter.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
 import com.example.weatherapp.common.SharingViewModel
+import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
+import com.example.weatherapp.location.data.models.LocationRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import kotlin.coroutines.coroutineContext
 
 @AndroidEntryPoint
 class AddCityDialog : DialogFragment() {
@@ -35,13 +37,33 @@ class AddCityDialog : DialogFragment() {
             dismiss()
         }
 
+
         binding.addCityBtn.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
                 viewModel.getLocationFromNetwork()
                 onDismiss()
             }
-
         }
+
+        binding.searchAddCityView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                binding.searchAddCityView.clearFocus()
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query != null) {
+                    val locationRequest = LocationRequest(query, 1, Constant.APPID)
+                    viewModel.setLocationRequest(locationRequest)
+                    viewModel.getLocationFromNetwork()
+                    Log.d("Search", query)
+                }
+
+                return false
+            }
+
+        })
         return binding.root
     }
 
@@ -66,10 +88,10 @@ class AddCityDialog : DialogFragment() {
     }
 
     private suspend fun onDismiss() {
-        GlobalScope.async {
+        withContext(Dispatchers.Default) {
             delay(500)
             dismiss()
-        }.await()
+        }
     }
 
 

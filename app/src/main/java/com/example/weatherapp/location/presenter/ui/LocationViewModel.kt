@@ -30,9 +30,9 @@ class LocationViewModel @Inject constructor(
 
 
     fun getLocationFromNetwork() {
-        viewModelScope.async {
+        viewModelScope.launch {
             when (val locationResult = getLocationFromNetworkUseCase
-                .invoke(LocationRequest("Moscow", 1, "b4ffacf20b03eabce37d537a7d83a675"))) {
+                .invoke(locationRequestLiveData.value!!)) {
                 is Result.Success ->{
                     Log.d(TAG, "getLocationFromNetwork: Success")
                     _locationLiveData.value = locationResult.data!!
@@ -46,4 +46,9 @@ class LocationViewModel @Inject constructor(
             }
         }
     }
+
+    fun setLocationRequest(data: LocationRequest) {
+        _locationRequestLiveData.value = data
+    }
+
 }
