@@ -5,5 +5,5 @@ import com.example.weatherapp.location.data.models.Location
 import com.example.weatherapp.location.data.models.LocationRequest
 
 interface LocationRepository {
-    suspend fun getWeather(locationRequest: LocationRequest) : Result<Location>
+    suspend fun getLocation(locationRequest: LocationRequest) : Result<Location>
 }
