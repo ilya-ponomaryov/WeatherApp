@@ -5,7 +5,9 @@ import android.view.*
 import androidx.fragment.app.DialogFragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
