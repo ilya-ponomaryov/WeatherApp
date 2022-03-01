@@ -34,6 +34,10 @@ class GeneralViewModel @Inject constructor(
     val weatherLiveData : LiveData<WeatherData>
     get() = _weatherLiveData
 
+    private val _weatherRequestLiveData = MutableLiveData<WeatherRequest>()
+    val weatherRequestLiveData : LiveData<WeatherRequest>
+        get() = _weatherRequestLiveData
+
     private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
         viewModelScope.launch {
             when(val weatherResult = getWeatherFromNetworkUseCase.invoke(weatherRequest)) {
