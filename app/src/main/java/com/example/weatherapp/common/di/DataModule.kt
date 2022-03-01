@@ -5,6 +5,11 @@ import com.example.weatherapp.general.data.network.sources.WeatherRemoteDataSour
 import com.example.weatherapp.general.data.network.WeatherService
 import com.example.weatherapp.general.data.network.repository.WeatherRepositoryImpl
 import com.example.weatherapp.general.domain.WeatherRepository
+import com.example.weatherapp.location.data.network.LocationService
+import com.example.weatherapp.location.data.network.repository.LocationRepositoryImpl
+import com.example.weatherapp.location.data.network.sources.LocationRemoteDataSource
+import com.example.weatherapp.location.data.network.sources.LocationRemoteDataSourceImpl
+import com.example.weatherapp.location.domain.LocationRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -36,13 +41,24 @@ class DataModule {
     @Provides
     @Singleton
     fun provideWeatherRemoteDataSource(weatherService: WeatherService): WeatherRemoteDataSource
-            = WeatherRemoteDataSourceImpl(weatherService)
+    = WeatherRemoteDataSourceImpl(weatherService)
 
     @Provides
     @Singleton
     fun provideWeatherRepository(weatherRemoteDataSource: WeatherRemoteDataSource): WeatherRepository
     = WeatherRepositoryImpl(weatherRemoteDataSource = weatherRemoteDataSource)
 
+    @Provides
+    @Singleton
+    fun provideLocationService(retrofit: Retrofit) : LocationService = retrofit.create(LocationService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideLocationRemoteDataSource(locationService: LocationService) : LocationRemoteDataSource
+    = LocationRemoteDataSourceImpl(locationService)
+
+    fun provideLocationRepository(locationRemoteDataSource: LocationRemoteDataSource): LocationRepository
+    = LocationRepositoryImpl(locationRemoteDataSource)
 
 
 

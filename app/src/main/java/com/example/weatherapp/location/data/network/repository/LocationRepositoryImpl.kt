@@ -8,7 +8,7 @@ import com.example.weatherapp.location.domain.LocationRepository
 
 class LocationRepositoryImpl(private val locationRemoteDataSource: LocationRemoteDataSource) : LocationRepository {
 
-    override suspend fun getWeather(locationRequest: LocationRequest): Result<Location> {
+    override suspend fun getLocation(locationRequest: LocationRequest): Result<Location> {
         return locationRemoteDataSource.getLocation(locationRequest)
     }
 }
