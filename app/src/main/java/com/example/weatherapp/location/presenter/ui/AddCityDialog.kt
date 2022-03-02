@@ -96,7 +96,6 @@ class AddCityDialog : DialogFragment() {
 
     private suspend fun onDismiss() {
         withContext(Dispatchers.Main) {
-            delay(500)
             navController.navigate(R.id.action_generalFragment_self)
             dismiss()
         }
