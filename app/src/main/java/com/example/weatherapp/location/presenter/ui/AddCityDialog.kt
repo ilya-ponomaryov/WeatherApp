@@ -8,10 +8,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.common.SharingViewModel
 import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
+import com.example.weatherapp.general.presenter.ui.GeneralViewModel
 import com.example.weatherapp.location.data.models.LocationRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -20,8 +23,9 @@ import kotlinx.coroutines.*
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: LocationViewModel by viewModels()
-    //private val sharingViewModel: SharingViewModel by viewModels()
+    //private val viewModel: GeneralViewModel by viewModels()
+    private lateinit var viewModel: GeneralViewModel
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +37,7 @@ class AddCityDialog : DialogFragment() {
         binding.searchAddCityView.isFocusable = true
         binding.searchAddCityView.isIconified = false
         binding.searchAddCityView.requestFocusFromTouch()
+        navController = findNavController()
         binding.cancelAddCityBtn.setOnClickListener {
             dismiss()
         }
@@ -40,7 +45,7 @@ class AddCityDialog : DialogFragment() {
 
         binding.addCityBtn.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
-                viewModel.getLocationFromNetwork()
+                viewModel.getWeather()
                 onDismiss()
             }
         }
@@ -80,16 +85,21 @@ class AddCityDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharingViewModel = ViewModelProvider(requireActivity()).get(SharingViewModel::class.java)
+        //val sharingViewModel = ViewModelProvider(requireActivity()).get(SharingViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(GeneralViewModel::class.java)
         viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("AddCityDialog", it.toString())
-            sharingViewModel.setShareLiveData(it)
+            if (it.isNotEmpty()) {
+                viewModel.createWeatherRequest(it)
+            }
         })
+
     }
 
     private suspend fun onDismiss() {
-        withContext(Dispatchers.Default) {
+        withContext(Dispatchers.Main) {
             delay(500)
+            navController.navigate(R.id.action_generalFragment_self)
             dismiss()
         }
     }

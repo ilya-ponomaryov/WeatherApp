@@ -9,5 +9,9 @@
         android:id="@+id/generalFragment"
         android:name="com.example.weatherapp.general.presenter.ui.GeneralFragment"
         android:label="general_fragment"
-        tools:layout="@layout/general_fragment" />
+        tools:layout="@layout/general_fragment" >
+        <action
+            android:id="@+id/action_generalFragment_self"
+            app:destination="@id/generalFragment" />
+    </fragment>
 </navigation>
