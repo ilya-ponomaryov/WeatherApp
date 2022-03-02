@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
-    //private val viewModel: GeneralViewModel by viewModels()
     private lateinit var viewModel: GeneralViewModel
     private var _binding: GeneralFragmentBinding? = null
     private val binding get() = _binding!!
