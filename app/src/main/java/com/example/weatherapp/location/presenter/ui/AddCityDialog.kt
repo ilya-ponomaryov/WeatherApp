@@ -23,7 +23,9 @@ import kotlinx.coroutines.*
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: GeneralViewModel
+    private val viewModel: GeneralViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(GeneralViewModel::class.java)
+    }
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -84,7 +86,6 @@ class AddCityDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(GeneralViewModel::class.java)
         viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("AddCityDialog", it.toString())
             if (it.isNotEmpty()) {

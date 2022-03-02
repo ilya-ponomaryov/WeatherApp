@@ -23,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
-    private lateinit var viewModel: GeneralViewModel
+    private val viewModel: GeneralViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(GeneralViewModel::class.java)}
     private var _binding: GeneralFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
@@ -51,7 +52,6 @@ class GeneralFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(GeneralViewModel::class.java)
         viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("GeneralFragmentLog", it.current.temp.toInt().toString())
             setupRecyclerView()
