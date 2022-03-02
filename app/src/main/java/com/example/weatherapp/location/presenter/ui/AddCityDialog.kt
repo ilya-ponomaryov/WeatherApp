@@ -34,23 +34,20 @@ class AddCityDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = AddCityDialogLayoutBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
         binding.searchAddCityView.setIconifiedByDefault(true)
         binding.searchAddCityView.isFocusable = true
         binding.searchAddCityView.isIconified = false
         binding.searchAddCityView.requestFocusFromTouch()
-        navController = findNavController()
+
         binding.cancelAddCityBtn.setOnClickListener {
             dismiss()
         }
-
-
-        binding.addCityBtn.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
-                viewModel.onAddCityClick()
-                onDismiss()
-            }
-        }
-
         binding.searchAddCityView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -66,9 +63,14 @@ class AddCityDialog : DialogFragment() {
 
                 return false
             }
-
         })
-        return binding.root
+        binding.addCityBtn.setOnClickListener {
+            GlobalScope.launch(Dispatchers.Main) {
+                viewModel.onAddCityClick()
+                navController.navigate(R.id.action_generalFragment_self)
+                dismiss()
+            }
+        }
     }
 
     override fun onStart() {
@@ -82,23 +84,6 @@ class AddCityDialog : DialogFragment() {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        /*viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
-            Log.d("AddCityDialog", it.toString())
-            if (it.isNotEmpty()) {
-                viewModel.createWeatherRequest(it)
-            }
-        })*/
-
-    }
-
-    private suspend fun onDismiss() {
-        withContext(Dispatchers.Main) {
-            navController.navigate(R.id.action_generalFragment_self)
-            dismiss()
-        }
-    }
 
 
 }
