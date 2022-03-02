@@ -41,17 +41,17 @@ class GeneralFragment : Fragment() {
     ): View? {
         navController = findNavController()
         _binding = GeneralFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.generalRv
         binding.searchToolbarBtn.setOnClickListener {
             val addCityDialog = AddCityDialog()
             fragmentManager?.let { it1 -> addCityDialog.show(it1, "Dialog") }
 
         }
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("GeneralFragmentLog", it.current.temp.toInt().toString())
             setupRecyclerView()
