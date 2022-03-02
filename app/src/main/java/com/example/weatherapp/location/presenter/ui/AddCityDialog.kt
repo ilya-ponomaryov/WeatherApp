@@ -46,7 +46,7 @@ class AddCityDialog : DialogFragment() {
 
         binding.addCityBtn.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
-                viewModel.getWeather()
+                viewModel.onAddCityClick()
                 onDismiss()
             }
         }
@@ -60,9 +60,7 @@ class AddCityDialog : DialogFragment() {
 
             override fun onQueryTextChange(query: String?): Boolean {
                 if (query != null) {
-                    val locationRequest = LocationRequest(query, 1, Constant.APPID)
-                    viewModel.setLocationRequest(locationRequest)
-                    viewModel.getLocationFromNetwork()
+                    viewModel.onQueryTextChange(query)
                     Log.d("Search", query)
                 }
 
@@ -86,12 +84,12 @@ class AddCityDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
+        /*viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("AddCityDialog", it.toString())
             if (it.isNotEmpty()) {
                 viewModel.createWeatherRequest(it)
             }
-        })
+        })*/
 
     }
 

@@ -44,18 +44,18 @@ class GeneralViewModel @Inject constructor(
     get() = _weatherLiveData
 
     private val _weatherRequestLiveData = MutableLiveData<WeatherRequest>()
-    val weatherRequestLiveData : LiveData<WeatherRequest>
+    private val weatherRequestLiveData : LiveData<WeatherRequest>
         get() = _weatherRequestLiveData
 
     private val _locationLiveData = MutableLiveData<Location>()
-    val locationLiveData : LiveData<Location>
+    private val locationLiveData : LiveData<Location>
         get() = _locationLiveData
 
     private val _locationRequestLiveData = MutableLiveData<LocationRequest>()
-    val locationRequestLiveData: LiveData<LocationRequest>
+    private val locationRequestLiveData: LiveData<LocationRequest>
         get() = _locationRequestLiveData
 
-    fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
+    private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
         viewModelScope.launch {
             when(val weatherResult =
                 getWeatherFromNetworkUseCase.invoke(weatherRequest)) {
@@ -64,7 +64,7 @@ class GeneralViewModel @Inject constructor(
                 }
                 is Result.Success -> {
                     Log.d("ViewModelLog", "Success")
-                    setWeather(weatherResult.data!!)
+                    _weatherLiveData.value = weatherResult.data!!
                 }
                 is Result.Error -> {
                     Log.d("ViewModelLog", "Error: ${weatherResult.exception}")
@@ -73,26 +73,13 @@ class GeneralViewModel @Inject constructor(
         }
     }
 
-    fun setWeatherRequest(data: WeatherRequest) {
-        _weatherRequestLiveData.value = data
-    }
-
-    fun setLocation(data: Location) {
-        _locationLiveData.value = data
-    }
-
-    fun setWeather(data: WeatherData) {
-        _weatherLiveData.value = data
-    }
-
-
-    fun getLocationFromNetwork() {
+    private fun getLocationFromNetwork() {
         viewModelScope.launch {
             when (val locationResult = getLocationFromNetworkUseCase
                 .invoke(locationRequestLiveData.value!!)) {
                 is Result.Success ->{
                     Log.d(TAG, "getLocationFromNetwork: Success")
-                    setLocation(locationResult.data!!)
+                    _locationLiveData.value = locationResult.data!!
                 }
                 is Result.Loading -> {
                     Log.d(TAG, "getLocationFromNetwork: Loading")
@@ -104,25 +91,37 @@ class GeneralViewModel @Inject constructor(
         }
     }
 
-    fun setLocationRequest(data: LocationRequest) {
-        _locationRequestLiveData.value = data
+    fun onQueryTextChange(query: String) {
+        val locationRequest =
+            LocationRequest(query, 1, Constant.APPID)
+        _locationRequestLiveData.value = locationRequest
+        getLocationFromNetwork()
     }
 
-    fun createWeatherRequest(data: Location) {
-        setWeatherRequest(WeatherRequest(
-            data[0].lat,
-            data[0].lon,
-            "alerts, minutely",
-            "metric",
-            "ru",
-            Constant.APPID))
+    private fun createWeatherRequest() {
+        val location = locationLiveData.value
+        if (location != null) {
+            _weatherRequestLiveData.value = WeatherRequest(
+                location[0].lat,
+                location[0].lon,
+                "alerts, minutely",
+                "metric",
+                "ru",
+                Constant.APPID
+            )
+        }
 
     }
 
-    fun getWeather() {
+    private fun getWeather() {
         Log.d("GeneralVM", "GetWeather")
         weatherRequestLiveData.value?.let { getWeatherFromNetwork(it) }
         city = locationLiveData.value?.get(0)?.local_names?.ru
+    }
+
+    fun onAddCityClick() {
+        createWeatherRequest()
+        getWeather()
     }
 
 
