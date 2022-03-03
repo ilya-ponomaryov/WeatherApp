@@ -20,7 +20,7 @@ class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
     private val viewModel: GeneralViewModel by activityViewModels()
-    private lateinit var navController: NavController
+    private val navController: NavController get() = findNavController()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +33,6 @@ class AddCityDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = findNavController()
         binding.searchAddCityView.setIconifiedByDefault(true)
         binding.searchAddCityView.isFocusable = true
         binding.searchAddCityView.isIconified = false

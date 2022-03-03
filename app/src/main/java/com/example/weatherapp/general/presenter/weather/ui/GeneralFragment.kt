@@ -26,7 +26,7 @@ class GeneralFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var generalRvAdapter: GeneralRvAdapter
-    private lateinit var navController: NavController
+    private val navController: NavController get() = findNavController()
 
     companion object {
         fun newInstance() = GeneralFragment()
@@ -36,7 +36,6 @@ class GeneralFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        navController = findNavController()
         _binding = GeneralFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
