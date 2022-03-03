@@ -42,6 +42,8 @@ class GeneralFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val city = arguments?.getString("city")
+        viewModel.onQueryTextChange(city)
         recyclerView = binding.generalRv
         binding.searchToolbarBtn.setOnClickListener {
             val addCityDialog = AddCityDialog()

@@ -12,6 +12,10 @@
         tools:layout="@layout/general_fragment" >
         <action
             android:id="@+id/action_generalFragment_self"
-            app:destination="@id/generalFragment" />
+            app:destination="@id/generalFragment" >
+        </action>
+        <argument
+            android:name="city"
+            app:argType="string" />
     </fragment>
 </navigation>

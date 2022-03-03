@@ -25,6 +25,7 @@ class GeneralViewModel @Inject constructor(
     private val TAG = "GeneralVM"
     var city: String? = null
     init {
+        city = "Тамбов"
         getWeatherFromNetwork(
             WeatherRequest(
             52.731118499999994,
@@ -35,7 +36,7 @@ class GeneralViewModel @Inject constructor(
             Constant.APPID
         )
         )
-        city = "Тамбов"
+
         Log.d(TAG, "init")
     }
 
@@ -80,6 +81,7 @@ class GeneralViewModel @Inject constructor(
                 is Result.Success ->{
                     Log.d(TAG, "getLocationFromNetwork: Success")
                     _locationLiveData.value = locationResult.data!!
+                    city = locationResult.data[0].local_names.ru
                 }
                 is Result.Loading -> {
                     Log.d(TAG, "getLocationFromNetwork: Loading")
@@ -91,11 +93,17 @@ class GeneralViewModel @Inject constructor(
         }
     }
 
-    fun onQueryTextChange(query: String) {
-        val locationRequest =
-            LocationRequest(query, 1, Constant.APPID)
-        _locationRequestLiveData.value = locationRequest
-        getLocationFromNetwork()
+    fun onQueryTextChange(query: String?) {
+        if (!query.isNullOrEmpty() && query.isNotBlank()) {
+            val locationRequest =
+                LocationRequest(query, 1, Constant.APPID)
+            _locationRequestLiveData.value = locationRequest
+            getLocationFromNetwork()
+            createWeather()
+        } else {
+            createWeather()
+            city = "Тамбов"
+        }
     }
 
     private fun createWeatherRequest() {
@@ -116,10 +124,10 @@ class GeneralViewModel @Inject constructor(
     private fun getWeather() {
         Log.d("GeneralVM", "GetWeather")
         weatherRequestLiveData.value?.let { getWeatherFromNetwork(it) }
-        city = locationLiveData.value?.get(0)?.local_names?.ru
+        //city = locationLiveData.value?.get(0)?.local_names?.ru
     }
 
-    fun onAddCityClick() {
+    fun createWeather() {
         createWeatherRequest()
         getWeather()
     }

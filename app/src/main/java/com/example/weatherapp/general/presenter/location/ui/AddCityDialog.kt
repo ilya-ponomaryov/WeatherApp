@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
+import com.example.weatherapp.general.presenter.weather.ui.GeneralFragmentDirections
 import com.example.weatherapp.general.presenter.weather.ui.GeneralViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -19,7 +20,6 @@ import kotlinx.coroutines.*
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: GeneralViewModel by activityViewModels()
     private val navController: NavController get() = findNavController()
 
     override fun onCreateView(
@@ -33,6 +33,7 @@ class AddCityDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var city: String = ""
         binding.searchAddCityView.setIconifiedByDefault(true)
         binding.searchAddCityView.isFocusable = true
         binding.searchAddCityView.isIconified = false
@@ -50,8 +51,8 @@ class AddCityDialog : DialogFragment() {
 
             override fun onQueryTextChange(query: String?): Boolean {
                 if (query != null) {
-                    viewModel.onQueryTextChange(query)
                     Log.d("Search", query)
+                    city = query
                 }
 
                 return false
@@ -59,8 +60,9 @@ class AddCityDialog : DialogFragment() {
         })
         binding.addCityBtn.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
-                viewModel.onAddCityClick()
-                navController.navigate(R.id.action_generalFragment_self)
+                val action = GeneralFragmentDirections.actionGeneralFragmentSelf(city)
+
+                navController.navigate(action)
                 dismiss()
             }
         }
