@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -18,9 +19,7 @@ import kotlinx.coroutines.*
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: GeneralViewModel by lazy {
-        ViewModelProvider(requireActivity()).get(GeneralViewModel::class.java)
-    }
+    private val viewModel: GeneralViewModel by activityViewModels()
     private lateinit var navController: NavController
 
     override fun onCreateView(

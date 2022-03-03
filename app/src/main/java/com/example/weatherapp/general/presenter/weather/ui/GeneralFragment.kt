@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -20,8 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
-    private val viewModel: GeneralViewModel by lazy {
-        ViewModelProvider(requireActivity()).get(GeneralViewModel::class.java)}
+    private val viewModel: GeneralViewModel by activityViewModels()
     private var _binding: GeneralFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
