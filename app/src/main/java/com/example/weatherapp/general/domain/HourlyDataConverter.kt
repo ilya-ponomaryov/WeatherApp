@@ -1,7 +1,7 @@
 package com.example.weatherapp.general.domain
 
 import android.util.Log
-import com.example.weatherapp.general.data.models.Hourly
+import com.example.weatherapp.general.data.models.weather.Hourly
 import java.util.*
 import kotlin.collections.ArrayList
 

@@ -1,15 +1,15 @@
 package com.example.weatherapp.common.di
 
-import com.example.weatherapp.general.data.network.sources.WeatherRemoteDataSource
-import com.example.weatherapp.general.data.network.sources.WeatherRemoteDataSourceImpl
+import com.example.weatherapp.general.data.network.sources.weather.WeatherRemoteDataSource
+import com.example.weatherapp.general.data.network.sources.weather.WeatherRemoteDataSourceImpl
 import com.example.weatherapp.general.data.network.WeatherService
-import com.example.weatherapp.general.data.network.repository.WeatherRepositoryImpl
+import com.example.weatherapp.general.data.network.repository.weather.WeatherRepositoryImpl
 import com.example.weatherapp.general.domain.WeatherRepository
-import com.example.weatherapp.location.data.network.LocationService
-import com.example.weatherapp.location.data.network.repository.LocationRepositoryImpl
-import com.example.weatherapp.location.data.network.sources.LocationRemoteDataSource
-import com.example.weatherapp.location.data.network.sources.LocationRemoteDataSourceImpl
-import com.example.weatherapp.location.domain.LocationRepository
+import com.example.weatherapp.general.data.network.LocationService
+import com.example.weatherapp.general.data.network.repository.location.LocationRepositoryImpl
+import com.example.weatherapp.general.data.network.sources.location.LocationRemoteDataSource
+import com.example.weatherapp.general.data.network.sources.location.LocationRemoteDataSourceImpl
+import com.example.weatherapp.general.domain.LocationRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -50,7 +50,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideLocationService(retrofit: Retrofit) : LocationService = retrofit.create(LocationService::class.java)
+    fun provideLocationService(retrofit: Retrofit) : LocationService = retrofit.create(
+        LocationService::class.java)
 
     @Provides
     @Singleton
