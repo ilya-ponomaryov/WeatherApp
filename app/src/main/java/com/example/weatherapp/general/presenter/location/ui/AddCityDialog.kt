@@ -22,14 +22,10 @@ class AddCityDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val navController: NavController get() = findNavController()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = AddCityDialogLayoutBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        AddCityDialogLayoutBinding.inflate(inflater, container, false)
+            .also { _binding = it }
+            .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

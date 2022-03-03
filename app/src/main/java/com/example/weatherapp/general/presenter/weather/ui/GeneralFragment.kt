@@ -31,13 +31,10 @@ class GeneralFragment : Fragment() {
         fun newInstance() = GeneralFragment()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = GeneralFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        GeneralFragmentBinding.inflate(inflater, container, false)
+            .also { _binding = it }
+            .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
