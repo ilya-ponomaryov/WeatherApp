@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,6 +42,7 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val city = arguments?.getString("city")
+        Log.d("GeneralFragmentLog", "City: $city")
         viewModel.onQueryTextChange(city)
         recyclerView = binding.generalRv
         binding.searchToolbarBtn.setOnClickListener {
@@ -50,12 +50,13 @@ class GeneralFragment : Fragment() {
             fragmentManager?.let { it1 -> addCityDialog.show(it1, "Dialog") }
 
         }
-        viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
-            Log.d("GeneralFragmentLog", it.current.temp.toInt().toString())
+        viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer { data ->
+            Log.d("GeneralFragmentLog", data.current.temp.toInt().toString())
             setupRecyclerView()
-            generalRvAdapter.getWeatherData(it)
+            generalRvAdapter.getWeatherData(data)
+            binding.toolbarMainText.text = viewModel.city
         })
-        binding.toolbarMainText.text = viewModel.city
+
 
     }
 

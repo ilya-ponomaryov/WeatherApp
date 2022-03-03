@@ -59,12 +59,9 @@ class AddCityDialog : DialogFragment() {
             }
         })
         binding.addCityBtn.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
-                val action = GeneralFragmentDirections.actionGeneralFragmentSelf(city)
-
-                navController.navigate(action)
-                dismiss()
-            }
+            val action = GeneralFragmentDirections.actionGeneralFragmentSelf(city)
+            navController.navigate(action)
+            dismiss()
         }
     }
 
