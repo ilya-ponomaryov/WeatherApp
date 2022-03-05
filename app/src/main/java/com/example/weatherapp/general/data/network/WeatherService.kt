@@ -15,15 +15,4 @@ interface WeatherService {
         @Query("lang")lang: String,
         @Query("appid")appid: String,
     ): Response<WeatherData>
-
-    /*companion object {
-        fun create() : WeatherService {
-            val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                .baseUrl("https://api.openweathermap.org")
-                .build()
-            return retrofit.create(WeatherService::class.java)
-        }
-    }*/
 }
