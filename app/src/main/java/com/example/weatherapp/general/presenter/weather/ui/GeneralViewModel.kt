@@ -24,20 +24,6 @@ class GeneralViewModel @Inject constructor(
 ) : ViewModel() {
     private val TAG = "GeneralVM"
     var city: String? = null
-    init {
-        getWeatherFromNetwork(
-            WeatherRequest(
-            52.731118499999994,
-            41.434199146086904,
-            "minutely,alerts",
-            "metric",
-            "ru",
-            Constant.APPID
-        )
-        )
-
-        Log.d(TAG, "init")
-    }
 
     private val _weatherLiveData = MutableLiveData<WeatherData>()
     val weatherLiveData : LiveData<WeatherData>
@@ -54,6 +40,21 @@ class GeneralViewModel @Inject constructor(
     private val _locationRequestLiveData = MutableLiveData<LocationRequest>()
     private val locationRequestLiveData: LiveData<LocationRequest>
         get() = _locationRequestLiveData
+
+    init {
+        getWeatherFromNetwork(
+            WeatherRequest(
+                52.731118499999994,
+                41.434199146086904,
+                "minutely,alerts",
+                "metric",
+                "ru",
+                Constant.APPID
+            )
+        )
+
+        Log.d(TAG, "init")
+    }
 
     private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
         viewModelScope.launch {
