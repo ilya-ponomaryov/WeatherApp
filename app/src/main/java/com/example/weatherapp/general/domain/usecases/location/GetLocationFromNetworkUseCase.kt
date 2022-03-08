@@ -1,6 +1,6 @@
 package com.example.weatherapp.general.domain.usecases.location
 
-import com.example.weatherapp.general.data.models.location.LocationRequest
+import com.example.weatherapp.general.data.location.models.LocationRequest
 import com.example.weatherapp.general.domain.LocationRepository
 import javax.inject.Inject
 

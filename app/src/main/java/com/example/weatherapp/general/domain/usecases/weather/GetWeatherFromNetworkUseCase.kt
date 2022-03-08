@@ -1,6 +1,6 @@
 package com.example.weatherapp.general.domain.usecases.weather
 
-import com.example.weatherapp.general.data.models.weather.WeatherRequest
+import com.example.weatherapp.general.data.weather.models.WeatherRequest
 import com.example.weatherapp.general.domain.WeatherRepository
 import javax.inject.Inject
 

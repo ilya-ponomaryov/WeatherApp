@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.Result
 import com.example.weatherapp.common.utils.Constant
-import com.example.weatherapp.general.data.models.weather.WeatherData
-import com.example.weatherapp.general.data.models.weather.WeatherRequest
+import com.example.weatherapp.general.data.weather.models.WeatherData
+import com.example.weatherapp.general.data.weather.models.WeatherRequest
 import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetworkUseCase
-import com.example.weatherapp.general.data.models.location.Location
-import com.example.weatherapp.general.data.models.location.LocationRequest
+import com.example.weatherapp.general.data.location.models.Location
+import com.example.weatherapp.general.data.location.models.LocationRequest
 import com.example.weatherapp.general.domain.usecases.location.GetLocationFromNetworkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
