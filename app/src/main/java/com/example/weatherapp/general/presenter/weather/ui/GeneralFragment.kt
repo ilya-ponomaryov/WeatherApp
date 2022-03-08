@@ -39,10 +39,11 @@ class GeneralFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerView = binding.generalRv
+        setupRecyclerView()
         val city = arguments?.getString("city")
         Log.d("GeneralFragmentLog", "City: $city")
         viewModel.onQueryTextChange(city)
-        recyclerView = binding.generalRv
         binding.searchToolbarBtn.setOnClickListener {
             val addCityDialog = AddCityDialog()
             fragmentManager?.let { it1 -> addCityDialog.show(it1, "Dialog") }
@@ -50,7 +51,6 @@ class GeneralFragment : Fragment() {
         }
         viewModel.weatherLiveData.observe(viewLifecycleOwner, Observer { data ->
             Log.d("GeneralFragmentLog", data.current.temp.toInt().toString())
-            setupRecyclerView()
             generalRvAdapter.getWeatherData(data)
             binding.toolbarMainText.text = viewModel.city
         })

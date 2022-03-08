@@ -60,10 +60,12 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
     }
 
     private fun initTodayViewHolder(holder: TodayViewHolder) {
+        if(weatherDataList.isNotEmpty())
         holder.bind(weatherDataList[0].current)
     }
 
     private fun initDayViewHolder(holder: DayViewHolder, position: Int) {
+        if(weatherDataList.isNotEmpty())
         holder.bind(weatherDataList[0].daily[position], position)
     }
 
@@ -106,5 +108,6 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
     fun getWeatherData(data: WeatherData) {
         weatherDataList.clear()
         weatherDataList.add(data)
+        notifyDataSetChanged()
     }
 }
