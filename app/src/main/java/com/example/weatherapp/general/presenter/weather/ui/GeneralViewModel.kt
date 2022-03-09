@@ -55,6 +55,20 @@ class GeneralViewModel @Inject constructor(
 
         Log.d(TAG, "init")
     }
+    fun onQueryTextChange(query: String?) {
+        if (!query.isNullOrEmpty() && query.isNotBlank()) {
+            Log.d(TAG, "onQueryTextChange not null $query")
+            val locationRequest =
+                LocationRequest(query, 1, Constant.APPID)
+            getLocationFromNetwork(locationRequest)
+        } else {
+            city = "Тамбов"
+            val locationRequest =
+                LocationRequest(city!!, 1, Constant.APPID)
+            _locationRequestLiveData.value = locationRequest
+            getLocationFromNetwork(locationRequest)
+        }
+    }
 
     private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
         viewModelScope.launch {
@@ -75,6 +89,21 @@ class GeneralViewModel @Inject constructor(
         }
     }
 
+    private fun createWeatherRequest(location: Location): WeatherRequest {
+        Log.d(TAG, "createWeatherRequest")
+            return WeatherRequest(
+                location[0].lat,
+                location[0].lon,
+                "alerts, minutely",
+                "metric",
+                "ru",
+                Constant.APPID)
+    }
+
+    private fun getWeather(location: Location) {
+        Log.d(TAG, "GetWeather")
+        getWeatherFromNetwork(createWeatherRequest(location))
+    }
     private fun getLocationFromNetwork(locationRequest: LocationRequest) {
         viewModelScope.launch {
             when (val locationResult = getLocationFromNetworkUseCase
@@ -93,37 +122,6 @@ class GeneralViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun onQueryTextChange(query: String?) {
-        if (!query.isNullOrEmpty() && query.isNotBlank()) {
-            Log.d(TAG, "onQueryTextChange not null $query")
-            val locationRequest =
-                LocationRequest(query, 1, Constant.APPID)
-            getLocationFromNetwork(locationRequest)
-        } else {
-            city = "Тамбов"
-            val locationRequest =
-                LocationRequest(city!!, 1, Constant.APPID)
-            _locationRequestLiveData.value = locationRequest
-            getLocationFromNetwork(locationRequest)
-        }
-    }
-
-    private fun createWeatherRequest(location: Location): WeatherRequest {
-        Log.d(TAG, "createWeatherRequest")
-            return WeatherRequest(
-                location[0].lat,
-                location[0].lon,
-                "alerts, minutely",
-                "metric",
-                "ru",
-                Constant.APPID)
-    }
-
-    private fun getWeather(location: Location) {
-        Log.d(TAG, "GetWeather")
-        getWeatherFromNetwork(createWeatherRequest(location))
     }
 
 
