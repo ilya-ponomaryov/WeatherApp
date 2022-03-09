@@ -70,40 +70,6 @@ class GeneralViewModel @Inject constructor(
         }
     }
 
-    private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
-        viewModelScope.launch {
-            Log.d(TAG, "getWeatherFromNetwork: $weatherRequest")
-            when(val weatherResult =
-                getWeatherFromNetworkUseCase.invoke(weatherRequest)) {
-                is Result.Loading -> {
-                    Log.d(TAG, "getWeatherFromNetwork: Loading")
-                }
-                is Result.Success -> {
-                    Log.d(TAG, "getWeatherFromNetwork: Success")
-                    _weatherLiveData.value = weatherResult.data!!
-                }
-                is Result.Error -> {
-                    Log.d(TAG, "getWeatherFromNetwork: Error: ${weatherResult.exception}")
-                }
-            }
-        }
-    }
-
-    private fun createWeatherRequest(location: Location): WeatherRequest {
-        Log.d(TAG, "createWeatherRequest")
-            return WeatherRequest(
-                location[0].lat,
-                location[0].lon,
-                "alerts, minutely",
-                "metric",
-                "ru",
-                Constant.APPID)
-    }
-
-    private fun getWeather(location: Location) {
-        Log.d(TAG, "GetWeather")
-        getWeatherFromNetwork(createWeatherRequest(location))
-    }
     private fun getLocationFromNetwork(locationRequest: LocationRequest) {
         viewModelScope.launch {
             when (val locationResult = getLocationFromNetworkUseCase
@@ -124,8 +90,39 @@ class GeneralViewModel @Inject constructor(
         }
     }
 
+    private fun createWeatherRequest(location: Location): WeatherRequest {
+        Log.d(TAG, "createWeatherRequest")
+        return WeatherRequest(
+            location[0].lat,
+            location[0].lon,
+            "alerts, minutely",
+            "metric",
+            "ru",
+            Constant.APPID)
+    }
 
+    private fun getWeather(location: Location) {
+        Log.d(TAG, "GetWeather")
+        getWeatherFromNetwork(createWeatherRequest(location))
+    }
 
-
+    private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
+        viewModelScope.launch {
+            Log.d(TAG, "getWeatherFromNetwork: $weatherRequest")
+            when(val weatherResult =
+                getWeatherFromNetworkUseCase.invoke(weatherRequest)) {
+                is Result.Loading -> {
+                    Log.d(TAG, "getWeatherFromNetwork: Loading")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "getWeatherFromNetwork: Success")
+                    _weatherLiveData.value = weatherResult.data!!
+                }
+                is Result.Error -> {
+                    Log.d(TAG, "getWeatherFromNetwork: Error: ${weatherResult.exception}")
+                }
+            }
+        }
+    }
 
 }

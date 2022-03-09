@@ -57,17 +57,16 @@ class GeneralFragment : Fragment() {
 
 
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setupRecyclerView() {
         generalRvAdapter = GeneralRvAdapter(requireContext())
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = generalRvAdapter
     }
 
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
