@@ -1,14 +1,10 @@
 package com.example.weatherapp.common.di
 
-import com.example.weatherapp.general.data.weather.network.sources.WeatherRemoteDataSource
-import com.example.weatherapp.general.data.weather.network.sources.WeatherRemoteDataSourceImpl
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.data.weather.network.repository.WeatherRepositoryImpl
 import com.example.weatherapp.general.domain.WeatherRepository
 import com.example.weatherapp.general.data.location.network.LocationService
 import com.example.weatherapp.general.data.location.network.repository.LocationRepositoryImpl
-import com.example.weatherapp.general.data.location.network.sources.LocationRemoteDataSource
-import com.example.weatherapp.general.data.location.network.sources.LocationRemoteDataSourceImpl
 import com.example.weatherapp.general.domain.LocationRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -40,13 +36,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideWeatherRemoteDataSource(weatherService: WeatherService): WeatherRemoteDataSource
-    = WeatherRemoteDataSourceImpl(weatherService)
-
-    @Provides
-    @Singleton
-    fun provideWeatherRepository(weatherRemoteDataSource: WeatherRemoteDataSource): WeatherRepository
-    = WeatherRepositoryImpl(weatherRemoteDataSource = weatherRemoteDataSource)
+    fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository
+    = WeatherRepositoryImpl(weatherService)
 
     @Provides
     @Singleton
@@ -55,13 +46,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideLocationRemoteDataSource(locationService: LocationService) : LocationRemoteDataSource
-    = LocationRemoteDataSourceImpl(locationService)
-
-    @Provides
-    @Singleton
-    fun provideLocationRepository(locationRemoteDataSource: LocationRemoteDataSource): LocationRepository
-    = LocationRepositoryImpl(locationRemoteDataSource)
+    fun provideLocationRepository(locationService: LocationService): LocationRepository
+    = LocationRepositoryImpl(locationService)
 
 
 
