@@ -6,19 +6,24 @@ import com.example.weatherapp.general.data.location.network.LocationService
 import com.example.weatherapp.general.domain.LocationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import javax.inject.Inject
+import kotlin.Exception
 
 class LocationRepositoryImpl @Inject constructor(private val locationService: LocationService) :
     LocationRepository {
 
-    override suspend fun getLocation(locationRequest: LocationRequest): Response<Location>
+    override suspend fun getLocation(locationRequest: LocationRequest): Location
     = withContext(Dispatchers.IO) {
-        return@withContext locationService.getCity(
+        val result = locationService.getCity(
             locationRequest.q,
             locationRequest.limit,
-            locationRequest.appid
-        )
+            locationRequest.appid)
+
+        if (result.isSuccessful) {
+            return@withContext result.body()!!
+        } else {
+            throw Exception("Error")
+        }
 
     }
 }

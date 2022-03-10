@@ -6,16 +6,14 @@ import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val weatherService: WeatherService) :
     WeatherRepository {
 
-    override suspend fun getWeather(weatherRequest: WeatherRequest) : Response<WeatherData>
+    override suspend fun getWeather(weatherRequest: WeatherRequest) : WeatherData
         = withContext(Dispatchers.IO) {
-
-        return@withContext weatherService.getWeather(
+         val result = weatherService.getWeather(
             weatherRequest.lat,
             weatherRequest.lon,
             weatherRequest.exclude,
@@ -23,7 +21,11 @@ class WeatherRepositoryImpl @Inject constructor(private val weatherService: Weat
             weatherRequest.lang,
             weatherRequest.appid
         )
-
+        if (result.isSuccessful) {
+            return@withContext result.body()!!
+        } else {
+            throw Exception("Error")
+        }
     }
 
 }

@@ -5,16 +5,12 @@ import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
 import com.example.weatherapp.general.presenter.weather.ui.GeneralFragmentDirections
-import com.example.weatherapp.general.presenter.weather.ui.GeneralViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class AddCityDialog : DialogFragment() {
