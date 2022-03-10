@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.common.Result
+import com.example.weatherapp.common.BaseUseCase
+import com.example.weatherapp.common.DataLocationStatus
+import com.example.weatherapp.common.DataWeatherStatus
 import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.data.weather.models.WeatherRequest
@@ -25,21 +27,21 @@ class GeneralViewModel @Inject constructor(
     private val TAG = "GeneralVM"
     var city: String? = null
 
-    private val _weatherLiveData = MutableLiveData<WeatherData>()
-    val weatherLiveData : LiveData<WeatherData>
-    get() = _weatherLiveData
-
     private val _weatherRequestLiveData = MutableLiveData<WeatherRequest>()
     private val weatherRequestLiveData : LiveData<WeatherRequest>
         get() = _weatherRequestLiveData
 
-    private val _locationLiveData = MutableLiveData<Location>()
-    private val locationLiveData : LiveData<Location>
-        get() = _locationLiveData
-
     private val _locationRequestLiveData = MutableLiveData<LocationRequest>()
     private val locationRequestLiveData: LiveData<LocationRequest>
         get() = _locationRequestLiveData
+
+    private val _weatherDataStatusLiveData = MutableLiveData<DataWeatherStatus<WeatherData>>()
+    val weatherDataStatusLiveData: LiveData<DataWeatherStatus<WeatherData>>
+        get() = _weatherDataStatusLiveData
+
+    private val _locationDataStatusLiveData = MutableLiveData<DataLocationStatus<Location>>()
+    val locationDataStatusLiveData: LiveData<DataLocationStatus<Location>>
+        get() = _locationDataStatusLiveData
 
     init {
         getWeatherFromNetwork(
@@ -52,7 +54,6 @@ class GeneralViewModel @Inject constructor(
                 Constant.APPID
             )
         )
-
         Log.d(TAG, "init")
     }
     fun onQueryTextChange(query: String?) {
@@ -72,21 +73,19 @@ class GeneralViewModel @Inject constructor(
 
     private fun getLocationFromNetwork(locationRequest: LocationRequest) {
         viewModelScope.launch {
-            when (val locationResult = getLocationFromNetworkUseCase
-                .invoke(locationRequest)) {
-                is Result.Success ->{
-                    Log.d(TAG, "getLocationFromNetwork: Success")
-                    _locationLiveData.value = locationResult.data!!
-                    city = locationResult.data[0].local_names.ru
-                    getWeather(locationResult.data)
-                }
-                is Result.Loading -> {
-                    Log.d(TAG, "getLocationFromNetwork: Loading")
-                }
-                is Result.Error -> {
-                    Log.d(TAG, "getLocationFromNetwork: Error, ${locationResult.exception}")
-                }
-            }
+            getLocationFromNetworkUseCase.invoke(locationRequest, getLocationFromNetworkUseCaseCallback)
+        }
+    }
+
+    private val getLocationFromNetworkUseCaseCallback = object : BaseUseCase.Callback<Location> {
+        override fun onSuccess(result: Location) {
+            _locationDataStatusLiveData.value = DataLocationStatus.Success(result)
+            getWeather(result)
+            city = result[0].local_names.ru
+        }
+
+        override fun onError(throwable: Throwable) {
+            _locationDataStatusLiveData.value = DataLocationStatus.Failure(throwable.toString())
         }
     }
 
@@ -109,19 +108,17 @@ class GeneralViewModel @Inject constructor(
     private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
         viewModelScope.launch {
             Log.d(TAG, "getWeatherFromNetwork: $weatherRequest")
-            when(val weatherResult =
-                getWeatherFromNetworkUseCase.invoke(weatherRequest)) {
-                is Result.Loading -> {
-                    Log.d(TAG, "getWeatherFromNetwork: Loading")
-                }
-                is Result.Success -> {
-                    Log.d(TAG, "getWeatherFromNetwork: Success")
-                    _weatherLiveData.value = weatherResult.data!!
-                }
-                is Result.Error -> {
-                    Log.d(TAG, "getWeatherFromNetwork: Error: ${weatherResult.exception}")
-                }
-            }
+            getWeatherFromNetworkUseCase.invoke(weatherRequest, getWeatherFromNetworkUseCaseCallback)
+        }
+    }
+
+    private val getWeatherFromNetworkUseCaseCallback = object : BaseUseCase.Callback<WeatherData> {
+        override fun onSuccess(result: WeatherData) {
+            _weatherDataStatusLiveData.value = DataWeatherStatus.Success(result)
+        }
+
+        override fun onError(throwable: Throwable) {
+            _weatherDataStatusLiveData.value = DataWeatherStatus.Failure(throwable.toString())
         }
     }
 
