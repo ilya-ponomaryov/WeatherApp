@@ -7,19 +7,23 @@ import com.example.weatherapp.general.domain.WeatherRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
-import java.lang.Exception
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val weatherService: WeatherService) :
     WeatherRepository {
 
-    override suspend fun getWeather(weatherRequest: WeatherRequest) : Response<WeatherData> {
-        return weatherService.getWeather(
+    override suspend fun getWeather(weatherRequest: WeatherRequest) : Response<WeatherData>
+        = withContext(Dispatchers.IO) {
+
+        return@withContext weatherService.getWeather(
             weatherRequest.lat,
             weatherRequest.lon,
             weatherRequest.exclude,
             weatherRequest.units,
             weatherRequest.lang,
-            weatherRequest.appid)
+            weatherRequest.appid
+        )
+
     }
+
 }

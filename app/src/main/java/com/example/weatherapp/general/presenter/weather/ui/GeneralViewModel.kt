@@ -73,19 +73,19 @@ class GeneralViewModel @Inject constructor(
 
     private fun getLocationFromNetwork(locationRequest: LocationRequest) {
         viewModelScope.launch {
-            getLocationFromNetworkUseCase.invoke(locationRequest, getLocationFromNetworkUseCaseCallback)
-        }
-    }
-
-    private val getLocationFromNetworkUseCaseCallback = object : BaseUseCase.Callback<Location> {
-        override fun onSuccess(result: Location) {
-            _locationDataStatusLiveData.value = DataLocationStatus.Success(result)
-            getWeather(result)
-            city = result[0].local_names.ru
-        }
-
-        override fun onError(throwable: Throwable) {
-            _locationDataStatusLiveData.value = DataLocationStatus.Failure(throwable.toString())
+            try {
+                val result = getLocationFromNetworkUseCase.invoke(locationRequest)
+                if (result.isSuccessful) {
+                    _locationDataStatusLiveData.value = DataLocationStatus.Success(result.body()!!)
+                    getWeather(result.body()!!)
+                    city = result.body()!![0].local_names.ru
+                    Log.d(TAG, "Success city: ${result.message()}")
+                }
+            } catch (e: Exception) {
+                println(e.message)
+                _locationDataStatusLiveData.value = DataLocationStatus.Failure("Ошибка: " + e.message.toString())
+                city = "Ошибка"
+            }
         }
     }
 
@@ -108,17 +108,15 @@ class GeneralViewModel @Inject constructor(
     private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
         viewModelScope.launch {
             Log.d(TAG, "getWeatherFromNetwork: $weatherRequest")
-            getWeatherFromNetworkUseCase.invoke(weatherRequest, getWeatherFromNetworkUseCaseCallback)
-        }
-    }
+            try {
+                val result = getWeatherFromNetworkUseCase.invoke(weatherRequest)
+                if (result.isSuccessful) {
+                    _weatherDataStatusLiveData.value = DataWeatherStatus.Success(result.body()!!)
+                }
+            } catch (e: Exception) {
+                _weatherDataStatusLiveData.value = DataWeatherStatus.Failure("Ошибка: " + e.message.toString())
+            }
 
-    private val getWeatherFromNetworkUseCaseCallback = object : BaseUseCase.Callback<WeatherData> {
-        override fun onSuccess(result: WeatherData) {
-            _weatherDataStatusLiveData.value = DataWeatherStatus.Success(result)
-        }
-
-        override fun onError(throwable: Throwable) {
-            _weatherDataStatusLiveData.value = DataWeatherStatus.Failure(throwable.toString())
         }
     }
 

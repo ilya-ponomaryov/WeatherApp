@@ -7,24 +7,7 @@ import com.example.weatherapp.general.data.weather.models.WeatherRequest
 import com.example.weatherapp.general.domain.WeatherRepository
 import javax.inject.Inject
 
-class GetWeatherFromNetworkUseCase @Inject constructor(private val weatherRepository: WeatherRepository)
-    : BaseUseCase<WeatherRequest, WeatherData> {
-    override suspend fun invoke(
-        params: WeatherRequest,
-        callback: BaseUseCase.Callback<WeatherData>
-    ) {
-        try {
-            val result = weatherRepository.getWeather(params)
-            if (result.isSuccessful) {
-                callback.onSuccess(result.body()!!)
-            } else {
-                handleThrow()
-            }
-        } catch (e: Exception) {
-            println(e.message)
-        }
-    }
-    private suspend fun handleThrow() {
-        throw Exception("Oh, it`s don`t work!")
-    }
+class GetWeatherFromNetworkUseCase @Inject constructor(private val weatherRepository: WeatherRepository) {
+     suspend fun invoke(params: WeatherRequest) = weatherRepository.getWeather(params)
+
 }
