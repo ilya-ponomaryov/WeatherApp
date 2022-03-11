@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.DataLocationStatus
 import com.example.weatherapp.common.DataWeatherStatus
 import com.example.weatherapp.common.utils.Constant
+import com.example.weatherapp.common.utils.Errors
+import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.data.weather.models.WeatherRequest
 import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetworkUseCase
@@ -80,7 +82,9 @@ class GeneralViewModel @Inject constructor(
                 Log.d(TAG, "Success city: $result")
             } catch (e: Exception) {
                 println(e.message)
-                _locationDataStatusLiveData.value = DataLocationStatus.Failure("Ошибка: " + e.message.toString())
+
+                _locationDataStatusLiveData.value = DataLocationStatus.Failure(ExceptionCatcher.getErrorMessage(e))
+                Log.d(TAG, ExceptionCatcher.getErrorMessage(e))
                 city = "Ошибка"
             }
         }
@@ -109,7 +113,7 @@ class GeneralViewModel @Inject constructor(
                 val result = getWeatherFromNetworkUseCase.invoke(weatherRequest)
                 _weatherDataStatusLiveData.value = DataWeatherStatus.Success(result)
             } catch (e: Exception) {
-                _weatherDataStatusLiveData.value = DataWeatherStatus.Failure("Ошибка: " + e.message.toString())
+                _weatherDataStatusLiveData.value = DataWeatherStatus.Failure(ExceptionCatcher.getErrorMessage(e))
             }
 
         }

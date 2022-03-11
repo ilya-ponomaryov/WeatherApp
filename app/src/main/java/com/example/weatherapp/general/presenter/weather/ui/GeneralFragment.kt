@@ -68,6 +68,7 @@ class GeneralFragment : Fragment() {
         viewModel.locationDataStatusLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result is DataLocationStatus.Failure) {
                 Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
+                Log.d("GeneralFragment", result.message)
             }
         })
     }
