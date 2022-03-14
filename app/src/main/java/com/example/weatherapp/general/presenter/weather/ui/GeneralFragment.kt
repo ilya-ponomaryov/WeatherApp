@@ -13,7 +13,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.common.DataLocationStatus
 import com.example.weatherapp.common.DataWeatherStatus
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapter
