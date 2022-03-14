@@ -23,11 +23,7 @@ class GeneralViewModel @Inject constructor(
     val errorLiveData: LiveData<String>
         get() = _errorLiveData
 
-    fun onQueryTextChange(query: String?) {
-        getWeatherFromNetwork(query)
-    }
-
-    private fun getWeatherFromNetwork(city: String?) {
+    fun getWeatherFromNetwork(city: String?) {
         viewModelScope.launch {
             try {
                 val result = getWeatherFromNetworkUseCase.invoke(city)

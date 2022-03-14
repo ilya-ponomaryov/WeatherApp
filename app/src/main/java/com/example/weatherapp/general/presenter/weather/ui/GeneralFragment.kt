@@ -29,11 +29,8 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        viewModel.onQueryTextChange(arguments?.getString("city"))
         binding.searchToolbarBtn.setOnClickListener {
-            val addCityDialog = AddCityDialog()
-            fragmentManager?.let { it1 -> addCityDialog.show(it1, "Dialog") }
-
+            showAddCityDialog()
         }
         viewModel.weatherAndLocationDataLiveData.observe(viewLifecycleOwner, Observer { result ->
             generalRvAdapter.getWeatherData(result.weatherData)
@@ -42,12 +39,17 @@ class GeneralFragment : Fragment() {
         viewModel.errorLiveData.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
-
+        viewModel.getWeatherFromNetwork(arguments?.getString("city"))
     }
 
     private fun setupRecyclerView() {
         generalRvAdapter = GeneralRvAdapter(requireContext())
         binding.generalRv.adapter = generalRvAdapter
+    }
+
+    private fun showAddCityDialog() {
+        val addCityDialog = AddCityDialog()
+        addCityDialog.show(parentFragmentManager, "Dialog")
     }
 
     override fun onDestroyView() {
