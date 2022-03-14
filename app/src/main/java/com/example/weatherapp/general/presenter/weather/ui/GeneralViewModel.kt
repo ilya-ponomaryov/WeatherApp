@@ -18,9 +18,11 @@ class GeneralViewModel @Inject constructor(
     private val _weather = MutableLiveData<WeatherAndLocation>()
     val weather: LiveData<WeatherAndLocation>
         get() = _weather
+
     private val _city= MutableLiveData<String>()
     val city: LiveData<String>
         get() = _city
+
     private val _error = MutableLiveData<String>()
     val error: LiveData<String>
         get() = _error
