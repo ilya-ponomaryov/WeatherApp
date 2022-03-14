@@ -1,5 +1,6 @@
 package com.example.weatherapp.general.data.location.network.repository
 
+import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.general.data.location.models.Location
 import com.example.weatherapp.general.data.location.models.LocationRequest
 import com.example.weatherapp.general.data.location.network.LocationService
@@ -12,12 +13,12 @@ import kotlin.Exception
 class LocationRepositoryImpl @Inject constructor(private val locationService: LocationService) :
     LocationRepository {
 
-    override suspend fun getLocation(locationRequest: LocationRequest): Location
+    override suspend fun getLocation(query: String): Location
     = withContext(Dispatchers.IO) {
         val result = locationService.getCity(
-            locationRequest.q,
-            locationRequest.limit,
-            locationRequest.appid)
+            query,
+            1,
+            Constant.APPID)
 
         if (result.isSuccessful) {
             return@withContext result.body()!!

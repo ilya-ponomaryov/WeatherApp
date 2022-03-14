@@ -13,8 +13,8 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class DomainModule {
     @Provides
-    fun provideGetWeatherFromNetworkUseCase(weatherRepository: WeatherRepository)
-    = GetWeatherFromNetworkUseCase(weatherRepository)
+    fun provideGetWeatherFromNetworkUseCase(weatherRepository: WeatherRepository, locationRepository: LocationRepository)
+    = GetWeatherFromNetworkUseCase(weatherRepository, locationRepository)
 
     fun provideGetLocationFromNetworkUseCase(locationRepository: LocationRepository)
     = GetLocationFromNetworkUseCase(locationRepository)

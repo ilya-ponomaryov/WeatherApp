@@ -55,20 +55,13 @@ class GeneralFragment : Fragment() {
         viewModel.weatherDataStatusLiveData.observe(viewLifecycleOwner, Observer { result ->
             when(result) {
                 is DataWeatherStatus.Success -> {
-                    Log.d("GeneralFragmentLog", result.data.current.temp.toInt().toString())
-                    generalRvAdapter.getWeatherData(result.data)
-                    binding.toolbarMainText.text = viewModel.city
+                    Log.d("GeneralFragmentLog", result.data.weatherData.current.temp.toString())
+                    generalRvAdapter.getWeatherData(result.data.weatherData)
+                    binding.toolbarMainText.text = result.data.location[0].local_names.ru
                 }
                 is DataWeatherStatus.Failure -> {
                     Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
                 }
-            }
-        })
-
-        viewModel.locationDataStatusLiveData.observe(viewLifecycleOwner, Observer { result ->
-            if (result is DataLocationStatus.Failure) {
-                Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
-                Log.d("GeneralFragment", result.message)
             }
         })
     }

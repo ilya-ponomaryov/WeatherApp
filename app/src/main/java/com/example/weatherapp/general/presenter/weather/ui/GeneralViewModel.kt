@@ -7,14 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.DataLocationStatus
 import com.example.weatherapp.common.DataWeatherStatus
-import com.example.weatherapp.common.utils.Constant
-import com.example.weatherapp.common.utils.Errors
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.general.data.weather.models.WeatherData
-import com.example.weatherapp.general.data.weather.models.WeatherRequest
 import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetworkUseCase
 import com.example.weatherapp.general.data.location.models.Location
-import com.example.weatherapp.general.data.location.models.LocationRequest
+import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
 import com.example.weatherapp.general.domain.usecases.location.GetLocationFromNetworkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -28,89 +25,22 @@ class GeneralViewModel @Inject constructor(
     private val TAG = "GeneralVM"
     var city: String? = null
 
-    private val _weatherRequestLiveData = MutableLiveData<WeatherRequest>()
-    private val weatherRequestLiveData : LiveData<WeatherRequest>
-        get() = _weatherRequestLiveData
-
-    private val _locationRequestLiveData = MutableLiveData<LocationRequest>()
-    private val locationRequestLiveData: LiveData<LocationRequest>
-        get() = _locationRequestLiveData
-
-    private val _weatherDataStatusLiveData = MutableLiveData<DataWeatherStatus<WeatherData>>()
-    val weatherDataStatusLiveData: LiveData<DataWeatherStatus<WeatherData>>
+    private val _weatherDataStatusLiveData = MutableLiveData<DataWeatherStatus<WeatherAndLocation>>()
+    val weatherDataStatusLiveData: LiveData<DataWeatherStatus<WeatherAndLocation>>
         get() = _weatherDataStatusLiveData
 
-    private val _locationDataStatusLiveData = MutableLiveData<DataLocationStatus<Location>>()
-    val locationDataStatusLiveData: LiveData<DataLocationStatus<Location>>
-        get() = _locationDataStatusLiveData
-
-    init {
-        getWeatherFromNetwork(
-            WeatherRequest(
-                52.731118499999994,
-                41.434199146086904,
-                "minutely,alerts",
-                "metric",
-                "ru",
-                Constant.APPID
-            )
-        )
-        Log.d(TAG, "init")
-    }
     fun onQueryTextChange(query: String?) {
         if (!query.isNullOrEmpty() && query.isNotBlank()) {
-            Log.d(TAG, "onQueryTextChange not null $query")
-            val locationRequest =
-                LocationRequest(query, 1, Constant.APPID)
-            getLocationFromNetwork(locationRequest)
+            getWeatherFromNetwork(query)
         } else {
-            city = "Тамбов"
-            val locationRequest =
-                LocationRequest(city!!, 1, Constant.APPID)
-            _locationRequestLiveData.value = locationRequest
-            getLocationFromNetwork(locationRequest)
+            getWeatherFromNetwork("Тамбов")
         }
     }
 
-    private fun getLocationFromNetwork(locationRequest: LocationRequest) {
+    private fun getWeatherFromNetwork(city: String) {
         viewModelScope.launch {
             try {
-                val result = getLocationFromNetworkUseCase.invoke(locationRequest)
-                _locationDataStatusLiveData.value = DataLocationStatus.Success(result)
-                getWeather(result)
-                city = result[0].local_names.ru
-                Log.d(TAG, "Success city: $result")
-            } catch (e: Exception) {
-                println(e.message)
-
-                _locationDataStatusLiveData.value = DataLocationStatus.Failure(ExceptionCatcher.getErrorMessage(e))
-                Log.d(TAG, ExceptionCatcher.getErrorMessage(e))
-                city = "Ошибка"
-            }
-        }
-    }
-
-    private fun createWeatherRequest(location: Location): WeatherRequest {
-        Log.d(TAG, "createWeatherRequest")
-        return WeatherRequest(
-            location[0].lat,
-            location[0].lon,
-            "alerts, minutely",
-            "metric",
-            "ru",
-            Constant.APPID)
-    }
-
-    private fun getWeather(location: Location) {
-        Log.d(TAG, "GetWeather")
-        getWeatherFromNetwork(createWeatherRequest(location))
-    }
-
-    private fun getWeatherFromNetwork(weatherRequest: WeatherRequest) {
-        viewModelScope.launch {
-            Log.d(TAG, "getWeatherFromNetwork: $weatherRequest")
-            try {
-                val result = getWeatherFromNetworkUseCase.invoke(weatherRequest)
+                val result = getWeatherFromNetworkUseCase.invoke(city)
                 _weatherDataStatusLiveData.value = DataWeatherStatus.Success(result)
             } catch (e: Exception) {
                 _weatherDataStatusLiveData.value = DataWeatherStatus.Failure(ExceptionCatcher.getErrorMessage(e))

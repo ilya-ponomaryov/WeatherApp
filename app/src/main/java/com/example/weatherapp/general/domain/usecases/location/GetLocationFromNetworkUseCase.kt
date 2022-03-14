@@ -5,6 +5,6 @@ import com.example.weatherapp.general.domain.LocationRepository
 import javax.inject.Inject
 
 class GetLocationFromNetworkUseCase @Inject constructor(private val locationRepository: LocationRepository) {
-     suspend fun invoke(params: LocationRequest)  = locationRepository.getLocation(params)
+     suspend fun invoke(params: String)  = locationRepository.getLocation(params)
 }
 
