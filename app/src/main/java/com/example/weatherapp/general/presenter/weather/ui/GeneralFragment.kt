@@ -32,11 +32,11 @@ class GeneralFragment : Fragment() {
         binding.searchToolbarBtn.setOnClickListener {
             showAddCityDialog()
         }
-        viewModel.weatherAndLocationDataLiveData.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.weatherAndLocationData.observe(viewLifecycleOwner, Observer { result ->
             generalRvAdapter.getWeatherData(result.weatherData)
             binding.toolbarMainText.text = result.location[0].local_names.ru
         })
-        viewModel.errorLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.error.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
         viewModel.getWeatherFromNetwork(arguments?.getString("city"))
