@@ -15,21 +15,21 @@ import javax.inject.Inject
 class GeneralViewModel @Inject constructor(
     private val getWeatherFromNetwork: GetWeatherFromNetwork
 ) : ViewModel() {
-    private val _weatherAndLocationData = MutableLiveData<WeatherAndLocation>()
-    val weatherAndLocationData: LiveData<WeatherAndLocation>
-        get() = _weatherAndLocationData
-    private val _cityName= MutableLiveData<String>()
-    val cityName: LiveData<String>
-        get() = _cityName
+    private val _weather = MutableLiveData<WeatherAndLocation>()
+    val weather: LiveData<WeatherAndLocation>
+        get() = _weather
+    private val _city= MutableLiveData<String>()
+    val city: LiveData<String>
+        get() = _city
     private val _error = MutableLiveData<String>()
     val error: LiveData<String>
         get() = _error
 
-    fun getWeather(city: String?)  = viewModelScope.launch {
+    fun loadWeather(city: String?)  = viewModelScope.launch {
             try {
                 val result = getWeatherFromNetwork(city)
-                _weatherAndLocationData.value = result
-                _cityName.value = result.location[0].local_names.ru
+                _weather.value = result
+                _city.value = result.location[0].local_names.ru
             } catch (e: Exception) {
                 _error.value = ExceptionCatcher.getErrorMessage(e)
             }

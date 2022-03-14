@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
@@ -17,44 +18,49 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
     private val viewModel: GeneralViewModel by viewModels()
+
     private var _binding: GeneralFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var generalRvAdapter: GeneralRvAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        GeneralFragmentBinding.inflate(inflater, container, false)
-            .also { _binding = it }
-            .root
+    private val weatherAdapter = GeneralRvAdapter()
+
+    private val city get() = arguments?.getString(ARG_CITY)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = GeneralFragmentBinding.inflate(inflater, container, false)
+        .also { _binding = it }
+        .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        binding.searchToolbarBtn.setOnClickListener {
-            showAddCityDialog() }
-        viewModel.cityName.observe(viewLifecycleOwner, Observer {
-            binding.toolbarMainText.text = it
-        })
-        viewModel.error.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-        })
-        viewModel.getWeather(arguments?.getString("city"))
+
+        setupToolbar()
+        setupWeatherRecycler()
+
+        viewModel.error.observe(viewLifecycleOwner) { showToast(it) }
+
+        viewModel.loadWeather(city)
     }
 
-    private fun setupRecyclerView() {
-        generalRvAdapter = GeneralRvAdapter(requireContext())
-        binding.generalRv.adapter = generalRvAdapter
-        viewModel.weatherAndLocationData.observe(viewLifecycleOwner, Observer { result ->
-            generalRvAdapter.getWeatherData(result.weatherData)
-        })
+    private fun setupToolbar() {
+        binding.selectCity.setOnClickListener { AddCityDialog().show(parentFragmentManager, "Dialog") }
+        viewModel.city.observe(viewLifecycleOwner) { binding.city.text = it }
     }
 
-    private fun showAddCityDialog() {
-        val addCityDialog = AddCityDialog()
-        addCityDialog.show(parentFragmentManager, "Dialog")
+    private fun setupWeatherRecycler() {
+        binding.weather.adapter = weatherAdapter
+        viewModel.weather.observe(viewLifecycleOwner) { weatherAdapter.setWeather(it.weatherData) }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val ARG_CITY = "city"
     }
 }

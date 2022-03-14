@@ -15,9 +15,10 @@ import com.example.weatherapp.general.domain.DateConverter
 import com.example.weatherapp.general.domain.HourlyDataConverter
 import com.example.weatherapp.location.presenter.adapters.HourlyRvAdapter
 
-class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val weatherDataList = arrayListOf<WeatherData>()
     private val hourList = arrayListOf<List<Hourly>>()
+    private lateinit var context: Context
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) {
@@ -35,6 +36,7 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
                     parent,
                     false
                 )
+                context = parent.context
                 return TodayViewHolder(view)
             }
             1 -> {
@@ -78,7 +80,7 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
             binding.descTodayCardText.text=
                 current.weather[0].description + ", ощущается как " + current.feels_like.toInt().toString()
 
-            Glide.with(context)
+            Glide.with(context!!)
                 .load("http://openweathermap.org/img/w/" + current.weather[0].icon + ".png")
                 .into(binding.iconTodayCardImg)
 
@@ -88,7 +90,7 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
 
     inner class DayViewHolder(private val binding: DayCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(daily: Daily, p: Int) {
-            val adapter = HourlyRvAdapter(context)
+            val adapter = HourlyRvAdapter(context!!)
             val c = HourlyDataConverter()
             hourList.addAll(c.getHourlyData(weatherDataList[0].hourly))
                 adapter.getHourlyData(hourList[p-1])
@@ -97,13 +99,13 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
             binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
             binding.hourListDayCardRv.adapter = adapter
-            Glide.with(context)
+            Glide.with(context!!)
                 .load("http://openweathermap.org/img/w/" + daily.weather[0].icon + ".png")
                 .into(binding.iconDayCardImg)
         }
     }
 
-    fun getWeatherData(data: WeatherData) {
+    fun setWeather(data: WeatherData) {
         weatherDataList.clear()
         weatherDataList.add(data)
         notifyDataSetChanged()
