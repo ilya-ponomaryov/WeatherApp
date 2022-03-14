@@ -32,9 +32,8 @@ class GeneralFragment : Fragment() {
         binding.searchToolbarBtn.setOnClickListener {
             showAddCityDialog()
         }
-        viewModel.weatherAndLocationData.observe(viewLifecycleOwner, Observer { result ->
-            generalRvAdapter.getWeatherData(result.weatherData)
-            binding.toolbarMainText.text = result.location[0].local_names.ru
+        viewModel.cityName.observe(viewLifecycleOwner, Observer {
+            binding.toolbarMainText.text = it
         })
         viewModel.error.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
@@ -45,6 +44,9 @@ class GeneralFragment : Fragment() {
     private fun setupRecyclerView() {
         generalRvAdapter = GeneralRvAdapter(requireContext())
         binding.generalRv.adapter = generalRvAdapter
+        viewModel.weatherAndLocationData.observe(viewLifecycleOwner, Observer { result ->
+            generalRvAdapter.getWeatherData(result.weatherData)
+        })
     }
 
     private fun showAddCityDialog() {
