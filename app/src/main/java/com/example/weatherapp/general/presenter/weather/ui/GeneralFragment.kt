@@ -30,8 +30,7 @@ class GeneralFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         binding.searchToolbarBtn.setOnClickListener {
-            showAddCityDialog()
-        }
+            showAddCityDialog() }
         viewModel.cityName.observe(viewLifecycleOwner, Observer {
             binding.toolbarMainText.text = it
         })
