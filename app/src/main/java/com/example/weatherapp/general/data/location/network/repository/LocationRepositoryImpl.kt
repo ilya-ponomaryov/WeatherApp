@@ -13,10 +13,16 @@ import kotlin.Exception
 class LocationRepositoryImpl @Inject constructor(private val locationService: LocationService) :
     LocationRepository {
 
-    override suspend fun getLocation(query: String): Location
+    override suspend fun getLocation(query: String?): Location
     = withContext(Dispatchers.IO) {
+        var city = ""
+        city = if (!query.isNullOrEmpty() && query.isNotBlank()) {
+            query
+        } else {
+            "Тамбов"
+        }
         val result = locationService.getCity(
-            query,
+            city,
             1,
             Constant.APPID)
 
