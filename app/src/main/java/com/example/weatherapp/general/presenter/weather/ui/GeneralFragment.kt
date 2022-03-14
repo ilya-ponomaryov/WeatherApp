@@ -38,7 +38,7 @@ class GeneralFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
-        viewModel.getWeatherFromNetwork(arguments?.getString("city"))
+        viewModel.getWeather(arguments?.getString("city"))
     }
 
     private fun setupRecyclerView() {

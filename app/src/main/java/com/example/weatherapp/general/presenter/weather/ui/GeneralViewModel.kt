@@ -5,15 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.utils.ExceptionCatcher
-import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetworkUseCase
 import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
+import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class GeneralViewModel @Inject constructor(
-    private val getWeatherFromNetworkUseCase: GetWeatherFromNetworkUseCase
+    private val getWeatherFromNetwork: GetWeatherFromNetwork
 ) : ViewModel() {
     private val _weatherAndLocationData = MutableLiveData<WeatherAndLocation>()
     val weatherAndLocationData: LiveData<WeatherAndLocation>
@@ -25,9 +25,9 @@ class GeneralViewModel @Inject constructor(
     val error: LiveData<String>
         get() = _error
 
-    fun getWeatherFromNetwork(city: String?)  = viewModelScope.launch {
+    fun getWeather(city: String?)  = viewModelScope.launch {
             try {
-                val result = getWeatherFromNetworkUseCase(city)
+                val result = getWeatherFromNetwork(city)
                 _weatherAndLocationData.value = result
                 _cityName.value = result.location[0].local_names.ru
             } catch (e: Exception) {

@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class GetWeatherFromNetworkUseCase @Inject constructor(
+class GetWeatherFromNetwork @Inject constructor(
      private val weatherRepository: WeatherRepository,
      private val locationRepository: LocationRepository
      ) {
