@@ -1,7 +1,6 @@
 package com.example.weatherapp.general.presenter.weather.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.common.DataWeatherStatus
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
@@ -43,26 +41,20 @@ class GeneralFragment : Fragment() {
 
         recyclerView = binding.generalRv
         setupRecyclerView()
-        val city = arguments?.getString("city")
-        Log.d("GeneralFragmentLog", "City: $city")
-        viewModel.onQueryTextChange(city)
+        viewModel.onQueryTextChange(arguments?.getString("city"))
         binding.searchToolbarBtn.setOnClickListener {
             val addCityDialog = AddCityDialog()
             fragmentManager?.let { it1 -> addCityDialog.show(it1, "Dialog") }
 
         }
-        viewModel.weatherDataStatusLiveData.observe(viewLifecycleOwner, Observer { result ->
-            when(result) {
-                is DataWeatherStatus.Success -> {
-                    Log.d("GeneralFragmentLog", result.data.weatherData.current.temp.toString())
-                    generalRvAdapter.getWeatherData(result.data.weatherData)
-                    binding.toolbarMainText.text = result.data.location[0].local_names.ru
-                }
-                is DataWeatherStatus.Failure -> {
-                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
-                }
-            }
+        viewModel.weatherAndLocationDataLiveData.observe(viewLifecycleOwner, Observer { result ->
+            generalRvAdapter.getWeatherData(result.weatherData)
+            binding.toolbarMainText.text = result.location[0].local_names.ru
         })
+        viewModel.errorLiveData.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        })
+
     }
 
     private fun setupRecyclerView() {

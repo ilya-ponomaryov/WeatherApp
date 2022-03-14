@@ -2,7 +2,6 @@ package com.example.weatherapp.general.data.location.network.repository
 
 import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.general.data.location.models.Location
-import com.example.weatherapp.general.data.location.models.LocationRequest
 import com.example.weatherapp.general.data.location.network.LocationService
 import com.example.weatherapp.general.domain.LocationRepository
 import kotlinx.coroutines.Dispatchers
@@ -15,8 +14,7 @@ class LocationRepositoryImpl @Inject constructor(private val locationService: Lo
 
     override suspend fun getLocation(query: String?): Location
     = withContext(Dispatchers.IO) {
-        var city = ""
-        city = if (!query.isNullOrEmpty() && query.isNotBlank()) {
+        val city = if (!query.isNullOrEmpty() && query.isNotBlank()) {
             query
         } else {
             "Тамбов"
