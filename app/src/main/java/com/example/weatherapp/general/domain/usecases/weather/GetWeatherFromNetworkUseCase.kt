@@ -1,11 +1,8 @@
 package com.example.weatherapp.general.domain.usecases.weather
 
-import com.example.weatherapp.general.data.location.models.Location
 import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
-import com.example.weatherapp.general.data.weather.models.WeatherRequest
 import com.example.weatherapp.general.domain.LocationRepository
 import com.example.weatherapp.general.domain.WeatherRepository
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

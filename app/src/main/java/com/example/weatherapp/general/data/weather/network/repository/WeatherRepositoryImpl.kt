@@ -1,9 +1,7 @@
 package com.example.weatherapp.general.data.weather.network.repository
 
 import com.example.weatherapp.common.utils.Constant
-import com.example.weatherapp.general.data.location.models.Location
 import com.example.weatherapp.general.data.weather.models.WeatherData
-import com.example.weatherapp.general.data.weather.models.WeatherRequest
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
 import kotlinx.coroutines.Dispatchers
