@@ -46,7 +46,10 @@ class GeneralFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.selectCity.setOnClickListener { AddCityDialog().show(parentFragmentManager, "Dialog") }
+        binding.selectCity.setOnClickListener { AddCityDialog().show(
+            parentFragmentManager,
+            DIALOG_TAG
+        ) }
         viewModel.city.observe(viewLifecycleOwner) { binding.city.text = it }
     }
 
@@ -62,5 +65,6 @@ class GeneralFragment : Fragment() {
 
     companion object {
         const val ARG_CITY = "city"
+        const val DIALOG_TAG = "AddCity"
     }
 }
