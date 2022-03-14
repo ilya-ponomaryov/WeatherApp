@@ -3,7 +3,6 @@ package com.example.weatherapp.general.presenter.weather.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.general.data.weather.models.Current
@@ -97,7 +96,6 @@ class GeneralRvAdapter(private val context: Context) : RecyclerView.Adapter<Recy
             binding.dateDayCardText.text = converter.getDateAsString(daily.dt)
             binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
-            binding.hourListDayCardRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.hourListDayCardRv.adapter = adapter
             Glide.with(context)
                 .load("http://openweathermap.org/img/w/" + daily.weather[0].icon + ".png")
