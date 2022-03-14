@@ -21,11 +21,7 @@ class GeneralViewModel @Inject constructor(
         get() = _weatherDataStatusLiveData
 
     fun onQueryTextChange(query: String?) {
-        //if (!query.isNullOrEmpty() && query.isNotBlank()) {
-            getWeatherFromNetwork(query)
-       // } else {
-       //     getWeatherFromNetwork("Тамбов")
-       // }
+        getWeatherFromNetwork(query)
     }
 
     private fun getWeatherFromNetwork(city: String?) {
@@ -35,7 +31,6 @@ class GeneralViewModel @Inject constructor(
                 _weatherDataStatusLiveData.value = DataWeatherStatus.Success(result)
             } catch (e: Exception) {
                 _weatherDataStatusLiveData.value = DataWeatherStatus.Failure(ExceptionCatcher.getErrorMessage(e))
-                //ExceptionCatcher.getErrorMessage()
             }
 
         }
