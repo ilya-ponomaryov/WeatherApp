@@ -9,13 +9,14 @@ import javax.inject.Inject
 
 class GetWeatherFromNetworkUseCase @Inject constructor(
      private val weatherRepository: WeatherRepository,
-     private val locationRepository: LocationRepository) {
-
-     suspend operator fun invoke(city: String?): WeatherAndLocation =
-          withContext(Dispatchers.Default) {
+     private val locationRepository: LocationRepository
+     ) {
+     suspend operator fun invoke(city: String?): WeatherAndLocation
+     = withContext(Dispatchers.Default) {
                val locationResult = locationRepository.getLocation(city)
-               val weatherResult = weatherRepository.getWeather(locationResult[0].lat, locationResult[0].lon)
+               val weatherResult = weatherRepository.getWeather(
+                    locationResult[0].lat,
+                    locationResult[0].lon)
                WeatherAndLocation(weatherResult, locationResult)
           }
-
 }
