@@ -19,12 +19,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DataModule {
     @Provides
-    fun provideBaseUrl() : String = "https://api.openweathermap.org"
+    fun provideBaseUrl(): String = "https://api.openweathermap.org"
 
     @Provides
     @Singleton
-    fun provideRetrofit(BASE_URL: String) : Retrofit
-    = Retrofit.Builder()
+    fun provideRetrofit(BASE_URL: String): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .baseUrl(BASE_URL)
@@ -32,26 +31,24 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideWeatherService(retrofit: Retrofit) : WeatherService = retrofit.create(WeatherService::class.java)
+    fun provideWeatherService(retrofit: Retrofit): WeatherService =
+        retrofit.create(WeatherService::class.java)
 
     @Provides
     @Singleton
-    fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository
-    = WeatherRepositoryImpl(weatherService)
+    fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository =
+        WeatherRepositoryImpl(weatherService)
 
     @Provides
     @Singleton
-    fun provideLocationService(retrofit: Retrofit) : LocationService = retrofit.create(
-        LocationService::class.java)
+    fun provideLocationService(retrofit: Retrofit): LocationService = retrofit.create(
+        LocationService::class.java
+    )
 
     @Provides
     @Singleton
-    fun provideLocationRepository(locationService: LocationService): LocationRepository
-    = LocationRepositoryImpl(locationService)
-
-
-
-
+    fun provideLocationRepository(locationService: LocationService): LocationRepository =
+        LocationRepositoryImpl(locationService)
 
 
 }

@@ -1,9 +1,8 @@
 package com.example.weatherapp.common.di
 
 import com.example.weatherapp.general.domain.WeatherRepository
-import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetworkUseCase
 import com.example.weatherapp.general.domain.LocationRepository
-import com.example.weatherapp.general.domain.usecases.location.GetLocationFromNetworkUseCase
+import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,9 +12,8 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class DomainModule {
     @Provides
-    fun provideGetWeatherFromNetworkUseCase(weatherRepository: WeatherRepository)
-    = GetWeatherFromNetworkUseCase(weatherRepository)
-
-    fun provideGetLocationFromNetworkUseCase(locationRepository: LocationRepository)
-    = GetLocationFromNetworkUseCase(locationRepository)
+    fun provideGetWeatherFromNetwork(
+        weatherRepository: WeatherRepository,
+        locationRepository: LocationRepository,
+    ) = WeatherGetter(weatherRepository, locationRepository)
 }

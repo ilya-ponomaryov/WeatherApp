@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
@@ -12,13 +13,19 @@ import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
 import com.example.weatherapp.general.presenter.weather.ui.GeneralFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "Dialog"
+
 @AndroidEntryPoint
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
     private val navController: NavController get() = findNavController()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         AddCityDialogLayoutBinding.inflate(inflater, container, false)
             .also { _binding = it }
             .root
@@ -68,6 +75,5 @@ class AddCityDialog : DialogFragment() {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
-
-
+    fun show(fragmentManager: FragmentManager) = show(fragmentManager, TAG)
 }
