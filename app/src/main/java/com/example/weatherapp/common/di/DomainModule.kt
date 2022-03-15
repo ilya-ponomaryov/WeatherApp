@@ -2,7 +2,7 @@ package com.example.weatherapp.common.di
 
 import com.example.weatherapp.general.domain.WeatherRepository
 import com.example.weatherapp.general.domain.LocationRepository
-import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetwork
+import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +15,5 @@ class DomainModule {
     fun provideGetWeatherFromNetwork(
         weatherRepository: WeatherRepository,
         locationRepository: LocationRepository,
-    ) = GetWeatherFromNetwork(weatherRepository, locationRepository)
+    ) = WeatherGetter(weatherRepository, locationRepository)
 }

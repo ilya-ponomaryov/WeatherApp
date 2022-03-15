@@ -13,6 +13,8 @@ import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
 import com.example.weatherapp.general.presenter.weather.ui.GeneralFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "Dialog"
+
 @AndroidEntryPoint
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
@@ -73,9 +75,5 @@ class AddCityDialog : DialogFragment() {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
-    fun show(fragmentManager: FragmentManager) = show(fragmentManager, DIALOG_TAG)
-
-    companion object {
-        const val DIALOG_TAG = "Dialog"
-    }
+    fun show(fragmentManager: FragmentManager) = show(fragmentManager, TAG)
 }
