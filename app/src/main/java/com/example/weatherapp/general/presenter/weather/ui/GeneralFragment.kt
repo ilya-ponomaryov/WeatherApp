@@ -46,10 +46,12 @@ class GeneralFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.selectCity.setOnClickListener { AddCityDialog().show(
-            parentFragmentManager,
-            DIALOG_TAG
-        ) }
+        binding.selectCity.setOnClickListener {
+            AddCityDialog().show(
+                parentFragmentManager,
+                DIALOG_TAG
+            )
+        }
         viewModel.city.observe(viewLifecycleOwner) { binding.city.text = it }
     }
 

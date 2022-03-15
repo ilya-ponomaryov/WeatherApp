@@ -10,20 +10,20 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val weatherService: WeatherService) :
     WeatherRepository {
-    override suspend fun getWeather(lat: Double, lon: Double) : WeatherData
-        = withContext(Dispatchers.IO) {
-         val result = weatherService.getWeather(
-            lat,
-            lon,
-            "minutely, alerts",
-            "metric",
-            "ru",
-            Constant.APPID
-        )
-        if (result.isSuccessful) {
-            return@withContext result.body()!!
-        } else {
-            throw Exception("Error")
+    override suspend fun getWeather(lat: Double, lon: Double): WeatherData =
+        withContext(Dispatchers.IO) {
+            val result = weatherService.getWeather(
+                lat,
+                lon,
+                "minutely, alerts",
+                "metric",
+                "ru",
+                Constant.APPID
+            )
+            if (result.isSuccessful) {
+                return@withContext result.body()!!
+            } else {
+                throw Exception("Error")
+            }
         }
-    }
 }

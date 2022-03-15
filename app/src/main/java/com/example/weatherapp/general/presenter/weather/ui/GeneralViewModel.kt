@@ -19,7 +19,7 @@ class GeneralViewModel @Inject constructor(
     val weather: LiveData<WeatherAndLocation>
         get() = _weather
 
-    private val _city= MutableLiveData<String>()
+    private val _city = MutableLiveData<String>()
     val city: LiveData<String>
         get() = _city
 
@@ -27,13 +27,13 @@ class GeneralViewModel @Inject constructor(
     val error: LiveData<String>
         get() = _error
 
-    fun loadWeather(city: String?)  = viewModelScope.launch {
-            try {
-                val result = getWeatherFromNetwork(city)
-                _weather.value = result
-                _city.value = result.location[0].local_names.ru
-            } catch (e: Exception) {
-                _error.value = ExceptionCatcher.getErrorMessage(e)
-            }
+    fun loadWeather(city: String?) = viewModelScope.launch {
+        try {
+            val result = getWeatherFromNetwork(city)
+            _weather.value = result
+            _city.value = result.location[0].local_names.ru
+        } catch (e: Exception) {
+            _error.value = ExceptionCatcher.getErrorMessage(e)
+        }
     }
 }
