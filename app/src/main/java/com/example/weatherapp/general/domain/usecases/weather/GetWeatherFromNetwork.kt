@@ -15,8 +15,7 @@ class GetWeatherFromNetwork @Inject constructor(
             val locationResult = locationRepository.getLocation(city)
             val weatherResult = weatherRepository.getWeather(
                 locationResult[0].lat,
-                locationResult[0].lon
-            )
+                locationResult[0].lon)
             WeatherAndLocation(weatherResult, locationResult)
         }
 }
