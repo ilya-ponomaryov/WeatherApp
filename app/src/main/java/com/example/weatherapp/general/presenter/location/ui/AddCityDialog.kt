@@ -19,7 +19,11 @@ class AddCityDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val navController: NavController get() = findNavController()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         AddCityDialogLayoutBinding.inflate(inflater, container, false)
             .also { _binding = it }
             .root
@@ -69,8 +73,9 @@ class AddCityDialog : DialogFragment() {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
-    fun show(fragmentManager: FragmentManager) = show(fragmentManager, "Dialog")
+    fun show(fragmentManager: FragmentManager) = show(fragmentManager, DIALOG_TAG)
 
-
-
+    companion object {
+        const val DIALOG_TAG = "Dialog"
+    }
 }
