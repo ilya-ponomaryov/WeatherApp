@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.Exception
 
-class LocationRepositoryImpl @Inject constructor(private val locationService: LocationService) :
+class LocationRepositoryImpl @Inject constructor(private val service: LocationService) :
     LocationRepository {
 
     override suspend fun getLocation(query: String?): Location
@@ -19,7 +19,7 @@ class LocationRepositoryImpl @Inject constructor(private val locationService: Lo
         } else {
             "Тамбов"
         }
-        val result = locationService.getCity(
+        val result = service.getCity(
             city,
             1,
             Constant.APPID)

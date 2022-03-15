@@ -8,11 +8,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WeatherRepositoryImpl @Inject constructor(private val weatherService: WeatherService) :
+class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) :
     WeatherRepository {
     override suspend fun getWeather(lat: Double, lon: Double): WeatherData =
         withContext(Dispatchers.IO) {
-            val result = weatherService.getWeather(
+            val result = service.getWeather(
                 lat,
                 lon,
                 "minutely, alerts",
