@@ -20,8 +20,6 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val hourList = arrayListOf<List<Hourly>>()
 
-    private lateinit var context: Context
-
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) {
             0
@@ -38,7 +36,6 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     parent,
                     false
                 )
-                context = parent.context
                 return TodayViewHolder(view)
             }
             1 -> {
@@ -85,7 +82,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 current.weather[0].description +
                         ", ощущается как " + current.feels_like.toInt().toString()
 
-            Glide.with(context!!)
+            Glide.with(binding.root.context)
                 .load("http://openweathermap.org/img/w/" + current.weather[0].icon + ".png")
                 .into(binding.iconTodayCardImg)
 
@@ -96,7 +93,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class DayViewHolder(private val binding: DayCardLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(daily: Daily, p: Int) {
-            val adapter = HourlyRvAdapter(context!!)
+            val adapter = HourlyRvAdapter(binding.root.context)
 
             val c = HourlyDataConverter()
 
@@ -110,7 +107,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
             binding.hourListDayCardRv.adapter = adapter
 
-            Glide.with(context!!)
+            Glide.with(binding.root.context)
                 .load("http://openweathermap.org/img/w/" + daily.weather[0].icon + ".png")
                 .into(binding.iconDayCardImg)
         }

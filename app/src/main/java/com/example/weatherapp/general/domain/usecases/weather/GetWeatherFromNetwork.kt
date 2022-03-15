@@ -9,8 +9,7 @@ import javax.inject.Inject
 
 class GetWeatherFromNetwork @Inject constructor(
     private val weatherRepository: WeatherRepository,
-    private val locationRepository: LocationRepository
-) {
+    private val locationRepository: LocationRepository) {
     suspend operator fun invoke(city: String?): WeatherAndLocation =
         withContext(Dispatchers.Default) {
             val locationResult = locationRepository.getLocation(city)

@@ -47,17 +47,14 @@ class GeneralFragment : Fragment() {
 
     private fun setupToolbar() {
         binding.selectCity.setOnClickListener {
-            AddCityDialog().show(
-                parentFragmentManager,
-                DIALOG_TAG
-            )
+            AddCityDialog().show(parentFragmentManager)
         }
         viewModel.city.observe(viewLifecycleOwner) { binding.city.text = it }
     }
 
     private fun setupWeatherRecycler() {
         binding.weather.adapter = weatherAdapter
-        viewModel.weather.observe(viewLifecycleOwner) { weatherAdapter.setWeather(it.weatherData) }
+        viewModel.weather.observe(viewLifecycleOwner) { weatherAdapter.setWeather(it) }
     }
 
     override fun onDestroyView() {
@@ -67,6 +64,5 @@ class GeneralFragment : Fragment() {
 
     companion object {
         const val ARG_CITY = "city"
-        const val DIALOG_TAG = "AddCity"
     }
 }

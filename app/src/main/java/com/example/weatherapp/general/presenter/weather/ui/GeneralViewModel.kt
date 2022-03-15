@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.utils.ExceptionCatcher
+import com.example.weatherapp.general.data.weather.models.Weather
 import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
+import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.domain.usecases.weather.GetWeatherFromNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,8 +17,8 @@ import javax.inject.Inject
 class GeneralViewModel @Inject constructor(
     private val getWeatherFromNetwork: GetWeatherFromNetwork
 ) : ViewModel() {
-    private val _weather = MutableLiveData<WeatherAndLocation>()
-    val weather: LiveData<WeatherAndLocation>
+    private val _weather = MutableLiveData<WeatherData>()
+    val weather: LiveData<WeatherData>
         get() = _weather
 
     private val _city = MutableLiveData<String>()
@@ -30,7 +32,7 @@ class GeneralViewModel @Inject constructor(
     fun loadWeather(city: String?) = viewModelScope.launch {
         try {
             val result = getWeatherFromNetwork(city)
-            _weather.value = result
+            _weather.value = result.weatherData
             _city.value = result.location[0].local_names.ru
         } catch (e: Exception) {
             _error.value = ExceptionCatcher.getErrorMessage(e)

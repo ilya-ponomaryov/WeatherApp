@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
@@ -67,6 +68,8 @@ class AddCityDialog : DialogFragment() {
         dialog?.window?.setBackgroundDrawableResource(R.drawable.insert_dialog)
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
+
+    fun show(fragmentManager: FragmentManager) = show(fragmentManager, "Dialog")
 
 
 

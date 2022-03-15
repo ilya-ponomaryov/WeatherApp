@@ -14,6 +14,6 @@ class DomainModule {
     @Provides
     fun provideGetWeatherFromNetwork(
         weatherRepository: WeatherRepository,
-        locationRepository: LocationRepository
+        locationRepository: LocationRepository,
     ) = GetWeatherFromNetwork(weatherRepository, locationRepository)
 }
