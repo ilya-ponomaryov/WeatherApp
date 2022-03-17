@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataModule {
+class NetworkModule {
     @Provides
     fun provideBaseUrl(): String = "https://api.openweathermap.org"
 
@@ -28,27 +28,5 @@ class DataModule {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .baseUrl(BASE_URL)
         .build()
-
-    @Provides
-    @Singleton
-    fun provideWeatherService(retrofit: Retrofit): WeatherService =
-        retrofit.create(WeatherService::class.java)
-
-    @Provides
-    @Singleton
-    fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository =
-        WeatherRepositoryImpl(weatherService)
-
-    @Provides
-    @Singleton
-    fun provideLocationService(retrofit: Retrofit): LocationService = retrofit.create(
-        LocationService::class.java
-    )
-
-    @Provides
-    @Singleton
-    fun provideLocationRepository(locationService: LocationService): LocationRepository =
-        LocationRepositoryImpl(locationService)
-
 
 }

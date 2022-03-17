@@ -1,4 +1,4 @@
-package com.example.weatherapp.common.di
+package com.example.weatherapp.general.domain.di
 
 import com.example.weatherapp.general.domain.WeatherRepository
 import com.example.weatherapp.general.domain.LocationRepository
@@ -10,7 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class DomainModule {
+class WeatherDomainModule {
     @Provides
     fun provideGetWeatherFromNetwork(
         weatherRepository: WeatherRepository,
