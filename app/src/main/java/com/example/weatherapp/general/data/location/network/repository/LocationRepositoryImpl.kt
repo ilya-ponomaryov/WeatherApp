@@ -19,6 +19,7 @@ class LocationRepositoryImpl @Inject constructor(private val service: LocationSe
         } else {
             "Тамбов"
         }
+
         val result = service.getCity(
             city,
             1,
