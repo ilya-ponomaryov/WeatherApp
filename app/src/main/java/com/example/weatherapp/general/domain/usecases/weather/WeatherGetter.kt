@@ -8,13 +8,13 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class WeatherGetter @Inject constructor(
-    private val weatherRepository: WeatherRepository,
-    private val locationRepository: LocationRepository
+    private val weatherService: WeatherRepository,
+    private val locationService: LocationRepository
 ) {
     suspend operator fun invoke(city: String?): WeatherAndLocation =
         withContext(Dispatchers.Default) {
-            val locationResult = locationRepository.getLocation(city)
-            val weatherResult = weatherRepository.getWeather(
+            val locationResult = locationService.getLocation(city)
+            val weatherResult = weatherService.getWeatherForecast(
                 locationResult[0].lat,
                 locationResult[0].lon
             )
