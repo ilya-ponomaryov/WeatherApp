@@ -34,16 +34,16 @@ class HourlyDataConverter {
                 for (h in hours) {
                     if (localDate.hours == h) {
                         if (bData != null) {
-                                when(p) {
-                                    0 -> data1.add(bData)
-                                    1 -> data2.add(bData)
-                                    2 -> data3.add(bData)
-                                    3 -> data4.add(bData)
-                                }
+                            when (p) {
+                                0 -> data1.add(bData)
+                                1 -> data2.add(bData)
+                                2 -> data3.add(bData)
+                                3 -> data4.add(bData)
+                            }
                             bData = null
                         }
                         Log.d("Hour", h.toString())
-                        when(p) {
+                        when (p) {
                             0 -> data1.add(n)
                             1 -> data2.add(n)
                             2 -> data3.add(n)
@@ -56,7 +56,7 @@ class HourlyDataConverter {
             } else {
                 bData = n
                 bDay = localDate.day
-                p=+1
+                p = +1
             }
         }
         data.add(data1)
