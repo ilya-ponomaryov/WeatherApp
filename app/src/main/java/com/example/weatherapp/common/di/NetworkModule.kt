@@ -14,10 +14,10 @@ import javax.inject.Singleton
 class NetworkModule {
     @Provides
     @Singleton
-    fun provideRetrofit(BASE_URL: String): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(url: String): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .baseUrl(BASE_URL)
+        .baseUrl(url)
         .build()
 
     @Provides
