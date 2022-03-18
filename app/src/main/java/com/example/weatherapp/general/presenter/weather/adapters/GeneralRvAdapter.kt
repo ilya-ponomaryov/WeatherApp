@@ -1,6 +1,5 @@
 package com.example.weatherapp.general.presenter.weather.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
