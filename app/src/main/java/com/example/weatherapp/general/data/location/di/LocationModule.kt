@@ -20,7 +20,6 @@ class LocationModule {
 
     @Provides
     @Singleton
-    fun provideLocationService(retrofit: Retrofit): LocationService = retrofit.create(
-        LocationService::class.java
-    )
+    fun provideLocationService(retrofit: Retrofit): LocationService =
+        retrofit.create(LocationService::class.java)
 }
