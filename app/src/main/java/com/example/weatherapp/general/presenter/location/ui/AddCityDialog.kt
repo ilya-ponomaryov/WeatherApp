@@ -19,6 +19,7 @@ private const val TAG = "Dialog"
 class AddCityDialog : DialogFragment() {
     private var _binding: AddCityDialogLayoutBinding? = null
     private val binding get() = _binding!!
+
     private val navController: NavController get() = findNavController()
 
     override fun onCreateView(
@@ -33,6 +34,7 @@ class AddCityDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var city: String = ""
+
         binding.searchAddCityView.setIconifiedByDefault(true)
         binding.searchAddCityView.isFocusable = true
         binding.searchAddCityView.isIconified = false
@@ -41,6 +43,7 @@ class AddCityDialog : DialogFragment() {
         binding.cancelAddCityBtn.setOnClickListener {
             dismiss()
         }
+
         binding.searchAddCityView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -53,7 +56,6 @@ class AddCityDialog : DialogFragment() {
                     Log.d("Search", query)
                     city = query
                 }
-
                 return false
             }
         })
