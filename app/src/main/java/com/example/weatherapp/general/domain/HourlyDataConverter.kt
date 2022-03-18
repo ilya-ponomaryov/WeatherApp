@@ -1,62 +1,74 @@
 package com.example.weatherapp.general.domain
 
-import android.util.Log
+
 import com.example.weatherapp.general.data.weather.models.Hourly
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HourlyDataConverter {
     fun getHourlyData(hourlyList: List<Hourly>): List<List<Hourly>> {
-        val hours = arrayListOf(0, 3, 6, 9, 12, 15, 18, 21)
+        val newList = separateHourlyList(hourlyList)
+
+        return distributeDataByDay(newList)
+    }
+
+    private fun separateHourlyList(hourlyList: List<Hourly>): List<Hourly> {
         val newList = arrayListOf<Hourly>()
+        val today = Date(hourlyList[0].dt.toLong() * 1000)
+
+        for (hourly in hourlyList) {
+            val hourlyDate = Date(hourly.dt.toLong() * 1000)
+
+            if (hourlyDate.day != today.day) {
+                newList.add(hourly)
+            }
+        }
+        return newList
+    }
+
+    private fun distributeDataByDay(newList: List<Hourly>): List<ArrayList<Hourly>> {
+        val hours = arrayListOf(0, 3, 6, 9, 12, 15, 18, 21)
+
         val data = arrayListOf<ArrayList<Hourly>>()
         val data1 = arrayListOf<Hourly>()
         val data2 = arrayListOf<Hourly>()
         val data3 = arrayListOf<Hourly>()
         val data4 = arrayListOf<Hourly>()
-        val today = Date(hourlyList[0].dt.toLong() * 1000)
 
-        for (i in hourlyList) {
-            val d = Date(i.dt.toLong() * 1000)
-            if (d.day != today.day) {
-                newList.add(i)
-                Log.d("NewList", newList.toString())
-            }
-        }
-        Log.d("NewListSize", newList.size.toString())
-        val b = Date(newList[0].dt.toLong() * 1000)
-        var bDay = b.day
-        var p = 0
-        var bData: Hourly? = null
-        for (n in newList) {
-            val localDate = Date(n.dt.toLong() * 1000)
-            if (bDay == localDate.day) {
-                for (h in hours) {
-                    if (localDate.hours == h) {
-                        if (bData != null) {
-                            when (p) {
-                                0 -> data1.add(bData)
-                                1 -> data2.add(bData)
-                                2 -> data3.add(bData)
-                                3 -> data4.add(bData)
+        val firstDate = Date(newList[0].dt.toLong() * 1000)
+        var firstDay = firstDate.day
+
+        var position = 0
+
+        var hourlyItem: Hourly? = null
+
+        for (list in newList) {
+            val localDate = Date(list.dt.toLong() * 1000)
+            if (firstDay == localDate.day) {
+                for (hour in hours) {
+                    if (localDate.hours == hour) {
+                        if (hourlyItem != null) {
+                            when (position) {
+                                0 -> data1.add(hourlyItem)
+                                1 -> data2.add(hourlyItem)
+                                2 -> data3.add(hourlyItem)
+                                3 -> data4.add(hourlyItem)
                             }
-                            bData = null
-                        }
-                        Log.d("Hour", h.toString())
-                        when (p) {
-                            0 -> data1.add(n)
-                            1 -> data2.add(n)
-                            2 -> data3.add(n)
-                            3 -> data4.add(n)
+                            hourlyItem = null
                         }
 
-
+                        when (position) {
+                            0 -> data1.add(list)
+                            1 -> data2.add(list)
+                            2 -> data3.add(list)
+                            3 -> data4.add(list)
+                        }
                     }
                 }
             } else {
-                bData = n
-                bDay = localDate.day
-                p = +1
+                hourlyItem = list
+                firstDay = localDate.day
+                position = +1
             }
         }
         data.add(data1)
