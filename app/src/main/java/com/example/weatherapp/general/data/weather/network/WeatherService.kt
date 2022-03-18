@@ -17,9 +17,4 @@ interface WeatherService {
         @Query("lang") lang: String,
         @Query("appid") appid: String,
     ): Response<WeatherData>
-
-    companion object {
-        fun newService(retrofit: Retrofit): WeatherService =
-            retrofit.create(WeatherService::class.java)
-    }
 }

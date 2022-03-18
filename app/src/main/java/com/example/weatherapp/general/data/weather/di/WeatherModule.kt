@@ -13,14 +13,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class WeatherModule {
-
     @Provides
     @Singleton
-    fun provideWeatherRepository(service: WeatherService): WeatherRepository =
-        WeatherRepository.newRepository(service)
+    fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository =
+        WeatherRepositoryImpl(weatherService)
 
     @Provides
     @Singleton
     fun provideWeatherService(retrofit: Retrofit): WeatherService =
-        WeatherService.newService(retrofit)
+        retrofit.create(WeatherService::class.java)
 }

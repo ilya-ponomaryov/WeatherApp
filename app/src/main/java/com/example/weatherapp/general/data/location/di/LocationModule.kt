@@ -15,12 +15,12 @@ import javax.inject.Singleton
 class LocationModule {
     @Provides
     @Singleton
-    fun provideLocationService(retrofit: Retrofit): LocationService = retrofit.create(
-        LocationService::class.java
-    )
+    fun provideLocationRepository(locationService: LocationService): LocationRepository =
+        LocationRepositoryImpl(locationService)
 
     @Provides
     @Singleton
-    fun provideLocationRepository(locationService: LocationService): LocationRepository =
-        LocationRepositoryImpl(locationService)
+    fun provideLocationService(retrofit: Retrofit): LocationService = retrofit.create(
+        LocationService::class.java
+    )
 }

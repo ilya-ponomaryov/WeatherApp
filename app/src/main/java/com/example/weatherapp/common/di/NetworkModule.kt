@@ -1,11 +1,5 @@
 package com.example.weatherapp.common.di
 
-import com.example.weatherapp.general.data.weather.network.WeatherService
-import com.example.weatherapp.general.data.weather.network.repository.WeatherRepositoryImpl
-import com.example.weatherapp.general.domain.WeatherRepository
-import com.example.weatherapp.general.data.location.network.LocationService
-import com.example.weatherapp.general.data.location.network.repository.LocationRepositoryImpl
-import com.example.weatherapp.general.domain.LocationRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -19,9 +13,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     @Provides
-    fun provideBaseUrl(): String = "https://api.openweathermap.org"
-
-    @Provides
     @Singleton
     fun provideRetrofit(BASE_URL: String): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
@@ -29,4 +20,6 @@ class NetworkModule {
         .baseUrl(BASE_URL)
         .build()
 
+    @Provides
+    fun provideBaseUrl(): String = "https://api.openweathermap.org"
 }
