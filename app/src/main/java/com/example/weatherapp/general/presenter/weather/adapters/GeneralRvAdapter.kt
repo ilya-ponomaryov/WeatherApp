@@ -12,7 +12,6 @@ import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.databinding.TodayCardLayoutBinding
 import com.example.weatherapp.general.domain.DateConverter
 import com.example.weatherapp.general.domain.HourlyDataConverter
-import com.example.weatherapp.location.presenter.adapters.HourlyRvAdapter
 
 class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val weatherDataList = arrayListOf<WeatherData>()
