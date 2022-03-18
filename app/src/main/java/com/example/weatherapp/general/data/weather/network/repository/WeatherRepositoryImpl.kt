@@ -20,6 +20,7 @@ class WeatherRepositoryImpl @Inject constructor(private val service: WeatherServ
                 "ru",
                 Constant.APPID
             )
+
             if (result.isSuccessful) {
                 return@withContext result.body()!!
             } else {
