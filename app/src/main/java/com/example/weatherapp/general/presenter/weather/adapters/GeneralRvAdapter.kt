@@ -75,8 +75,12 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(current: Current) {
             val converter = DateConverter()
 
-            binding.dateTodayCardText.text = "Сегодня, " + converter.getDateAsString(current.dt)
-            binding.tempTodayCardText.text = current.temp.toInt().toString() + "°"
+            binding.dateTodayCardText.text =
+                "Сегодня, " + converter.getDateAsString(current.dt)
+
+            binding.tempTodayCardText.text =
+                current.temp.toInt().toString() + "°"
+
             binding.descTodayCardText.text =
                 current.weather[0].description +
                         ", ощущается как " + current.feels_like.toInt().toString()
@@ -91,23 +95,24 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class DayViewHolder(private val binding: DayCardLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(daily: Daily, p: Int) {
+        fun bind(daily: Daily, position: Int) {
             val adapter = HourlyRvAdapter(binding.root.context)
 
-            val c = HourlyDataConverter()
+            val hourlyConverter = HourlyDataConverter()
 
-            hourList.addAll(c.getHourlyData(weatherDataList[0].hourly))
-            adapter.getHourlyData(hourList[p - 1])
+            hourList.addAll(hourlyConverter.getHourlyData(weatherDataList[0].hourly))
+            adapter.getHourlyData(hourList[position - 1])
 
-            val converter = DateConverter()
+            val dateConverter = DateConverter()
 
-            binding.dateDayCardText.text = converter.getDateAsString(daily.dt)
+            binding.dateDayCardText.text = dateConverter.getDateAsString(daily.dt)
             binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
             binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
             binding.hourListDayCardRv.adapter = adapter
 
             Glide.with(binding.root.context)
-                .load("http://openweathermap.org/img/w/" + daily.weather[0].icon + ".png")
+                .load("http://openweathermap.org/img/w/"
+                        + daily.weather[0].icon + ".png")
                 .into(binding.iconDayCardImg)
         }
     }
@@ -115,6 +120,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun setWeather(data: WeatherData) {
         weatherDataList.clear()
         weatherDataList.add(data)
+
         notifyDataSetChanged()
     }
 }
