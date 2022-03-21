@@ -8,11 +8,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
@@ -40,7 +42,11 @@ class GeneralFragment : Fragment() {
         setupToolbar()
         setupWeatherRecycler()
 
-        viewModel.error.observe(viewLifecycleOwner) { showToast(it) }
+        lifecycleScope.launchWhenCreated {
+            viewModel.error.collect { error ->
+                error?.let { showToast(it) }
+            }
+        }
 
         viewModel.loadWeather(city)
     }
@@ -49,12 +55,22 @@ class GeneralFragment : Fragment() {
         binding.selectCity.setOnClickListener {
             AddCityDialog().show(parentFragmentManager)
         }
-        viewModel.city.observe(viewLifecycleOwner) { binding.city.text = it }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.city.collect { city ->
+                city?.let { binding.city.text = it }
+            }
+        }
     }
 
     private fun setupWeatherRecycler() {
         binding.weather.adapter = weatherAdapter
-        viewModel.weather.observe(viewLifecycleOwner) { weatherAdapter.setWeather(it) }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.weather.collect { weather ->
+                weather?.let { weatherAdapter.setWeather(it) }
+            }
+        }
     }
 
     override fun onDestroyView() {
