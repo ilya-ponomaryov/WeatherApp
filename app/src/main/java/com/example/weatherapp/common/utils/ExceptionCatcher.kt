@@ -19,7 +19,6 @@ object Solutions {
 object ExceptionCatcher {
 
     fun getErrorMessage(exception: Exception): String {
-        Log.d("ExceptionCatcher", exception.message.toString())
         when {
             exception.message.toString()
                 .contains(Errors.incorrectCity) -> {
