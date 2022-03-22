@@ -1,7 +1,5 @@
 package com.example.weatherapp.common.utils
 
-import android.util.Log
-
 object Errors {
     const val incorrectCity = "java.lang.IndexOutOfBoundsException: Index: 0, Size: 0"
     const val emptyData = "Index: 0, Size: 0"
