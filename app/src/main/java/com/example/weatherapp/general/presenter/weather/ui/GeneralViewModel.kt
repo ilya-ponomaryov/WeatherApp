@@ -9,9 +9,7 @@ import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.domain.getFakeWeatherData
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,16 +18,14 @@ class GeneralViewModel @Inject constructor(
     private val getWeather: WeatherGetter
 ) : ViewModel() {
     private val _weather = MutableStateFlow<WeatherData>(getFakeWeatherData())
-    val weather: StateFlow<WeatherData>
-        get() = _weather
+    val weather: StateFlow<WeatherData> = _weather.asStateFlow()
 
     private val _city = MutableStateFlow<String>("")
-    val city: StateFlow<String>
-        get() = _city
+    val city: StateFlow<String> = _city.asStateFlow()
 
-    private val _error = MutableStateFlow<String>("")
-    val error: StateFlow<String>
-        get() = _error
+    private val _error = MutableSharedFlow<String>(1)
+    val error: SharedFlow<String> = _error.asSharedFlow()
+
 
     fun loadWeather(city: String?) = viewModelScope.launch {
         try {
@@ -37,7 +33,7 @@ class GeneralViewModel @Inject constructor(
             _weather.value = result.weatherData
             _city.value = result.location[0].local_names.ru
         } catch (e: Exception) {
-            _error.value = ExceptionCatcher.getErrorMessage(e)
+            _error.tryEmit(ExceptionCatcher.getErrorMessage(e))
         }
     }
 }
