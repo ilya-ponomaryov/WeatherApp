@@ -5,7 +5,7 @@ import com.example.weatherapp.general.data.weather.models.*
 fun getFakeWeatherData(): WeatherData {
     val weatherList = listOf<Weather>(
         Weather(
-            description = "Описанин",
+            description = "Описание",
             icon = "",
             id = 0,
             main = "main"
@@ -93,7 +93,7 @@ private fun getDailyList(): List<Daily> {
         Daily(
             clouds = 0,
             dew_point = 0.0,
-            dt = 1647916167,
+            dt = 1645174800,
             feels_like = feelsLike,
             humidity = 0,
             moon_phase = 0.0,
@@ -115,7 +115,7 @@ private fun getDailyList(): List<Daily> {
         Daily(
             clouds = 0,
             dew_point = 0.0,
-            dt = 1647916167,
+            dt = 1645261200,
             feels_like = feelsLike,
             humidity = 0,
             moon_phase = 0.0,
@@ -137,7 +137,7 @@ private fun getDailyList(): List<Daily> {
         Daily(
             clouds = 0,
             dew_point = 0.0,
-            dt = 1647916167,
+            dt = 1645347600,
             feels_like = feelsLike,
             humidity = 0,
             moon_phase = 0.0,
@@ -159,7 +159,7 @@ private fun getDailyList(): List<Daily> {
         Daily(
             clouds = 0,
             dew_point = 0.0,
-            dt = 1647916167,
+            dt = 1645434000,
             feels_like = feelsLike,
             humidity = 0,
             moon_phase = 0.0,
@@ -184,7 +184,7 @@ private fun getDailyList(): List<Daily> {
 private fun getHourlyList(): List<Hourly> {
     val weatherXXList = listOf<WeatherXX>(
         WeatherXX(
-            description = "Описанин",
+            description = "Описание",
             icon = "",
             id = 0,
             main = "main"
@@ -195,7 +195,7 @@ private fun getHourlyList(): List<Hourly> {
         Hourly(
             clouds = 0,
             dew_point = 0.0,
-            dt = 1645151367,
+            dt = 1645174800,
             feels_like = 0.0,
             humidity = 0,
             pop = 0.0,
@@ -212,7 +212,7 @@ private fun getHourlyList(): List<Hourly> {
         Hourly(
             clouds = 0,
             dew_point = 0.0,
-            dt = 1645237767,
+            dt = 1645261200,
             feels_like = 0.0,
             humidity = 0,
             pop = 0.0,
@@ -229,7 +229,7 @@ private fun getHourlyList(): List<Hourly> {
         Hourly(
             clouds = 0,
             dew_point = 0.0,
-            dt = 1646447367,
+            dt = 1645444800,
             feels_like = 0.0,
             humidity = 0,
             pop = 0.0,
