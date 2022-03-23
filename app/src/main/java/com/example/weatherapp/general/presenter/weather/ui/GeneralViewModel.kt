@@ -1,5 +1,6 @@
 package com.example.weatherapp.general.presenter.weather.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,9 +25,8 @@ class GeneralViewModel @Inject constructor(
     private val _city = MutableStateFlow<String>("Ваш город")
     val city: StateFlow<String> = _city.asStateFlow()
 
-    private val _error = MutableSharedFlow<String>(0, 1, BufferOverflow.SUSPEND)
+    private val _error = MutableSharedFlow<String>(0, 1, BufferOverflow.DROP_LATEST)
     val error: SharedFlow<String> = _error.asSharedFlow()
-
 
     fun loadWeather(city: String?) = viewModelScope.launch {
         try {
