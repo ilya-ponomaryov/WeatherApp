@@ -9,6 +9,7 @@ import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.domain.getFakeWeatherData
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,10 +21,10 @@ class GeneralViewModel @Inject constructor(
     private val _weather = MutableStateFlow<WeatherData>(getFakeWeatherData())
     val weather: StateFlow<WeatherData> = _weather.asStateFlow()
 
-    private val _city = MutableStateFlow<String>("")
+    private val _city = MutableStateFlow<String>("Ваш город")
     val city: StateFlow<String> = _city.asStateFlow()
 
-    private val _error = MutableSharedFlow<String>(1)
+    private val _error = MutableSharedFlow<String>(0, 1, BufferOverflow.SUSPEND)
     val error: SharedFlow<String> = _error.asSharedFlow()
 
 
@@ -33,7 +34,7 @@ class GeneralViewModel @Inject constructor(
             _weather.value = result.weatherData
             _city.value = result.location[0].local_names.ru
         } catch (e: Exception) {
-            _error.tryEmit(ExceptionCatcher.getErrorMessage(e))
+            _error.emit(ExceptionCatcher.getErrorMessage(e))
         }
     }
 }
