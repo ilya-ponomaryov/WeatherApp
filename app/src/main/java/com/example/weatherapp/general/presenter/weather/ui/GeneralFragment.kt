@@ -47,7 +47,7 @@ class GeneralFragment : Fragment() {
 
         viewModel.error.onEach { error ->
             showToast(error)
-        }.launchWhenCreated(lifecycleScope)
+        }.launchWhenCreated(viewLifecycleOwner)
 
         viewModel.loadWeather(city)
     }
@@ -58,7 +58,7 @@ class GeneralFragment : Fragment() {
         }
         viewModel.city.onEach { city ->
             binding.city.text = city
-        }.launchWhenCreated(lifecycleScope)
+        }.launchWhenCreated(viewLifecycleOwner)
     }
 
     private fun setupWeatherRecycler() {
@@ -66,7 +66,7 @@ class GeneralFragment : Fragment() {
 
         viewModel.weather.onEach { weather ->
             weatherAdapter.setWeather(weather)
-        }.launchWhenCreated(lifecycleScope)
+        }.launchWhenCreated(viewLifecycleOwner)
     }
 
     override fun onDestroyView() {
