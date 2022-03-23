@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.utils.ExceptionCatcher
+import com.example.weatherapp.common.utils.MutableSingleEventFlow
 import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.domain.getFakeWeatherData
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
@@ -25,7 +26,7 @@ class GeneralViewModel @Inject constructor(
     private val _city = MutableStateFlow<String>("Ваш город")
     val city: StateFlow<String> = _city.asStateFlow()
 
-    private val _error = MutableSharedFlow<String>(0, 1, BufferOverflow.DROP_LATEST)
+    private val _error = MutableSingleEventFlow<String>()
     val error: SharedFlow<String> = _error.asSharedFlow()
 
     fun loadWeather(city: String?) = viewModelScope.launch {
