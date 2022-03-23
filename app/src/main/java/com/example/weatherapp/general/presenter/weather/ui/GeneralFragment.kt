@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.example.weatherapp.common.utils.launchWhenCreated
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.data.weather.models.WeatherData
@@ -16,6 +17,7 @@ import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapte
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 
 
 @AndroidEntryPoint
@@ -43,11 +45,9 @@ class GeneralFragment : Fragment() {
         setupToolbar()
         setupWeatherRecycler()
 
-        lifecycleScope.launchWhenCreated {
-            viewModel.error.collect { error ->
-                showToast(error)
-            }
-        }
+        viewModel.error.onEach { error ->
+            showToast(error)
+        }.launchWhenCreated(lifecycleScope)
 
         viewModel.loadWeather(city)
     }
@@ -56,22 +56,17 @@ class GeneralFragment : Fragment() {
         binding.selectCity.setOnClickListener {
             AddCityDialog().show(parentFragmentManager)
         }
-
-        lifecycleScope.launchWhenCreated {
-            viewModel.city.collect { city ->
-                binding.city.text = city
-            }
-        }
+        viewModel.city.onEach { city ->
+            binding.city.text = city
+        }.launchWhenCreated(lifecycleScope)
     }
 
     private fun setupWeatherRecycler() {
         binding.weather.adapter = weatherAdapter
 
-        lifecycleScope.launchWhenCreated {
-            viewModel.weather.collect { weather ->
-                weatherAdapter.setWeather(weather)
-            }
-        }
+        viewModel.weather.onEach { weather ->
+            weatherAdapter.setWeather(weather)
+        }.launchWhenCreated(lifecycleScope)
     }
 
     override fun onDestroyView() {
