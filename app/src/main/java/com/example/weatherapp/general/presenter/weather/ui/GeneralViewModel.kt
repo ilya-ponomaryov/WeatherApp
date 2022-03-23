@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.general.data.weather.models.WeatherData
+import com.example.weatherapp.general.domain.getFakeWeatherData
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,16 +19,16 @@ import javax.inject.Inject
 class GeneralViewModel @Inject constructor(
     private val getWeather: WeatherGetter
 ) : ViewModel() {
-    private val _weather = MutableStateFlow<WeatherData?>(null)
-    val weather: StateFlow<WeatherData?>
+    private val _weather = MutableStateFlow<WeatherData>(getFakeWeatherData())
+    val weather: StateFlow<WeatherData>
         get() = _weather
 
-    private val _city = MutableStateFlow<String?>(null)
-    val city: StateFlow<String?>
+    private val _city = MutableStateFlow<String>("")
+    val city: StateFlow<String>
         get() = _city
 
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?>
+    private val _error = MutableStateFlow<String>("")
+    val error: StateFlow<String>
         get() = _error
 
     fun loadWeather(city: String?) = viewModelScope.launch {
