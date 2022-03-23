@@ -6,7 +6,7 @@ fun getFakeWeatherData(): WeatherData {
     val weatherList = listOf<Weather>(
         Weather(
             description = "Описание",
-            icon = "",
+            icon = "04d",
             id = 0,
             main = "main"
         )
@@ -61,7 +61,7 @@ private fun getDailyList(): List<Daily> {
     val weatherXList = listOf<WeatherX>(
         WeatherX(
             description = "Описанин",
-            icon = "",
+            icon = "04d",
             id = 0,
             main = "main"
         )
@@ -185,7 +185,7 @@ private fun getHourlyList(): List<Hourly> {
     val weatherXXList = listOf<WeatherXX>(
         WeatherXX(
             description = "Описание",
-            icon = "",
+            icon = "04d",
             id = 0,
             main = "main"
         )
