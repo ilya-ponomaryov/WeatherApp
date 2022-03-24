@@ -33,10 +33,13 @@ class AddCityDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var city: String = ""
-        binding.searchAddCityView.setIconifiedByDefault(true)
-        binding.searchAddCityView.isFocusable = true
-        binding.searchAddCityView.isIconified = false
-        binding.searchAddCityView.requestFocusFromTouch()
+
+        binding.searchAddCityView.apply {
+            setIconifiedByDefault(true)
+            isFocusable = true
+            isIconified = false
+            requestFocusFromTouch()
+        }
 
         binding.cancelAddCityBtn.setOnClickListener {
             dismiss()
