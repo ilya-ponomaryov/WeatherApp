@@ -47,7 +47,7 @@ class GeneralFragment : Fragment() {
         setupToolbar()
         setupWeatherRecycler()
 
-        viewModel.error.observe(viewLifecycleOwner, Lifecycle.State.STARTED) { error ->
+        viewModel.error.observe(viewLifecycleOwner) { error ->
             showToast(error)
         }
 
@@ -59,7 +59,7 @@ class GeneralFragment : Fragment() {
             AddCityDialog().show(parentFragmentManager)
         }
 
-        viewModel.city.observe(viewLifecycleOwner, Lifecycle.State.STARTED) { city ->
+        viewModel.city.observe(viewLifecycleOwner) { city ->
             binding.city.text = city
         }
     }
@@ -67,7 +67,7 @@ class GeneralFragment : Fragment() {
     private fun setupWeatherRecycler() {
         binding.weather.adapter = weatherAdapter
 
-        viewModel.weather.observe(viewLifecycleOwner, Lifecycle.State.STARTED) { weather ->
+        viewModel.weather.observe(viewLifecycleOwner) { weather ->
             weatherAdapter.setWeather(weather)
         }
     }
