@@ -16,21 +16,21 @@ object Solutions {
 
 object ExceptionCatcher {
 
-    fun getErrorMessage(exception: Exception): String {
+    fun getErrorMessage(message: Exception): String {
         when {
-            exception.message.toString()
+            message.message.toString()
                 .contains(Errors.incorrectCity) -> {
                 return Solutions.inputSolution
             }
-            exception.message.toString()
+            message.message.toString()
                 .contains(Errors.connectionTrouble, ignoreCase = true) -> {
                 return Solutions.connectionSolution
             }
-            exception.message.toString()
+            message.message.toString()
                 .contains(Errors.emptyData) -> {
                 return Solutions.inputSolution
             }
-            exception.message.toString()
+            message.message.toString()
                 .contains(Errors.timeoutError) -> {
                 return Solutions.connectionSolution
             }
