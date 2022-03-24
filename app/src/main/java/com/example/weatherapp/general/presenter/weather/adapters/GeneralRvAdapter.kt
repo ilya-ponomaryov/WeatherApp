@@ -97,6 +97,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             val c = HourlyDataConverter()
 
+            hourList.clear()
             hourList.addAll(c.getHourlyData(weatherDataList[0].hourly))
             adapter.getHourlyData(hourList[p - 1])
 
