@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.weatherapp.common.utils.launchWhenCreated
+import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.data.weather.models.WeatherData
@@ -45,9 +47,9 @@ class GeneralFragment : Fragment() {
         setupToolbar()
         setupWeatherRecycler()
 
-        viewModel.error.onEach { error ->
+        viewModel.error.observe(viewLifecycleOwner, Lifecycle.State.STARTED) { error ->
             showToast(error)
-        }.launchWhenCreated(viewLifecycleOwner)
+        }
 
         viewModel.loadWeather(city)
     }
@@ -56,17 +58,18 @@ class GeneralFragment : Fragment() {
         binding.selectCity.setOnClickListener {
             AddCityDialog().show(parentFragmentManager)
         }
-        viewModel.city.onEach { city ->
+
+        viewModel.city.observe(viewLifecycleOwner, Lifecycle.State.STARTED) { city ->
             binding.city.text = city
-        }.launchWhenCreated(viewLifecycleOwner)
+        }
     }
 
     private fun setupWeatherRecycler() {
         binding.weather.adapter = weatherAdapter
 
-        viewModel.weather.onEach { weather ->
+        viewModel.weather.observe(viewLifecycleOwner, Lifecycle.State.STARTED) { weather ->
             weatherAdapter.setWeather(weather)
-        }.launchWhenCreated(viewLifecycleOwner)
+        }
     }
 
     override fun onDestroyView() {
