@@ -11,6 +11,11 @@ import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
+import com.example.weatherapp.general.presenter.weather.adapters.DailyWeatherItem
+import com.example.weatherapp.general.presenter.weather.adapters.TodayWeatherItem
+import com.mikepenz.fastadapter.*
+import com.mikepenz.fastadapter.adapters.GenericItemAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -52,8 +57,21 @@ class GeneralFragment : Fragment() {
     }
 
     private fun setupWeatherRecycler() {
-        binding.weather.adapter = weatherAdapter
-        viewModel.weather.observe(viewLifecycleOwner) { weatherAdapter.setWeather(it) }
+        val todayItem = ItemAdapter<TodayWeatherItem>()
+        val dailyItem = GenericItemAdapter()
+        val fastAdapter = FastAdapter.with(listOf(todayItem, dailyItem))
+
+        binding.weather.adapter = fastAdapter
+        viewModel.weather.observe(viewLifecycleOwner) {
+            todayItem.clear()
+            dailyItem.clear()
+            todayItem.add(0, TodayWeatherItem(it.current))
+            it.daily.forEach { daily ->
+                dailyItem.add(DailyWeatherItem(daily))
+
+            }
+
+        }
     }
 
     override fun onDestroyView() {
