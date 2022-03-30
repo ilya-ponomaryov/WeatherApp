@@ -13,7 +13,7 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 open class TodayWeatherItem(private val current: Current) :
     AbstractBindingItem<TodayCardLayoutBinding>() {
     override val type: Int
-        get() = R.id.weather
+        get() = R.id.today_weather_layout
 
     override fun createBinding(
         inflater: LayoutInflater,

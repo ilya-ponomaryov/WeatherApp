@@ -9,14 +9,17 @@ import androidx.fragment.app.viewModels
 import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
-import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapter
+import com.example.weatherapp.general.data.weather.models.Hourly
+import com.example.weatherapp.general.data.weather.models.WeatherData
+import com.example.weatherapp.general.domain.HourlyDataConverter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
-import com.example.weatherapp.general.presenter.weather.adapters.DailyWeatherItem
-import com.example.weatherapp.general.presenter.weather.adapters.TodayWeatherItem
+import com.example.weatherapp.general.presenter.weather.adapters.*
 import com.mikepenz.fastadapter.*
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.ArrayList
+import java.util.concurrent.atomic.AtomicLong
 
 
 @AndroidEntryPoint
@@ -25,8 +28,6 @@ class GeneralFragment : Fragment() {
 
     private var _binding: GeneralFragmentBinding? = null
     private val binding get() = _binding!!
-
-    private val weatherAdapter = GeneralRvAdapter()
 
     private val city get() = arguments?.getString(ARG_CITY)
 
@@ -59,19 +60,53 @@ class GeneralFragment : Fragment() {
     private fun setupWeatherRecycler() {
         val todayItem = ItemAdapter<TodayWeatherItem>()
         val dailyItem = GenericItemAdapter()
-        val fastAdapter = FastAdapter.with(listOf(todayItem, dailyItem))
 
+        val fastAdapter = FastAdapter.with(listOf(todayItem, dailyItem))
         binding.weather.adapter = fastAdapter
-        viewModel.weather.observe(viewLifecycleOwner) {
+
+        viewModel.weather.observe(viewLifecycleOwner) { weatherData ->
             todayItem.clear()
             dailyItem.clear()
-            todayItem.add(0, TodayWeatherItem(it.current))
-            it.daily.forEach { daily ->
-                dailyItem.add(DailyWeatherItem(daily))
 
-            }
+            val today = TodayWeatherItem(weatherData.current)
+            today.identifier = 0
 
+            todayItem.add(today)
+            dailyItem.add(getDailyItems(weatherData))
         }
+    }
+
+    private fun getDailyItems(data: WeatherData): List<DailyWeatherItem> {
+        val items = ArrayList<DailyWeatherItem>()
+        var position = 0
+        val id = AtomicLong(1)
+
+        while (position < 5) {
+            val daily = DailyWeatherItem(data.daily[position])
+            val hourlyItems = getHourlyItems(data.hourly, position)
+
+            daily.getHourlyItems(hourlyItems)
+            daily.identifier = id.getAndIncrement()
+            items.add(daily)
+
+            position++
+        }
+        return items
+    }
+
+    private fun getHourlyItems(data: List<Hourly>, position: Int): List<HourlyWeatherItem> {
+        val items = ArrayList<HourlyWeatherItem>()
+        val converter = HourlyDataConverter()
+        val allHours = converter.getHourlyData(data)
+
+        if (position < allHours.size) {
+            val hourlyList = allHours[position]
+
+            for (i in hourlyList) {
+                items.add(HourlyWeatherItem(i))
+            }
+        }
+        return items
     }
 
     override fun onDestroyView() {
