@@ -15,19 +15,19 @@ fun getFakeWeatherData(): WeatherData {
     val current = Current(
         clouds = 0,
         dew_point = 0.0,
-        dt = 1648020228,
-        feels_like = 0.0,
+        date = 1648020228,
+        feelsLike = 0.0,
         humidity = 0,
         pressure = 0,
         sunrise = 0,
         sunset = 0,
-        temp = 0.0,
+        temperature = 0.0,
         uvi = 0.0,
         visibility = 0,
         weather = weatherList,
-        wind_deg = 0,
-        wind_gust = 0.0,
-        wind_speed = 0.0,
+        windDegrees = 0,
+        windGust = 0.0,
+        windSpeed = 0.0,
     )
 
     return WeatherData(

@@ -1,6 +1,5 @@
 package com.example.weatherapp.general.presenter.weather.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,7 @@ import com.example.weatherapp.general.data.weather.models.Daily
 import com.example.weatherapp.general.data.weather.models.Hourly
 import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.databinding.DayCardLayoutBinding
-import com.example.weatherapp.databinding.TodayCardLayoutBinding
+import com.example.weatherapp.databinding.WeatherForTodayBinding
 import com.example.weatherapp.general.domain.DateConverter
 import com.example.weatherapp.general.domain.HourlyDataConverter
 import com.example.weatherapp.location.presenter.adapters.HourlyRvAdapter
@@ -31,7 +30,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             0 -> {
-                val view = TodayCardLayoutBinding.inflate(
+                val view = WeatherForTodayBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -71,20 +70,20 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = 5
 
-    inner class TodayViewHolder(private val binding: TodayCardLayoutBinding) :
+    inner class TodayViewHolder(private val binding: WeatherForTodayBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(current: Current) {
             val converter = DateConverter()
 
-            binding.dateTodayCardText.text = "Сегодня, " + converter.getDateAsString(current.dt)
-            binding.tempTodayCardText.text = current.temp.toInt().toString() + "°"
-            binding.descTodayCardText.text =
+            binding.date.text = "Сегодня, " + converter.getDateAsString(current.date)
+            binding.temperature.text = current.temperature.toInt().toString() + "°"
+            binding.description.text =
                 current.weather[0].description +
-                        ", ощущается как " + current.feels_like.toInt().toString()
+                        ", ощущается как " + current.feelsLike.toInt().toString()
 
             Glide.with(binding.root.context)
                 .load("http://openweathermap.org/img/w/" + current.weather[0].icon + ".png")
-                .into(binding.iconTodayCardImg)
+                .into(binding.icon)
 
         }
 
@@ -95,10 +94,10 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(daily: Daily, p: Int) {
             val adapter = HourlyRvAdapter(binding.root.context)
 
-            val c = HourlyDataConverter()
+            val dataConverter = HourlyDataConverter()
 
             hourList.clear()
-            hourList.addAll(c.getHourlyData(weatherDataList[0].hourly))
+            hourList.addAll(dataConverter.getHourlyData(weatherDataList[0].hourly))
             adapter.getHourlyData(hourList[p - 1])
 
             val converter = DateConverter()

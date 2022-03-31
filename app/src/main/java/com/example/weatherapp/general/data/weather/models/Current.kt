@@ -3,17 +3,17 @@ package com.example.weatherapp.general.data.weather.models
 data class Current(
     val clouds: Int,
     val dew_point: Double,
-    val dt: Int,
-    val feels_like: Double,
+    val date: Int,
+    val feelsLike: Double,
     val humidity: Int,
     val pressure: Int,
     val sunrise: Int,
     val sunset: Int,
-    val temp: Double,
+    val temperature: Double,
     val uvi: Double,
     val visibility: Int,
     val weather: List<Weather>,
-    val wind_deg: Int,
-    val wind_gust: Double,
-    val wind_speed: Double
+    val windDegrees: Int,
+    val windGust: Double,
+    val windSpeed: Double
 )
