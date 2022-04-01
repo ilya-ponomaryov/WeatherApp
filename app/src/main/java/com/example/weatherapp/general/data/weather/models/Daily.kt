@@ -24,7 +24,7 @@ data class Daily(
     val sunrise: Int,
     val sunset: Int,
     @SerializedName("temp")
-    val temperature: Temp,
+    val temperature: Temperature,
     val uvi: Double,
     val weather: List<WeatherX>,
     @SerializedName("wind_deg")

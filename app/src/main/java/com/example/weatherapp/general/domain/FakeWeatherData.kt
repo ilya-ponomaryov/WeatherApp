@@ -34,10 +34,10 @@ fun getFakeWeatherData(): WeatherData {
         current,
         getDailyList(),
         getHourlyList(),
-        lat = 0.0,
-        lon = 0.0,
+        latitude = 0.0,
+        longitude = 0.0,
         timezone = "timezone",
-        timezone_offset = 0
+        timezoneOffset = 0
     )
 }
 
@@ -49,12 +49,12 @@ private fun getDailyList(): List<Daily> {
         night = 0.0
     )
 
-    val temp = Temp(
+    val temp = Temperature(
         day = 0.0,
-        eve = 0.0,
+        evening = 0.0,
         max = 0.0,
         min = 0.0,
-        morn = 0.0,
+        morning = 0.0,
         night = 0.0
     )
 

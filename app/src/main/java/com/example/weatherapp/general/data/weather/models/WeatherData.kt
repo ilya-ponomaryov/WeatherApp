@@ -1,11 +1,16 @@
 package com.example.weatherapp.general.data.weather.models
 
+import com.google.gson.annotations.SerializedName
+
 data class WeatherData(
     val current: Current,
     val daily: List<Daily>,
     val hourly: List<Hourly>,
-    val lat: Double,
-    val lon: Double,
+    @SerializedName("lat")
+    val latitude: Double,
+    @SerializedName("lon")
+    val longitude: Double,
     val timezone: String,
-    val timezone_offset: Int
+    @SerializedName("timezone_offset")
+    val timezoneOffset: Int
 )
