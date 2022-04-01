@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.weatherapp.databinding.WeatherForDayBinding
 import com.example.weatherapp.general.data.weather.models.Current
 import com.example.weatherapp.general.data.weather.models.Daily
 import com.example.weatherapp.general.data.weather.models.Hourly
 import com.example.weatherapp.general.data.weather.models.WeatherData
-import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.databinding.WeatherForTodayBinding
 import com.example.weatherapp.general.domain.DateConverter
 import com.example.weatherapp.general.domain.HourlyDataConverter
@@ -38,7 +38,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 return TodayViewHolder(view)
             }
             1 -> {
-                val view = DayCardLayoutBinding.inflate(
+                val view = WeatherForDayBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -89,7 +89,7 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     }
 
-    inner class DayViewHolder(private val binding: DayCardLayoutBinding) :
+    inner class DayViewHolder(private val binding: WeatherForDayBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(daily: Daily, p: Int) {
             val adapter = HourlyRvAdapter(binding.root.context)
@@ -102,14 +102,14 @@ class GeneralRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             val converter = DateConverter()
 
-            binding.dateDayCardText.text = converter.getDateAsString(daily.dt)
-            binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
-            binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
-            binding.hourListDayCardRv.adapter = adapter
+            binding.date.text = converter.getDateAsString(daily.date)
+            binding.daytimeTemperature.text = daily.temperature.day.toInt().toString() + "°"
+            binding.nighttimeTemperature.text = daily.temperature.night.toInt().toString() + "°"
+            binding.weatherByHours.adapter = adapter
 
             Glide.with(binding.root.context)
                 .load("http://openweathermap.org/img/w/" + daily.weather[0].icon + ".png")
-                .into(binding.iconDayCardImg)
+                .into(binding.weatherIcon)
         }
     }
 

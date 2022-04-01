@@ -27,7 +27,7 @@
                 android:layout_marginTop="16dp">
 
                 <TextView
-                    android:id="@+id/date_day_card_text"
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -49,12 +49,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/date_day_card_text"
+                    app:layout_constraintStart_toEndOf="@+id/date"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
 
                     <TextView
-                        android:id="@+id/temp_day_card_text"
+                        android:id="@+id/daytime_temperature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -63,7 +63,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/temp_night_card_text"
+                        android:id="@+id/nighttime_temperature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -72,7 +72,7 @@
                         android:textSize="16sp" />
 
                     <ImageView
-                        android:id="@+id/icon_day_card_img"
+                        android:id="@+id/weather_icon"
                         android:layout_width="32dp"
                         android:layout_height="26dp"
                         android:contentDescription="@string/weather_icon" />
@@ -92,7 +92,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hour_list_day_card_rv"
+            android:id="@+id/weather_by_hours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
