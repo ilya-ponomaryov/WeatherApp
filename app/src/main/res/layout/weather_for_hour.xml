@@ -12,7 +12,7 @@
         android:background="@color/hour_card_color"
         android:orientation="vertical">
     <TextView
-        android:id="@+id/time_hour_card_text"
+        android:id="@+id/hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12:00"
@@ -23,7 +23,7 @@
         android:layout_marginEnd="17dp"/>
 
     <ImageView
-        android:id="@+id/icon_hour_card_img"
+        android:id="@+id/weather_icon"
         android:layout_width="32dp"
         android:layout_height="26dp"
         android:contentDescription="@string/weather_icon"
@@ -31,7 +31,7 @@
         android:layout_marginTop="9dp"/>
 
         <TextView
-            android:id="@+id/temp_hour_card_text"
+            android:id="@+id/temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="25°"

@@ -44,8 +44,8 @@ fun getFakeWeatherData(): WeatherData {
 private fun getDailyList(): List<Daily> {
     val feelsLike = FeelsLike(
         day = 0.0,
-        eve = 0.0,
-        morn = 0.0,
+        evening = 0.0,
+        morning = 0.0,
         night = 0.0
     )
 
@@ -194,54 +194,54 @@ private fun getHourlyList(): List<Hourly> {
     return listOf(
         Hourly(
             clouds = 0,
-            dew_point = 0.0,
-            dt = 1645174800,
-            feels_like = 0.0,
+            dewPoint = 0.0,
+            date = 1645174800,
+            feelsLike = 0.0,
             humidity = 0,
-            pop = 0.0,
+            probabilityOfPrecipitation = 0.0,
             pressure = 0,
             snow = Snow(oneHour = 0.0),
-            temp = 0.0,
+            temperature = 0.0,
             uvi = 0.0,
             visibility = 0,
             weather = weatherXXList,
-            wind_deg = 0,
-            wind_gust = 0.0,
-            wind_speed = 0.0
+            windDegrees = 0,
+            windGust = 0.0,
+            windSpeed = 0.0
         ),
         Hourly(
             clouds = 0,
-            dew_point = 0.0,
-            dt = 1645261200,
-            feels_like = 0.0,
+            dewPoint = 0.0,
+            date = 1645261200,
+            feelsLike = 0.0,
             humidity = 0,
-            pop = 0.0,
+            probabilityOfPrecipitation = 0.0,
             pressure = 0,
             snow = Snow(oneHour = 0.0),
-            temp = 0.0,
+            temperature = 0.0,
             uvi = 0.0,
             visibility = 0,
             weather = weatherXXList,
-            wind_deg = 0,
-            wind_gust = 0.0,
-            wind_speed = 0.0
+            windDegrees = 0,
+            windGust = 0.0,
+            windSpeed = 0.0
         ),
         Hourly(
             clouds = 0,
-            dew_point = 0.0,
-            dt = 1645444800,
-            feels_like = 0.0,
+            dewPoint = 0.0,
+            date = 1645444800,
+            feelsLike = 0.0,
             humidity = 0,
-            pop = 0.0,
+            probabilityOfPrecipitation = 0.0,
             pressure = 0,
             snow = Snow(oneHour = 0.0),
-            temp = 0.0,
+            temperature = 0.0,
             uvi = 0.0,
             visibility = 0,
             weather = weatherXXList,
-            wind_deg = 0,
-            wind_gust = 0.0,
-            wind_speed = 0.0
+            windDegrees = 0,
+            windGust = 0.0,
+            windSpeed = 0.0
         )
     )
 }

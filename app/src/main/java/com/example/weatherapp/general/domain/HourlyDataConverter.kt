@@ -14,22 +14,22 @@ class HourlyDataConverter {
         val data2 = arrayListOf<Hourly>()
         val data3 = arrayListOf<Hourly>()
         val data4 = arrayListOf<Hourly>()
-        val today = Date(hourlyList[0].dt.toLong() * 1000)
+        val today = Date(hourlyList[0].date.toLong() * 1000)
 
         for (i in hourlyList) {
-            val d = Date(i.dt.toLong() * 1000)
+            val d = Date(i.date.toLong() * 1000)
             if (d.day != today.day) {
                 newList.add(i)
                 Log.d("NewList", newList.toString())
             }
         }
         Log.d("NewListSize", newList.size.toString())
-        val b = Date(newList[0].dt.toLong() * 1000)
+        val b = Date(newList[0].date.toLong() * 1000)
         var bDay = b.day
         var p = 0
         var bData: Hourly? = null
         for (n in newList) {
-            val localDate = Date(n.dt.toLong() * 1000)
+            val localDate = Date(n.date.toLong() * 1000)
             if (bDay == localDate.day) {
                 for (h in hours) {
                     if (localDate.hours == h) {
