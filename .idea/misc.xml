@@ -23,10 +23,13 @@
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/today_card_layout.xml" value="0.2" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/today_expanded_card_layout.xml" value="0.25" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/WeatherApp/app/src/main/res/xml/network_security_config.xml" value="0.1234375" />
+        <entry key="..\:/Users/Ilya/AndroidStudioProjects/weather-ilya-ponomarev/app/src/main/res/layout/activity_main.xml" value="0.15237134207870837" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/weather-ilya-ponomarev/app/src/main/res/layout/day_card_layout.xml" value="0.29393115942028986" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/weather-ilya-ponomarev/app/src/main/res/layout/general_fragment.xml" value="0.3572311495673671" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/weather-ilya-ponomarev/app/src/main/res/layout/hour_card_layout.xml" value="0.296195652173913" />
         <entry key="..\:/Users/Ilya/AndroidStudioProjects/weather-ilya-ponomarev/app/src/main/res/layout/today_card_layout.xml" value="0.29393115942028986" />
+        <entry key="..\:/Users/Ilya/AndroidStudioProjects/weather-ilya-ponomarev/app/src/main/res/layout/weather_for_day.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/Ilya/AndroidStudioProjects/weather-ilya-ponomarev/app/src/main/res/layout/weather_for_hour.xml" value="0.15237134207870837" />
       </map>
     </option>
   </component>
