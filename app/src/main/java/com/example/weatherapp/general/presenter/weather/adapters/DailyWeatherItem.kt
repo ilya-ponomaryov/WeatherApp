@@ -6,14 +6,16 @@ import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.general.data.weather.models.Daily
+import com.example.weatherapp.general.data.weather.models.DailyEquipped
+import com.example.weatherapp.general.data.weather.models.Hourly
 import com.example.weatherapp.general.domain.DateConverter
+import com.example.weatherapp.general.domain.HourlyDataConverter
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import java.util.ArrayList
 
-class DailyWeatherItem(private val daily: Daily) : AbstractBindingItem<DayCardLayoutBinding>() {
-    private val hourlyItems = ArrayList<HourlyWeatherItem>()
+class DailyWeatherItem(private val daily: DailyEquipped) : AbstractBindingItem<DayCardLayoutBinding>() {
     override val type: Int
         get() = R.id.day_weather_layout
 
@@ -26,13 +28,11 @@ class DailyWeatherItem(private val daily: Daily) : AbstractBindingItem<DayCardLa
         val itemAdapter = ItemAdapter<HourlyWeatherItem>()
         val adapter = FastAdapter.with(itemAdapter)
         itemAdapter.clear()
-        itemAdapter.set(hourlyItems)
+        itemAdapter.set(getHourlyItems(daily.hourly))
 
-        val converter = DateConverter()
-
-        binding.dateDayCardText.text = converter.getDateAsString(daily.dt)
-        binding.tempDayCardText.text = daily.temp.day.toInt().toString() + "°"
-        binding.tempNightCardText.text = daily.temp.night.toInt().toString() + "°"
+        binding.dateDayCardText.text = daily.date
+        binding.tempDayCardText.text = daily.dayTemperature
+        binding.tempNightCardText.text = daily.nightTemperature
         binding.hourListDayCardRv.adapter = adapter
 
         Glide.with(binding.root.context)
@@ -40,15 +40,18 @@ class DailyWeatherItem(private val daily: Daily) : AbstractBindingItem<DayCardLa
             .into(binding.iconDayCardImg)
     }
 
+    private fun getHourlyItems(data: List<Hourly>): List<HourlyWeatherItem> {
+        val items = ArrayList<HourlyWeatherItem>()
+        data.forEach {
+            items.add(HourlyWeatherItem(it))
+        }
+        return items
+    }
+
     override fun unbindView(binding: DayCardLayoutBinding) {
         binding.dateDayCardText.text = null
         binding.tempDayCardText.text = null
         binding.tempNightCardText.text = null
         binding.hourListDayCardRv.adapter = null
-    }
-
-    fun getHourlyItems(data: List<HourlyWeatherItem>) {
-        hourlyItems.clear()
-        hourlyItems.addAll(data)
     }
 }

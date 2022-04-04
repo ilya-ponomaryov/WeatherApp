@@ -11,6 +11,7 @@ import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.data.weather.models.Hourly
 import com.example.weatherapp.general.data.weather.models.WeatherData
+import com.example.weatherapp.general.domain.DailyMapper
 import com.example.weatherapp.general.domain.HourlyDataConverter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
 import com.example.weatherapp.general.presenter.weather.adapters.*
@@ -77,34 +78,18 @@ class GeneralFragment : Fragment() {
     }
 
     private fun getDailyItems(data: WeatherData): List<DailyWeatherItem> {
+        val dailyMapper = DailyMapper(data.daily, data.hourly)
+        val dailyEquipped = dailyMapper.toDailyEquippedList()
         val items = ArrayList<DailyWeatherItem>()
         var position = 0
         val id = AtomicLong(1)
 
         while (position < 5) {
-            val daily = DailyWeatherItem(data.daily[position])
-            val hourlyItems = getHourlyItems(data.hourly, position)
-
-            daily.getHourlyItems(hourlyItems)
+            val daily = DailyWeatherItem(dailyEquipped[position])
             daily.identifier = id.getAndIncrement()
             items.add(daily)
 
             position++
-        }
-        return items
-    }
-
-    private fun getHourlyItems(data: List<Hourly>, position: Int): List<HourlyWeatherItem> {
-        val items = ArrayList<HourlyWeatherItem>()
-        val converter = HourlyDataConverter()
-        val allHours = converter.getHourlyData(data)
-
-        if (position < allHours.size) {
-            val hourlyList = allHours[position]
-
-            for (i in hourlyList) {
-                items.add(HourlyWeatherItem(i))
-            }
         }
         return items
     }
