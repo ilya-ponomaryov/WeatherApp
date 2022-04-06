@@ -9,10 +9,8 @@ import androidx.fragment.app.viewModels
 import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
-import com.example.weatherapp.general.data.weather.models.Hourly
 import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.domain.DailyMapper
-import com.example.weatherapp.general.domain.HourlyDataConverter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
 import com.example.weatherapp.general.presenter.weather.adapters.*
 import com.mikepenz.fastadapter.*
@@ -59,7 +57,7 @@ class GeneralFragment : Fragment() {
     }
 
     private fun setupWeatherRecycler() {
-        val todayItem = ItemAdapter<TodayWeatherItem>()
+        val todayItem = ItemAdapter<WeatherForTodayItem>()
         val dailyItem = GenericItemAdapter()
 
         val fastAdapter = FastAdapter.with(listOf(todayItem, dailyItem))
@@ -69,7 +67,7 @@ class GeneralFragment : Fragment() {
             todayItem.clear()
             dailyItem.clear()
 
-            val today = TodayWeatherItem(weatherData.current)
+            val today = WeatherForTodayItem(weatherData.current)
             today.identifier = 0
 
             todayItem.add(today)
@@ -77,15 +75,15 @@ class GeneralFragment : Fragment() {
         }
     }
 
-    private fun getDailyItems(data: WeatherData): List<DailyWeatherItem> {
+    private fun getDailyItems(data: WeatherData): List<WeatherForDayItem> {
         val dailyMapper = DailyMapper(data.daily, data.hourly)
         val dailyEquipped = dailyMapper.toDailyEquippedList()
-        val items = ArrayList<DailyWeatherItem>()
+        val items = ArrayList<WeatherForDayItem>()
         var position = 0
         val id = AtomicLong(1)
 
         while (position < 5) {
-            val daily = DailyWeatherItem(dailyEquipped[position])
+            val daily = WeatherForDayItem(dailyEquipped[position])
             daily.identifier = id.getAndIncrement()
             items.add(daily)
 

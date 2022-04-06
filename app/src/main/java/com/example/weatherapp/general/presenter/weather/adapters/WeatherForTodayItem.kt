@@ -10,7 +10,7 @@ import com.example.weatherapp.general.domain.DateConverter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 
-open class TodayWeatherItem(private val current: Current) :
+open class WeatherForTodayItem(private val current: Current) :
     AbstractBindingItem<TodayCardLayoutBinding>() {
     override val type: Int
         get() = R.id.today_weather_layout

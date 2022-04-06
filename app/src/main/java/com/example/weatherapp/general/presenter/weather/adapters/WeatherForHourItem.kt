@@ -9,7 +9,7 @@ import com.example.weatherapp.general.data.weather.models.Hourly
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import java.util.*
 
-class HourlyWeatherItem(private val hourly: Hourly) : AbstractBindingItem<HourCardLayoutBinding>(){
+class WeatherForHourItem(private val hourly: Hourly) : AbstractBindingItem<HourCardLayoutBinding>(){
     override val type: Int
         get() = R.id.hour_weather_layout
 
