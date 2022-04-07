@@ -60,13 +60,15 @@ class GeneralFragment : Fragment() {
         val fastAdapter = FastAdapter.with(listOf(todayItem, dailyItem))
         binding.weather.adapter = fastAdapter
 
-        viewModel.weather.observe(viewLifecycleOwner) { weatherCollection ->
+        viewModel.weatherForToday.observe(viewLifecycleOwner) {
             todayItem.clear()
-            dailyItem.clear()
-
-            val today = WeatherForTodayItem(weatherCollection.weatherForToday)
+            val today = WeatherForTodayItem(it)
             todayItem.add(today)
-            val days = weatherCollection.weatherForDay.map { WeatherForDayItem(it) }
+        }
+
+        viewModel.weatherForDay.observe(viewLifecycleOwner) { weatherForDay ->
+            dailyItem.clear()
+            val days = weatherForDay.map { WeatherForDayItem(it) }
             dailyItem.add(days)
         }
     }

@@ -3,7 +3,36 @@ package com.example.weatherapp.general.domain
 import com.example.weatherapp.general.data.weather.models.*
 
 fun getFakeWeatherCollection(): WeatherCollection {
-    val weatherList = listOf<Weather>(
+    return WeatherCollection(
+        getFakeWeatherForToday(),
+        getFakeWeatherForDay()
+    )
+}
+
+fun getFakeWeatherForToday(): WeatherForToday {
+    return WeatherForToday(
+        0,
+        0.0,
+        "00.00.00",
+        0.0,
+        0,
+        0,
+        0,
+        0,
+        "0",
+        0.0,
+        0,
+        getWeatherList(),
+        0,
+        0.0,
+        0.0,
+        "http://openweathermap.org/img/w/" + "04d" + ".png",
+        "Описание",
+    )
+}
+
+private fun getWeatherList(): List<Weather> {
+    return listOf<Weather>(
         Weather(
             description = "Описание",
             icon = "04d",
@@ -11,32 +40,9 @@ fun getFakeWeatherCollection(): WeatherCollection {
             main = "main"
         )
     )
-
-    return WeatherCollection(
-        WeatherForToday(
-            0,
-            0.0,
-            "00.00.00",
-            0.0,
-            0,
-            0,
-            0,
-            0,
-            "0",
-            0.0,
-            0,
-            weatherList,
-            0,
-            0.0,
-            0.0,
-            "http://openweathermap.org/img/w/" + "04d" + ".png",
-            "Описание",
-        ),
-        getWeatherForDay()
-    )
 }
 
-private fun getWeatherForDay(): List<WeatherForDay> {
+ fun getFakeWeatherForDay(): List<WeatherForDay> {
     val feelsLike = FeelsLike(
         day = 0.0,
         eve = 0.0,

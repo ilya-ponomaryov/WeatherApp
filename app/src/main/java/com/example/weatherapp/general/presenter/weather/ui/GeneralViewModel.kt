@@ -8,7 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
 import com.example.weatherapp.general.data.weather.models.WeatherCollection
+import com.example.weatherapp.general.data.weather.models.WeatherForDay
+import com.example.weatherapp.general.data.weather.models.WeatherForToday
 import com.example.weatherapp.general.domain.getFakeWeatherCollection
+import com.example.weatherapp.general.domain.getFakeWeatherForDay
+import com.example.weatherapp.general.domain.getFakeWeatherForToday
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -20,8 +24,11 @@ import javax.inject.Inject
 class GeneralViewModel @Inject constructor(
     private val getWeather: WeatherGetter
 ) : ViewModel() {
-    private val _weather = MutableStateFlow<WeatherCollection>(getFakeWeatherCollection())
-    val weather: StateFlow<WeatherCollection> = _weather.asStateFlow()
+    private val _weatherForToday = MutableStateFlow<WeatherForToday>(getFakeWeatherForToday())
+    val weatherForToday: StateFlow<WeatherForToday> = _weatherForToday.asStateFlow()
+
+    private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(getFakeWeatherForDay())
+    val weatherForDay: StateFlow<List<WeatherForDay>> = _weatherForDay.asStateFlow()
 
     private val _city = MutableStateFlow<String>("Ваш город")
     val city: StateFlow<String> = _city.asStateFlow()
@@ -32,7 +39,8 @@ class GeneralViewModel @Inject constructor(
     fun loadWeather(city: String?) = viewModelScope.launch {
         try {
             val result = getWeather(city)
-            _weather.value = result.weather
+            _weatherForToday.value = result.weather.weatherForToday
+            _weatherForDay.value = result.weather.weatherForDay
             _city.value = result.location[0].local_names.ru
         } catch (e: Exception) {
             _error.emit(ExceptionCatcher.getErrorMessage(e))
