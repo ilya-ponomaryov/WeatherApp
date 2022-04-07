@@ -1,28 +1,28 @@
 package com.example.weatherapp.general.domain.mappers
 
 import com.example.weatherapp.general.data.weather.models.Daily
-import com.example.weatherapp.general.data.weather.models.DailyEquipped
+import com.example.weatherapp.general.data.weather.models.WeatherForDay
 import com.example.weatherapp.general.data.weather.models.Hourly
-import com.example.weatherapp.general.data.weather.models.HourlyEquipped
+import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.example.weatherapp.general.domain.DateConverter
 import com.example.weatherapp.general.domain.HourlyDataConverter
 
 class DailyMapper(private val daily: List<Daily>, private val hourly: List<Hourly>) {
-    fun toDailyEquippedList(): List<DailyEquipped> {
+    fun toDailyEquippedList(): List<WeatherForDay> {
         val converter = HourlyDataConverter()
         val dailyDate = DateConverter()
         val hourlyList = converter.getHourlyData(hourly)
-        val result = arrayListOf<DailyEquipped>()
+        val result = arrayListOf<WeatherForDay>()
 
         for ((i, day) in daily.withIndex()) {
-            val hourlyLocal = arrayListOf<HourlyEquipped>()
+            val hourlyLocal = arrayListOf<WeatherForHour>()
             if (hourlyList.size > i) {
                 val hourlyMapper = HourlyMapper(hourlyList[i])
                 hourlyLocal.addAll(hourlyMapper.toHourlyEquippedList())
             } else {
                 hourlyLocal.addAll(emptyList())
             }
-            result.add(DailyEquipped(
+            result.add(WeatherForDay(
                 day.clouds,
                 day.dew_point,
                 dailyDate.getDateAsString(day.dt),

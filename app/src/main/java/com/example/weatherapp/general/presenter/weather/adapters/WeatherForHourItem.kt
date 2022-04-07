@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.HourCardLayoutBinding
-import com.example.weatherapp.general.data.weather.models.HourlyEquipped
+import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class WeatherForHourItem(private val hourly: HourlyEquipped) : AbstractBindingItem<HourCardLayoutBinding>(){
+class WeatherForHourItem(private val hourly: WeatherForHour) : AbstractBindingItem<HourCardLayoutBinding>(){
     override val type: Int
         get() = R.id.hour_weather_layout
 

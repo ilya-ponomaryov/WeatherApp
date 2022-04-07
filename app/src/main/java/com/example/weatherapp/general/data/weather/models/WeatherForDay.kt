@@ -2,29 +2,40 @@ package com.example.weatherapp.general.data.weather.models
 
 import com.google.gson.annotations.SerializedName
 
-data class HourlyEquipped(
+data class WeatherForDay(
     val clouds: Int,
     @SerializedName("dew_point")
     val dewPoint: Double,
-    @SerializedName("dt")
     val date: String,
     @SerializedName("feels_like")
-    val feels_like: Double,
+    val feelsLike: FeelsLike,
     val humidity: Int,
+    @SerializedName("moon_phase")
+    val moonPhase: Double,
+    val moonrise: Int,
+    @SerializedName("moonset")
+    val moonSet: Int,
     @SerializedName("pop")
     val probabilityOfPrecipitation: Double,
     val pressure: Int,
-    val snow: Snow,
-    @SerializedName("temp")
-    val temperature: String,
+    val rain: Double,
+    val snow: Double,
+    val sunrise: Int,
+    val sunset: Int,
     val uvi: Double,
-    val visibility: Int,
-    val weather: List<WeatherXX>,
+    val weather: List<WeatherX>,
     @SerializedName("wind_deg")
     val windDegrees: Int,
     @SerializedName("wind_gust")
     val windGust: Double,
     @SerializedName("wind_speed")
     val windSpeed: Double,
+    val hourly: List<WeatherForHour>,
+    val dayTemperature: String,
+    val eveningTemperature: String,
+    val maxTemperature: String,
+    val minTemperature: String,
+    val morningTemperature: String,
+    val nightTemperature: String,
     val weatherIcon: String,
 )

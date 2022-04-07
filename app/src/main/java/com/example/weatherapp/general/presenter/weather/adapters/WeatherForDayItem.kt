@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.DayCardLayoutBinding
-import com.example.weatherapp.general.data.weather.models.DailyEquipped
-import com.example.weatherapp.general.data.weather.models.HourlyEquipped
+import com.example.weatherapp.general.data.weather.models.WeatherForDay
+import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import java.util.ArrayList
 
-class WeatherForDayItem(private val daily: DailyEquipped) : AbstractBindingItem<DayCardLayoutBinding>() {
+class WeatherForDayItem(private val daily: WeatherForDay) : AbstractBindingItem<DayCardLayoutBinding>() {
     override val type: Int
         get() = R.id.day_weather_layout
 
@@ -37,7 +37,7 @@ class WeatherForDayItem(private val daily: DailyEquipped) : AbstractBindingItem<
             .into(binding.iconDayCardImg)
     }
 
-    private fun getHourlyItems(data: List<HourlyEquipped>): List<WeatherForHourItem> {
+    private fun getHourlyItems(data: List<WeatherForHour>): List<WeatherForHourItem> {
         val items = ArrayList<WeatherForHourItem>()
         data.map {
             items.add(WeatherForHourItem(it))

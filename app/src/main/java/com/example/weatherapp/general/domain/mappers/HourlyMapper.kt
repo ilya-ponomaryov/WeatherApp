@@ -1,13 +1,13 @@
 package com.example.weatherapp.general.domain.mappers
 
 import com.example.weatherapp.general.data.weather.models.Hourly
-import com.example.weatherapp.general.data.weather.models.HourlyEquipped
+import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.example.weatherapp.general.data.weather.models.Snow
 import java.util.*
 
 class HourlyMapper(private val hourly: List<Hourly>) {
-    fun toHourlyEquippedList(): List<HourlyEquipped> {
-        val result = arrayListOf<HourlyEquipped>()
+    fun toHourlyEquippedList(): List<WeatherForHour> {
+        val result = arrayListOf<WeatherForHour>()
         hourly.map {
             val date = Date(it.dt.toLong() * 1000)
             var snow = Snow(0.0)
@@ -16,7 +16,7 @@ class HourlyMapper(private val hourly: List<Hourly>) {
             }
 
             result.add(
-                HourlyEquipped(
+                WeatherForHour(
                     it.clouds,
                     it.dew_point,
                     date.hours.toString() + ":" + date.minutes + "0",
