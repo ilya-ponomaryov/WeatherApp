@@ -26,10 +26,11 @@ class WeatherForDayItem(private val weatherForDay: WeatherForDay) : AbstractBind
     ) = WeatherForDayBinding.inflate(inflater, parent, false)
 
     override fun bindView(binding: WeatherForDayBinding, payloads: List<Any>) {
+        val items = weatherForDay.hourly.map { WeatherForHourItem(it) }
         val itemAdapter = ItemAdapter<WeatherForHourItem>()
         val adapter = FastAdapter.with(itemAdapter)
         itemAdapter.clear()
-        itemAdapter.set(getHourlyItems(weatherForDay.hourly))
+        itemAdapter.set(items)
 
         binding.date.text = weatherForDay.date
         binding.daytimeTemperature.text = weatherForDay.dayTemperature
@@ -39,14 +40,6 @@ class WeatherForDayItem(private val weatherForDay: WeatherForDay) : AbstractBind
         Glide.with(binding.root.context)
             .load(weatherForDay.weatherIcon)
             .into(binding.weatherIcon)
-    }
-
-    private fun getHourlyItems(data: List<WeatherForHour>): List<WeatherForHourItem> {
-        val items = ArrayList<WeatherForHourItem>()
-        data.map {
-            items.add(WeatherForHourItem(it))
-        }
-        return items
     }
 
     override fun unbindView(binding: WeatherForDayBinding) {
