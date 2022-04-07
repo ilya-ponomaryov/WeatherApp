@@ -8,9 +8,9 @@ import com.example.weatherapp.databinding.WeatherForHourBinding
 import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class WeatherForHourItem(private val hour: WeatherForHour) : AbstractBindingItem<WeatherForHourBinding>(){
+class WeatherForHourItem(private val weatherForHour: WeatherForHour) : AbstractBindingItem<WeatherForHourBinding>(){
     override var identifier: Long
-        get() = hour.hashCode().toLong()
+        get() = weatherForHour.hashCode().toLong()
         set(value) {}
 
     override val type: Int
@@ -22,10 +22,10 @@ class WeatherForHourItem(private val hour: WeatherForHour) : AbstractBindingItem
     ) = WeatherForHourBinding.inflate(inflater, parent, false)
 
     override fun bindView(binding: WeatherForHourBinding, payloads: List<Any>) {
-        binding.temperature.text = hour.temperature
-        binding.hour.text = hour.date
+        binding.temperature.text = weatherForHour.temperature
+        binding.hour.text = weatherForHour.date
         Glide.with(binding.root.context)
-            .load(hour.weatherIcon)
+            .load(weatherForHour.weatherIcon)
             .into(binding.weatherIcon)
     }
 

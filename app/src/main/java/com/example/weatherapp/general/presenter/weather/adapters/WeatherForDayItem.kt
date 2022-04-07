@@ -12,9 +12,9 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import java.util.ArrayList
 
-class WeatherForDayItem(private val day: WeatherForDay) : AbstractBindingItem<WeatherForDayBinding>() {
+class WeatherForDayItem(private val weatherForDay: WeatherForDay) : AbstractBindingItem<WeatherForDayBinding>() {
     override var identifier: Long
-        get() = day.hashCode().toLong()
+        get() = weatherForDay.hashCode().toLong()
         set(value) {}
 
     override val type: Int
@@ -29,15 +29,15 @@ class WeatherForDayItem(private val day: WeatherForDay) : AbstractBindingItem<We
         val itemAdapter = ItemAdapter<WeatherForHourItem>()
         val adapter = FastAdapter.with(itemAdapter)
         itemAdapter.clear()
-        itemAdapter.set(getHourlyItems(day.hourly))
+        itemAdapter.set(getHourlyItems(weatherForDay.hourly))
 
-        binding.date.text = day.date
-        binding.daytimeTemperature.text = day.dayTemperature
-        binding.nighttimeTemperature.text = day.nightTemperature
+        binding.date.text = weatherForDay.date
+        binding.daytimeTemperature.text = weatherForDay.dayTemperature
+        binding.nighttimeTemperature.text = weatherForDay.nightTemperature
         binding.weatherByHours.adapter = adapter
 
         Glide.with(binding.root.context)
-            .load(day.weatherIcon)
+            .load(weatherForDay.weatherIcon)
             .into(binding.weatherIcon)
     }
 
