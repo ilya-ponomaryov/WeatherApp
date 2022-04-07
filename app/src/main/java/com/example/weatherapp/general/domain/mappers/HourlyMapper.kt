@@ -8,7 +8,7 @@ import java.util.*
 class HourlyMapper(private val hourly: List<Hourly>) {
     fun toHourlyEquippedList(): List<WeatherForHour> {
         val result = arrayListOf<WeatherForHour>()
-        hourly.map {
+        hourly.forEach {
             val date = Date(it.dt.toLong() * 1000)
             var snow = Snow(0.0)
             if (it.snow != null) {
