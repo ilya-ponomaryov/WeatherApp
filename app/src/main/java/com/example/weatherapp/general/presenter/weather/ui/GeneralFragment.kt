@@ -69,7 +69,6 @@ class GeneralFragment : Fragment() {
             dailyItem.clear()
             val todayMapper = TodayMapper(weatherData.current)
             val today = WeatherForTodayItem(todayMapper.toTodayEquipped())
-            today.identifier = 0
 
             todayItem.add(today)
             dailyItem.add(getDailyItems(weatherData))
@@ -81,11 +80,9 @@ class GeneralFragment : Fragment() {
         val dailyEquipped = dailyMapper.toDailyEquippedList()
         val items = ArrayList<WeatherForDayItem>()
         var position = 0
-        val id = AtomicLong(1)
 
         while (position < 5) {
             val daily = WeatherForDayItem(dailyEquipped[position])
-            daily.identifier = id.getAndIncrement()
             items.add(daily)
 
             position++

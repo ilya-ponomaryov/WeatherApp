@@ -13,6 +13,10 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import java.util.ArrayList
 
 class WeatherForDayItem(private val daily: WeatherForDay) : AbstractBindingItem<DayCardLayoutBinding>() {
+    override var identifier: Long
+        get() = daily.hashCode().toLong()
+        set(value) {}
+
     override val type: Int
         get() = R.id.day_weather_layout
 

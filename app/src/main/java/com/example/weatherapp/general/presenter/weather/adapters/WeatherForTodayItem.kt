@@ -9,8 +9,12 @@ import com.example.weatherapp.general.data.weather.models.WeatherForToday
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 
-open class WeatherForTodayItem(private val weatherForToday: WeatherForToday) :
+open class WeatherForTodayItem(private val today: WeatherForToday) :
     AbstractBindingItem<TodayCardLayoutBinding>() {
+    override var identifier: Long
+        get() = today.hashCode().toLong()
+        set(value) {}
+
     override val type: Int
         get() = R.id.today_weather_layout
 
@@ -20,12 +24,12 @@ open class WeatherForTodayItem(private val weatherForToday: WeatherForToday) :
     ): TodayCardLayoutBinding = TodayCardLayoutBinding.inflate(inflater, parent, false)
 
     override fun bindView(binding: TodayCardLayoutBinding, payloads: List<Any>) {
-        binding.dateTodayCardText.text = weatherForToday.date
-        binding.tempTodayCardText.text = weatherForToday.temperature
-        binding.descTodayCardText.text = weatherForToday.weatherDescription
+        binding.dateTodayCardText.text = today.date
+        binding.tempTodayCardText.text = today.temperature
+        binding.descTodayCardText.text = today.weatherDescription
 
         Glide.with(binding.root.context)
-            .load(weatherForToday.weatherIcon)
+            .load(today.weatherIcon)
             .into(binding.iconTodayCardImg)
     }
 
