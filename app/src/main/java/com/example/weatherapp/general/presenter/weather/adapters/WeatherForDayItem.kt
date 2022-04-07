@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.DayCardLayoutBinding
 import com.example.weatherapp.general.data.weather.models.DailyEquipped
-import com.example.weatherapp.general.data.weather.models.Hourly
+import com.example.weatherapp.general.data.weather.models.HourlyEquipped
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
@@ -33,11 +33,11 @@ class WeatherForDayItem(private val daily: DailyEquipped) : AbstractBindingItem<
         binding.hourListDayCardRv.adapter = adapter
 
         Glide.with(binding.root.context)
-            .load("http://openweathermap.org/img/w/" + daily.weather[0].icon + ".png")
+            .load(daily.weatherIcon)
             .into(binding.iconDayCardImg)
     }
 
-    private fun getHourlyItems(data: List<Hourly>): List<WeatherForHourItem> {
+    private fun getHourlyItems(data: List<HourlyEquipped>): List<WeatherForHourItem> {
         val items = ArrayList<WeatherForHourItem>()
         data.map {
             items.add(WeatherForHourItem(it))

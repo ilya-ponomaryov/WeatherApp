@@ -10,7 +10,7 @@ import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.data.weather.models.WeatherData
-import com.example.weatherapp.general.domain.DailyMapper
+import com.example.weatherapp.general.domain.mappers.DailyMapper
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
 import com.example.weatherapp.general.presenter.weather.adapters.*
 import com.mikepenz.fastadapter.*

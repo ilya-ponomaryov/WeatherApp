@@ -1,8 +1,11 @@
-package com.example.weatherapp.general.domain
+package com.example.weatherapp.general.domain.mappers
 
 import com.example.weatherapp.general.data.weather.models.Daily
 import com.example.weatherapp.general.data.weather.models.DailyEquipped
 import com.example.weatherapp.general.data.weather.models.Hourly
+import com.example.weatherapp.general.data.weather.models.HourlyEquipped
+import com.example.weatherapp.general.domain.DateConverter
+import com.example.weatherapp.general.domain.HourlyDataConverter
 
 class DailyMapper(private val daily: List<Daily>, private val hourly: List<Hourly>) {
     fun toDailyEquippedList(): List<DailyEquipped> {
@@ -12,9 +15,10 @@ class DailyMapper(private val daily: List<Daily>, private val hourly: List<Hourl
         val result = arrayListOf<DailyEquipped>()
 
         for ((i, day) in daily.withIndex()) {
-            val hourlyLocal = arrayListOf<Hourly>()
+            val hourlyLocal = arrayListOf<HourlyEquipped>()
             if (hourlyList.size > i) {
-                hourlyLocal.addAll(hourlyList[i])
+                val hourlyMapper = HourlyMapper(hourlyList[i])
+                hourlyLocal.addAll(hourlyMapper.toHourlyEquippedList())
             } else {
                 hourlyLocal.addAll(emptyList())
             }
@@ -45,6 +49,7 @@ class DailyMapper(private val daily: List<Daily>, private val hourly: List<Hourl
                 day.temp.min.toInt().toString(),
                 day.temp.morn.toInt().toString(),
                 day.temp.night.toInt().toString() + "°",
+                "http://openweathermap.org/img/w/" + day.weather[0].icon + ".png",
             ))
         }
         return result

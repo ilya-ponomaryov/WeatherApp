@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.HourCardLayoutBinding
-import com.example.weatherapp.general.data.weather.models.Hourly
+import com.example.weatherapp.general.data.weather.models.HourlyEquipped
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import java.util.*
 
-class WeatherForHourItem(private val hourly: Hourly) : AbstractBindingItem<HourCardLayoutBinding>(){
+class WeatherForHourItem(private val hourly: HourlyEquipped) : AbstractBindingItem<HourCardLayoutBinding>(){
     override val type: Int
         get() = R.id.hour_weather_layout
 
@@ -19,11 +18,10 @@ class WeatherForHourItem(private val hourly: Hourly) : AbstractBindingItem<HourC
     ) = HourCardLayoutBinding.inflate(inflater, parent, false)
 
     override fun bindView(binding: HourCardLayoutBinding, payloads: List<Any>) {
-        val date = Date(hourly.dt.toLong() * 1000)
-        binding.tempHourCardText.text = hourly.temp.toInt().toString() + "°"
-        binding.timeHourCardText.text = date.hours.toString() + ":" + date.minutes + "0"
+        binding.tempHourCardText.text = hourly.temperature
+        binding.timeHourCardText.text = hourly.date
         Glide.with(binding.root.context)
-            .load("http://openweathermap.org/img/w/" + hourly.weather[0].icon + ".png")
+            .load(hourly.weatherIcon)
             .into(binding.iconHourCardImg)
     }
 
