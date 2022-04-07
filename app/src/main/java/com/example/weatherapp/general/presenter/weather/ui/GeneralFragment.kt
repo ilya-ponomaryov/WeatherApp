@@ -10,6 +10,7 @@ import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
 import com.example.weatherapp.general.data.weather.models.WeatherData
+import com.example.weatherapp.general.data.weather.models.WeatherForDay
 import com.example.weatherapp.general.domain.mappers.DailyMapper
 import com.example.weatherapp.general.domain.mappers.TodayMapper
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
@@ -64,25 +65,22 @@ class GeneralFragment : Fragment() {
         val fastAdapter = FastAdapter.with(listOf(todayItem, dailyItem))
         binding.weather.adapter = fastAdapter
 
-        viewModel.weather.observe(viewLifecycleOwner) { weatherData ->
+        viewModel.weather.observe(viewLifecycleOwner) { weatherCollection ->
             todayItem.clear()
             dailyItem.clear()
-            val todayMapper = TodayMapper(weatherData.current)
-            val today = WeatherForTodayItem(todayMapper.toTodayEquipped())
 
+            val today = WeatherForTodayItem(weatherCollection.weatherForToday)
             todayItem.add(today)
-            dailyItem.add(getDailyItems(weatherData))
+            dailyItem.add(getDailyItems(weatherCollection.weatherForDay))
         }
     }
 
-    private fun getDailyItems(data: WeatherData): List<WeatherForDayItem> {
-        val dailyMapper = DailyMapper(data.daily, data.hourly)
-        val dailyEquipped = dailyMapper.toDailyEquippedList()
+    private fun getDailyItems(weatherForDay: List<WeatherForDay>): List<WeatherForDayItem> {
         val items = ArrayList<WeatherForDayItem>()
         var position = 0
 
         while (position < 5) {
-            val daily = WeatherForDayItem(dailyEquipped[position])
+            val daily = WeatherForDayItem(weatherForDay[position])
             items.add(daily)
 
             position++
