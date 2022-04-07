@@ -66,13 +66,10 @@ class GeneralFragment : Fragment() {
 
             val today = WeatherForTodayItem(weatherCollection.weatherForToday)
             todayItem.add(today)
-            dailyItem.add(getDailyItems(weatherCollection.weatherForDay))
+            val days = weatherCollection.weatherForDay.map { WeatherForDayItem(it) }
+            dailyItem.add(days)
         }
     }
-
-    private fun getDailyItems(weatherForDay: List<WeatherForDay>) =
-        weatherForDay.map { WeatherForDayItem(it) }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
