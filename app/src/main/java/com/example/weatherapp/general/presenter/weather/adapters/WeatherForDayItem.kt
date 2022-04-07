@@ -12,7 +12,8 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import java.util.ArrayList
 
-class WeatherForDayItem(private val weatherForDay: WeatherForDay) : AbstractBindingItem<WeatherForDayBinding>() {
+class WeatherForDayItem(private val weatherForDay: WeatherForDay) :
+    AbstractBindingItem<WeatherForDayBinding>() {
     override var identifier: Long
         get() = weatherForDay.hashCode().toLong()
         set(value) {}
@@ -36,8 +37,9 @@ class WeatherForDayItem(private val weatherForDay: WeatherForDay) : AbstractBind
             .into(binding.weatherIcon)
     }
 
-    private fun getWeatherByHoursAdapter(weatherForDay: WeatherForDay):
-            FastAdapter<WeatherForHourItem> {
+    private fun getWeatherByHoursAdapter(
+        weatherForDay: WeatherForDay
+    ): FastAdapter<WeatherForHourItem> {
         val items = weatherForDay.hourly.map { WeatherForHourItem(it) }
         val itemAdapter = ItemAdapter<WeatherForHourItem>()
         val adapter = FastAdapter.with(itemAdapter)
