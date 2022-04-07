@@ -31,14 +31,14 @@ class WeatherForDayItem(private val day: WeatherForDay) : AbstractBindingItem<We
         itemAdapter.clear()
         itemAdapter.set(getHourlyItems(day.hourly))
 
-        binding.dateDayCardText.text = day.date
-        binding.tempDayCardText.text = day.dayTemperature
-        binding.tempNightCardText.text = day.nightTemperature
-        binding.hourListDayCardRv.adapter = adapter
+        binding.date.text = day.date
+        binding.daytimeTemperature.text = day.dayTemperature
+        binding.nighttimeTemperature.text = day.nightTemperature
+        binding.weatherByHours.adapter = adapter
 
         Glide.with(binding.root.context)
             .load(day.weatherIcon)
-            .into(binding.iconDayCardImg)
+            .into(binding.weatherIcon)
     }
 
     private fun getHourlyItems(data: List<WeatherForHour>): List<WeatherForHourItem> {
@@ -50,9 +50,9 @@ class WeatherForDayItem(private val day: WeatherForDay) : AbstractBindingItem<We
     }
 
     override fun unbindView(binding: WeatherForDayBinding) {
-        binding.dateDayCardText.text = null
-        binding.tempDayCardText.text = null
-        binding.tempNightCardText.text = null
-        binding.hourListDayCardRv.adapter = null
+        binding.date.text = null
+        binding.daytimeTemperature.text = null
+        binding.nighttimeTemperature.text = null
+        binding.weatherByHours.adapter = null
     }
 }
