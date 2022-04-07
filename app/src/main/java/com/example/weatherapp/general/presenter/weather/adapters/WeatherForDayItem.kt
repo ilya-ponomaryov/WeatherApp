@@ -39,7 +39,7 @@ class WeatherForDayItem(private val daily: DailyEquipped) : AbstractBindingItem<
 
     private fun getHourlyItems(data: List<Hourly>): List<WeatherForHourItem> {
         val items = ArrayList<WeatherForHourItem>()
-        data.forEach {
+        data.map {
             items.add(WeatherForHourItem(it))
         }
         return items
