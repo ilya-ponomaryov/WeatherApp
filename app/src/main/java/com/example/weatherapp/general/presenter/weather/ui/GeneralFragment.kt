@@ -9,18 +9,13 @@ import androidx.fragment.app.viewModels
 import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
-import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.data.weather.models.WeatherForDay
-import com.example.weatherapp.general.domain.mappers.DailyMapper
-import com.example.weatherapp.general.domain.mappers.TodayMapper
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
 import com.example.weatherapp.general.presenter.weather.adapters.*
 import com.mikepenz.fastadapter.*
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ArrayList
-import java.util.concurrent.atomic.AtomicLong
 
 
 @AndroidEntryPoint
@@ -75,18 +70,9 @@ class GeneralFragment : Fragment() {
         }
     }
 
-    private fun getDailyItems(weatherForDay: List<WeatherForDay>): List<WeatherForDayItem> {
-        val items = ArrayList<WeatherForDayItem>()
-        var position = 0
+    private fun getDailyItems(weatherForDay: List<WeatherForDay>) =
+        weatherForDay.map { WeatherForDayItem(it) }
 
-        while (position < 5) {
-            val daily = WeatherForDayItem(weatherForDay[position])
-            items.add(daily)
-
-            position++
-        }
-        return items
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
