@@ -22,16 +22,16 @@ class WeatherForHourItem(private val hour: WeatherForHour) : AbstractBindingItem
     ) = WeatherForHourBinding.inflate(inflater, parent, false)
 
     override fun bindView(binding: WeatherForHourBinding, payloads: List<Any>) {
-        binding.tempHourCardText.text = hour.temperature
-        binding.timeHourCardText.text = hour.date
+        binding.temperature.text = hour.temperature
+        binding.hour.text = hour.date
         Glide.with(binding.root.context)
             .load(hour.weatherIcon)
-            .into(binding.iconHourCardImg)
+            .into(binding.weatherIcon)
     }
 
     override fun unbindView(binding: WeatherForHourBinding) {
         super.unbindView(binding)
-        binding.tempHourCardText.text = null
-        binding.timeHourCardText.text = null
+        binding.temperature.text = null
+        binding.hour.text = null
     }
 }
