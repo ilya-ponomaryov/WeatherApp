@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
-import com.example.weatherapp.databinding.DayCardLayoutBinding
+import com.example.weatherapp.databinding.WeatherForDayBinding
 import com.example.weatherapp.general.data.weather.models.WeatherForDay
 import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.FastAdapter
@@ -12,9 +12,9 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import java.util.ArrayList
 
-class WeatherForDayItem(private val daily: WeatherForDay) : AbstractBindingItem<DayCardLayoutBinding>() {
+class WeatherForDayItem(private val day: WeatherForDay) : AbstractBindingItem<WeatherForDayBinding>() {
     override var identifier: Long
-        get() = daily.hashCode().toLong()
+        get() = day.hashCode().toLong()
         set(value) {}
 
     override val type: Int
@@ -23,21 +23,21 @@ class WeatherForDayItem(private val daily: WeatherForDay) : AbstractBindingItem<
     override fun createBinding(
         inflater: LayoutInflater,
         parent: ViewGroup?
-    ) = DayCardLayoutBinding.inflate(inflater, parent, false)
+    ) = WeatherForDayBinding.inflate(inflater, parent, false)
 
-    override fun bindView(binding: DayCardLayoutBinding, payloads: List<Any>) {
+    override fun bindView(binding: WeatherForDayBinding, payloads: List<Any>) {
         val itemAdapter = ItemAdapter<WeatherForHourItem>()
         val adapter = FastAdapter.with(itemAdapter)
         itemAdapter.clear()
-        itemAdapter.set(getHourlyItems(daily.hourly))
+        itemAdapter.set(getHourlyItems(day.hourly))
 
-        binding.dateDayCardText.text = daily.date
-        binding.tempDayCardText.text = daily.dayTemperature
-        binding.tempNightCardText.text = daily.nightTemperature
+        binding.dateDayCardText.text = day.date
+        binding.tempDayCardText.text = day.dayTemperature
+        binding.tempNightCardText.text = day.nightTemperature
         binding.hourListDayCardRv.adapter = adapter
 
         Glide.with(binding.root.context)
-            .load(daily.weatherIcon)
+            .load(day.weatherIcon)
             .into(binding.iconDayCardImg)
     }
 
@@ -49,7 +49,7 @@ class WeatherForDayItem(private val daily: WeatherForDay) : AbstractBindingItem<
         return items
     }
 
-    override fun unbindView(binding: DayCardLayoutBinding) {
+    override fun unbindView(binding: WeatherForDayBinding) {
         binding.dateDayCardText.text = null
         binding.tempDayCardText.text = null
         binding.tempNightCardText.text = null
