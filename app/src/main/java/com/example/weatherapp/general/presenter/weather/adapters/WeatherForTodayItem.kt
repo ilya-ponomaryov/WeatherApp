@@ -24,18 +24,18 @@ open class WeatherForTodayItem(private val today: WeatherForToday) :
     ) = WeatherForTodayBinding.inflate(inflater, parent, false)
 
     override fun bindView(binding: WeatherForTodayBinding, payloads: List<Any>) {
-        binding.dateTodayCardText.text = today.date
-        binding.tempTodayCardText.text = today.temperature
-        binding.descTodayCardText.text = today.weatherDescription
+        binding.date.text = today.date
+        binding.temperature.text = today.temperature
+        binding.weatherDescription.text = today.weatherDescription
 
         Glide.with(binding.root.context)
             .load(today.weatherIcon)
-            .into(binding.iconTodayCardImg)
+            .into(binding.weatherIcon)
     }
 
     override fun unbindView(binding: WeatherForTodayBinding) {
-        binding.dateTodayCardText.text = null
-        binding.tempTodayCardText.text = null
-        binding.descTodayCardText.text = null
+        binding.date.text = null
+        binding.temperature.text = null
+        binding.weatherDescription.text = null
     }
 }
