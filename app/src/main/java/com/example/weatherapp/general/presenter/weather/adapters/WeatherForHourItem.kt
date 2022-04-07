@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
-import com.example.weatherapp.databinding.HourCardLayoutBinding
+import com.example.weatherapp.databinding.WeatherForHourBinding
 import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class WeatherForHourItem(private val hourly: WeatherForHour) : AbstractBindingItem<HourCardLayoutBinding>(){
+class WeatherForHourItem(private val hour: WeatherForHour) : AbstractBindingItem<WeatherForHourBinding>(){
     override var identifier: Long
-        get() = hourly.hashCode().toLong()
+        get() = hour.hashCode().toLong()
         set(value) {}
 
     override val type: Int
@@ -19,17 +19,17 @@ class WeatherForHourItem(private val hourly: WeatherForHour) : AbstractBindingIt
     override fun createBinding(
         inflater: LayoutInflater,
         parent: ViewGroup?
-    ) = HourCardLayoutBinding.inflate(inflater, parent, false)
+    ) = WeatherForHourBinding.inflate(inflater, parent, false)
 
-    override fun bindView(binding: HourCardLayoutBinding, payloads: List<Any>) {
-        binding.tempHourCardText.text = hourly.temperature
-        binding.timeHourCardText.text = hourly.date
+    override fun bindView(binding: WeatherForHourBinding, payloads: List<Any>) {
+        binding.tempHourCardText.text = hour.temperature
+        binding.timeHourCardText.text = hour.date
         Glide.with(binding.root.context)
-            .load(hourly.weatherIcon)
+            .load(hour.weatherIcon)
             .into(binding.iconHourCardImg)
     }
 
-    override fun unbindView(binding: HourCardLayoutBinding) {
+    override fun unbindView(binding: WeatherForHourBinding) {
         super.unbindView(binding)
         binding.tempHourCardText.text = null
         binding.timeHourCardText.text = null
