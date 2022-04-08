@@ -43,15 +43,6 @@ private fun getWeatherList(): List<Weather> {
         night = 0.0
     )
 
-    val weatherXList = listOf<WeatherX>(
-        WeatherX(
-            description = "Описанин",
-            icon = "04d",
-            id = 0,
-            main = "main"
-        )
-    )
-
     return listOf(
         WeatherForDay(
             0,
@@ -69,7 +60,7 @@ private fun getWeatherList(): List<Weather> {
             0,
             0,
             0.0,
-            weatherXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -98,7 +89,7 @@ private fun getWeatherList(): List<Weather> {
             0,
             0,
             0.0,
-            weatherXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -127,7 +118,7 @@ private fun getWeatherList(): List<Weather> {
             0,
             0,
             0.0,
-            weatherXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -156,7 +147,7 @@ private fun getWeatherList(): List<Weather> {
             0,
             0,
             0.0,
-            weatherXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -185,7 +176,7 @@ private fun getWeatherList(): List<Weather> {
             0,
             0,
             0.0,
-            weatherXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -202,15 +193,6 @@ private fun getWeatherList(): List<Weather> {
 }
 
 private fun getWeatherForHour(): List<WeatherForHour> {
-    val weatherXXList = listOf<WeatherXX>(
-        WeatherXX(
-            description = "Описание",
-            icon = "04d",
-            id = 0,
-            main = "main"
-        )
-    )
-
     return listOf(
         WeatherForHour(
             0,
@@ -224,7 +206,7 @@ private fun getWeatherForHour(): List<WeatherForHour> {
             "0",
             0.0,
             0,
-            weatherXXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -242,7 +224,7 @@ private fun getWeatherForHour(): List<WeatherForHour> {
             "0",
             0.0,
             0,
-            weatherXXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -260,7 +242,7 @@ private fun getWeatherForHour(): List<WeatherForHour> {
             "0",
             0.0,
             0,
-            weatherXXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,
@@ -278,7 +260,7 @@ private fun getWeatherForHour(): List<WeatherForHour> {
             "0",
             0.0,
             0,
-            weatherXXList,
+            getWeatherList(),
             0,
             0.0,
             0.0,

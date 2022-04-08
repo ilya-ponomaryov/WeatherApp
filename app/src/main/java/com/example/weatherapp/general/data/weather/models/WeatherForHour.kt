@@ -19,7 +19,7 @@ data class WeatherForHour(
     val temperature: String,
     val uvi: Double,
     val visibility: Int,
-    val weather: List<WeatherXX>,
+    val weather: List<Weather>,
     @SerializedName("wind_deg")
     val windDegrees: Int,
     @SerializedName("wind_gust")
