@@ -17,22 +17,22 @@ class HourlyMapper(private val hourly: List<Hourly>) {
 
             result.add(
                 WeatherForHour(
-                    it.clouds,
-                    it.dew_point,
-                    date.hours.toString() + ":" + date.minutes + "0",
-                    it.feels_like,
-                    it.humidity,
-                    it.pop,
-                    it.pressure,
-                    snow,
-                    it.temp.toInt().toString() + "°",
-                    it.uvi,
-                    it.visibility,
-                    it.aboutWeather,
-                    it.wind_deg,
-                    it.wind_gust,
-                    it.wind_speed,
-                    "http://openweathermap.org/img/w/" + it.aboutWeather[0].icon + ".png"
+                    clouds = it.clouds,
+                    dewPoint = it.dew_point,
+                    hour = date.hours.toString() + ":" + date.minutes + "0",
+                    feelsLike = it.feels_like,
+                    humidity = it.humidity,
+                    probabilityOfPrecipitation = it.pop,
+                    pressure = it.pressure,
+                    snow = snow,
+                    temperature = it.temp.toInt().toString() + "°",
+                    uvi = it.uvi,
+                    visibility = it.visibility,
+                    aboutWeather = it.aboutWeather,
+                    windDegrees = it.wind_deg,
+                    windGust = it.wind_gust,
+                    windSpeed = it.wind_speed,
+                    weatherIcon = "http://openweathermap.org/img/w/" + it.aboutWeather[0].icon + ".png"
                 )
             )
         }
