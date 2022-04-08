@@ -9,14 +9,15 @@ import com.example.weatherapp.general.data.weather.models.WeatherForToday
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 
-open class WeatherForTodayItem(private val weatherForToday: WeatherForToday) :
-    AbstractBindingItem<WeatherForTodayBinding>() {
+open class WeatherForTodayItem(
+    private val weatherForToday: WeatherForToday
+) : AbstractBindingItem<WeatherForTodayBinding>() {
     override var identifier: Long
         get() = weatherForToday.hashCode().toLong()
         set(value) {}
 
     override val type: Int
-        get() = R.id.today_weather_layout
+        get() = R.id.weather_for_today_layout
 
     override fun createBinding(
         inflater: LayoutInflater,

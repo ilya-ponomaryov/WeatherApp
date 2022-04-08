@@ -31,11 +31,11 @@ data class WeatherForDay(
     @SerializedName("wind_speed")
     val windSpeed: Double,
     val hourly: List<WeatherForHour>,
-    val dayTemperature: String,
+    val daytimeTemperature: String,
     val eveningTemperature: String,
     val maxTemperature: String,
     val minTemperature: String,
     val morningTemperature: String,
-    val nightTemperature: String,
+    val nighttimeTemperature: String,
     val weatherIcon: String,
 )

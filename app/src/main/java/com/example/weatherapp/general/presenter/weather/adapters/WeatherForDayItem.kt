@@ -17,7 +17,7 @@ class WeatherForDayItem(private val weatherForDay: WeatherForDay) :
         set(value) {}
 
     override val type: Int
-        get() = R.id.day_weather_layout
+        get() = R.id.weather_for_day_layout
 
     override fun createBinding(
         inflater: LayoutInflater,
@@ -26,8 +26,8 @@ class WeatherForDayItem(private val weatherForDay: WeatherForDay) :
 
     override fun bindView(binding: WeatherForDayBinding, payloads: List<Any>) {
         binding.date.text = weatherForDay.date
-        binding.daytimeTemperature.text = weatherForDay.dayTemperature
-        binding.nighttimeTemperature.text = weatherForDay.nightTemperature
+        binding.daytimeTemperature.text = weatherForDay.daytimeTemperature
+        binding.nighttimeTemperature.text = weatherForDay.nighttimeTemperature
         binding.weatherByHours.adapter = getWeatherByHoursAdapter(weatherForDay)
 
         Glide.with(binding.root.context)

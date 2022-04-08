@@ -1,8 +1,5 @@
 package com.example.weatherapp.general.presenter.weather.ui
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.utils.ExceptionCatcher
@@ -13,7 +10,6 @@ import com.example.weatherapp.general.domain.getFakeWeatherForDay
 import com.example.weatherapp.general.domain.getFakeWeatherForToday
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,7 +34,7 @@ class GeneralViewModel @Inject constructor(
         try {
             val result = getWeather(city)
             _weatherForToday.value = result.weather.weatherForToday
-            _weatherForDay.value = result.weather.weatherForDay
+            _weatherForDay.value = result.weather.weatherForDays
             _city.value = result.location[0].local_names.ru
         } catch (e: Exception) {
             _error.emit(ExceptionCatcher.getErrorMessage(e))

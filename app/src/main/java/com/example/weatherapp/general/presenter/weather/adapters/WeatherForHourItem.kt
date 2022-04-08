@@ -14,7 +14,7 @@ class WeatherForHourItem(private val weatherForHour: WeatherForHour) : AbstractB
         set(value) {}
 
     override val type: Int
-        get() = R.id.hour_weather_layout
+        get() = R.id.weather_for_hour_layout
 
     override fun createBinding(
         inflater: LayoutInflater,
@@ -23,7 +23,7 @@ class WeatherForHourItem(private val weatherForHour: WeatherForHour) : AbstractB
 
     override fun bindView(binding: WeatherForHourBinding, payloads: List<Any>) {
         binding.temperature.text = weatherForHour.temperature
-        binding.hour.text = weatherForHour.date
+        binding.hour.text = weatherForHour.hour
         Glide.with(binding.root.context)
             .load(weatherForHour.weatherIcon)
             .into(binding.weatherIcon)

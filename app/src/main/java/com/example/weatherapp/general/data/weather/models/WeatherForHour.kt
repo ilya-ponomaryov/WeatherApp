@@ -7,7 +7,7 @@ data class WeatherForHour(
     @SerializedName("dew_point")
     val dewPoint: Double,
     @SerializedName("dt")
-    val date: String,
+    val hour: String,
     @SerializedName("feels_like")
     val feels_like: Double,
     val humidity: Int,
