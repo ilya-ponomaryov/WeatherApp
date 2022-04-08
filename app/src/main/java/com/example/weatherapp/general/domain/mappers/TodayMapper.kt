@@ -8,23 +8,23 @@ class TodayMapper(private val current: Current) {
     fun toTodayEquipped(): WeatherForToday {
         val converter = DateConverter()
         return WeatherForToday(
-            current.clouds,
-            current.dew_point,
-            "Сегодня, " + converter.getDateAsString(current.dt),
-            current.feels_like,
-            current.humidity,
-            current.pressure,
-            current.sunrise,
-            current.sunset,
-            current.temp.toInt().toString() + "°",
-            current.uvi,
-            current.visibility,
-            current.aboutWeather,
-            current.wind_deg,
-            current.wind_gust,
-            current.wind_speed,
-            "http://openweathermap.org/img/w/" + current.aboutWeather[0].icon + ".png",
-            current.aboutWeather[0].description +
+            clouds = current.clouds,
+            dewPoint = current.dew_point,
+            date = "Сегодня, " + converter.getDateAsString(current.dt),
+            feelsLike = current.feels_like,
+            humidity = current.humidity,
+            pressure = current.pressure,
+            sunrise = current.sunrise,
+            sunset = current.sunset,
+            temperature = current.temp.toInt().toString() + "°",
+            uvi = current.uvi,
+            visibility = current.visibility,
+            aboutWeather = current.aboutWeather,
+            windDegrees = current.wind_deg,
+            windGust = current.wind_gust,
+            windSpeed = current.wind_speed,
+            weatherIcon = "http://openweathermap.org/img/w/" + current.aboutWeather[0].icon + ".png",
+            weatherDescription = current.aboutWeather[0].description +
                     ", ощущается как " + current.feels_like.toInt().toString(),
         )
     }

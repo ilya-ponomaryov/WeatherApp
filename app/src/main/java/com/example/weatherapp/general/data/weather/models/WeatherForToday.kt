@@ -9,7 +9,7 @@ data class WeatherForToday(
     @SerializedName("dt")
     val date: String,
     @SerializedName("feels_like")
-    val feels_like: Double,
+    val feelsLike: Double,
     val humidity: Int,
     val pressure: Int,
     val sunrise: Int,

@@ -7,7 +7,7 @@ fun getFakeWeatherForToday(): WeatherForToday {
         clouds = 0,
         dewPoint = 0.0,
         date = "00.00.00",
-        feels_like = 0.0,
+        feelsLike = 0.0,
         humidity = 0,
         pressure = 0,
         sunrise = 0,
