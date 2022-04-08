@@ -9,7 +9,7 @@ data class WeatherForHour(
     @SerializedName("dt")
     val hour: String,
     @SerializedName("feels_like")
-    val feels_like: Double,
+    val feelsLike: Double,
     val humidity: Int,
     @SerializedName("pop")
     val probabilityOfPrecipitation: Double,

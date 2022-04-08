@@ -39,7 +39,7 @@ class WeatherForDayItem(
     private fun getWeatherByHoursAdapter(
         weatherForDay: WeatherForDay
     ): FastAdapter<WeatherForHourItem> {
-        val items = weatherForDay.hourly.map { WeatherForHourItem(it) }
+        val items = weatherForDay.weatherForHour.map { WeatherForHourItem(it) }
         val itemAdapter = ItemAdapter<WeatherForHourItem>()
         val adapter = FastAdapter.with(itemAdapter)
         itemAdapter.clear()
