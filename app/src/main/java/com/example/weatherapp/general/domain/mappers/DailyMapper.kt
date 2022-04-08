@@ -15,41 +15,41 @@ class DailyMapper(private val daily: List<Daily>, private val hourly: List<Hourl
         val result = arrayListOf<WeatherForDay>()
 
         for ((i, day) in daily.withIndex()) {
-            val hourlyLocal = arrayListOf<WeatherForHour>()
+            val weatherForHour = arrayListOf<WeatherForHour>()
             if (hourlyList.size > i) {
                 val hourlyMapper = HourlyMapper(hourlyList[i])
-                hourlyLocal.addAll(hourlyMapper.toHourlyEquippedList())
+                weatherForHour.addAll(hourlyMapper.toHourlyEquippedList())
             } else {
-                hourlyLocal.addAll(emptyList())
+                weatherForHour.addAll(emptyList())
             }
             result.add(WeatherForDay(
-                day.clouds,
-                day.dew_point,
-                dailyDate.getDateAsString(day.dt),
-                day.feels_like,
-                day.humidity,
-                day.moon_phase,
-                day.moonrise,
-                day.moonset,
-                day.pop,
-                day.pressure,
-                day.rain,
-                day.snow,
-                day.sunrise,
-                day.sunset,
-                day.uvi,
-                day.aboutWeather,
-                day.wind_deg,
-                day.wind_gust,
-                day.wind_speed,
-                hourlyLocal,
-                day.temp.day.toInt().toString() + "°",
-                day.temp.eve.toInt().toString() + "°",
-                day.temp.max.toInt().toString(),
-                day.temp.min.toInt().toString(),
-                day.temp.morn.toInt().toString(),
-                day.temp.night.toInt().toString() + "°",
-                "http://openweathermap.org/img/w/" + day.aboutWeather[0].icon + ".png",
+                clouds = day.clouds,
+                dewPoint = day.dew_point,
+                date = dailyDate.getDateAsString(day.dt),
+                feelsLike = day.feels_like,
+                humidity = day.humidity,
+                moonPhase = day.moon_phase,
+                moonrise = day.moonrise,
+                moonSet = day.moonset,
+                probabilityOfPrecipitation = day.pop,
+                pressure = day.pressure,
+                rain = day.rain,
+                snow = day.snow,
+                sunrise = day.sunrise,
+                sunset = day.sunset,
+                uvi = day.uvi,
+                aboutWeather = day.aboutWeather,
+                windDegrees = day.wind_deg,
+                windGust = day.wind_gust,
+                windSpeed = day.wind_speed,
+                weatherForHour = weatherForHour,
+                daytimeTemperature = day.temp.day.toInt().toString() + "°",
+                eveningTemperature = day.temp.eve.toInt().toString() + "°",
+                maxTemperature = day.temp.max.toInt().toString(),
+                minTemperature = day.temp.min.toInt().toString(),
+                morningTemperature = day.temp.morn.toInt().toString(),
+                nighttimeTemperature = day.temp.night.toInt().toString() + "°",
+                weatherIcon = "http://openweathermap.org/img/w/" + day.aboutWeather[0].icon + ".png",
             ))
         }
         return result
