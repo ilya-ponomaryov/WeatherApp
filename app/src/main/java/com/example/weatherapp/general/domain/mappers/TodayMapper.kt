@@ -19,12 +19,12 @@ class TodayMapper(private val current: Current) {
             current.temp.toInt().toString() + "°",
             current.uvi,
             current.visibility,
-            current.weather,
+            current.aboutWeather,
             current.wind_deg,
             current.wind_gust,
             current.wind_speed,
-            "http://openweathermap.org/img/w/" + current.weather[0].icon + ".png",
-            current.weather[0].description +
+            "http://openweathermap.org/img/w/" + current.aboutWeather[0].icon + ".png",
+            current.aboutWeather[0].description +
                     ", ощущается как " + current.feels_like.toInt().toString(),
         )
     }

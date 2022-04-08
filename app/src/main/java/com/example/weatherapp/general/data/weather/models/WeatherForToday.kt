@@ -18,7 +18,8 @@ data class WeatherForToday(
     val temperature: String,
     val uvi: Double,
     val visibility: Int,
-    val weather: List<Weather>,
+    @SerializedName("weather")
+    val aboutWeather: List<AboutWeather>,
     @SerializedName("wind_deg")
     val windDegrees: Int,
     @SerializedName("wind_gust")

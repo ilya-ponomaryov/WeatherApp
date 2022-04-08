@@ -23,7 +23,8 @@ data class WeatherForDay(
     val sunrise: Int,
     val sunset: Int,
     val uvi: Double,
-    val weather: List<Weather>,
+    @SerializedName("weather")
+    val aboutWeather: List<AboutWeather>,
     @SerializedName("wind_deg")
     val windDegrees: Int,
     @SerializedName("wind_gust")

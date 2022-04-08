@@ -28,11 +28,11 @@ class HourlyMapper(private val hourly: List<Hourly>) {
                     it.temp.toInt().toString() + "°",
                     it.uvi,
                     it.visibility,
-                    it.weather,
+                    it.aboutWeather,
                     it.wind_deg,
                     it.wind_gust,
                     it.wind_speed,
-                    "http://openweathermap.org/img/w/" + it.weather[0].icon + ".png"
+                    "http://openweathermap.org/img/w/" + it.aboutWeather[0].icon + ".png"
                 )
             )
         }

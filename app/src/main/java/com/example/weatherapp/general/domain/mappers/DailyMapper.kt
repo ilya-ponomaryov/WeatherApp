@@ -38,7 +38,7 @@ class DailyMapper(private val daily: List<Daily>, private val hourly: List<Hourl
                 day.sunrise,
                 day.sunset,
                 day.uvi,
-                day.weather,
+                day.aboutWeather,
                 day.wind_deg,
                 day.wind_gust,
                 day.wind_speed,
@@ -49,7 +49,7 @@ class DailyMapper(private val daily: List<Daily>, private val hourly: List<Hourl
                 day.temp.min.toInt().toString(),
                 day.temp.morn.toInt().toString(),
                 day.temp.night.toInt().toString() + "°",
-                "http://openweathermap.org/img/w/" + day.weather[0].icon + ".png",
+                "http://openweathermap.org/img/w/" + day.aboutWeather[0].icon + ".png",
             ))
         }
         return result

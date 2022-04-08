@@ -24,9 +24,9 @@ fun getFakeWeatherForToday(): WeatherForToday {
     )
 }
 
-private fun getWeatherList(): List<Weather> {
-    return listOf<Weather>(
-        Weather(
+private fun getWeatherList(): List<AboutWeather> {
+    return listOf<AboutWeather>(
+        AboutWeather(
             description = "Описание",
             icon = "04d",
             id = 0,
