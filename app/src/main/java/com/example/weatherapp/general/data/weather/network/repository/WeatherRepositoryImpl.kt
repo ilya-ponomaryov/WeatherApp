@@ -1,11 +1,11 @@
 package com.example.weatherapp.general.data.weather.network.repository
 
 import com.example.weatherapp.common.utils.Constant
+import com.example.weatherapp.common.utils.toDailyEquippedList
+import com.example.weatherapp.common.utils.toTodayEquipped
 import com.example.weatherapp.general.data.weather.models.Weather
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
-import com.example.weatherapp.general.domain.mappers.DailyMapper
-import com.example.weatherapp.general.domain.mappers.TodayMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -23,11 +23,10 @@ class WeatherRepositoryImpl @Inject constructor(private val service: WeatherServ
                 Constant.APPID
             )
             if (result.isSuccessful) {
-                val todayMapper = TodayMapper(result.body()!!.current)
-                val dayMapper = DailyMapper(result.body()!!.daily, result.body()!!.hourly)
                 return@withContext Weather(
-                    todayMapper.toTodayEquipped(),
-                    dayMapper.toDailyEquippedList())
+                    toTodayEquipped(result.body()!!.current),
+                    toDailyEquippedList(result.body()!!.daily, result.body()!!.hourly)
+                )
             } else {
                 throw Exception("Error")
             }
