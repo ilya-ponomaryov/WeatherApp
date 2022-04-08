@@ -10,8 +10,9 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class WeatherForDayItem(private val weatherForDay: WeatherForDay) :
-    AbstractBindingItem<WeatherForDayBinding>() {
+class WeatherForDayItem(
+    private val weatherForDay: WeatherForDay
+) : AbstractBindingItem<WeatherForDayBinding>() {
     override var identifier: Long
         get() = weatherForDay.hashCode().toLong()
         set(value) {}

@@ -8,7 +8,9 @@ import com.example.weatherapp.databinding.WeatherForHourBinding
 import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class WeatherForHourItem(private val weatherForHour: WeatherForHour) : AbstractBindingItem<WeatherForHourBinding>(){
+class WeatherForHourItem(
+    private val weatherForHour: WeatherForHour
+) : AbstractBindingItem<WeatherForHourBinding>() {
     override var identifier: Long
         get() = weatherForHour.hashCode().toLong()
         set(value) {}
