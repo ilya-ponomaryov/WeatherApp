@@ -2,13 +2,6 @@ package com.example.weatherapp.general.domain
 
 import com.example.weatherapp.general.data.weather.models.*
 
-fun getFakeWeatherCollection(): WeatherCollection {
-    return WeatherCollection(
-        getFakeWeatherForToday(),
-        getFakeWeatherForDay()
-    )
-}
-
 fun getFakeWeatherForToday(): WeatherForToday {
     return WeatherForToday(
         0,

@@ -1,7 +1,6 @@
 package com.example.weatherapp.general.domain
 
 import com.example.weatherapp.general.data.weather.models.WeatherCollection
-import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.data.weather.network.repository.WeatherRepositoryImpl
 

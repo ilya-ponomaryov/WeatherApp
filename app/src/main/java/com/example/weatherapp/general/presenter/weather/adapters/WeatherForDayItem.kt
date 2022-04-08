@@ -6,11 +6,9 @@ import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.WeatherForDayBinding
 import com.example.weatherapp.general.data.weather.models.WeatherForDay
-import com.example.weatherapp.general.data.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import java.util.ArrayList
 
 class WeatherForDayItem(private val weatherForDay: WeatherForDay) :
     AbstractBindingItem<WeatherForDayBinding>() {

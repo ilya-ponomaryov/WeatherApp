@@ -2,7 +2,6 @@ package com.example.weatherapp.general.data.weather.network.repository
 
 import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.general.data.weather.models.WeatherCollection
-import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
 import com.example.weatherapp.general.domain.mappers.DailyMapper
