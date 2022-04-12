@@ -19,8 +19,8 @@ data class Hourly(
     val temperature: Double,
     val uvi: Double,
     val visibility: Int,
-    val weather: List<WeatherXX>,
-    @SerializedName("wind_deg")
+    @SerializedName("weather")
+    val aboutWeather: List<AboutWeather>,
     val windDegrees: Int,
     @SerializedName("wind_gust")
     val windGust: Double,

@@ -2,30 +2,23 @@ package com.example.weatherapp.general.data.weather.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Daily(
+data class WeatherForHour(
     val clouds: Int,
     @SerializedName("dew_point")
     val dewPoint: Double,
     @SerializedName("dt")
-    val date: Int,
+    val hour: String,
     @SerializedName("feels_like")
-    val feelsLike: FeelsLike,
+    val feelsLike: Double,
     val humidity: Int,
-    @SerializedName("moon_phase")
-    val moonPhase: Double,
-    val moonrise: Int,
-    @SerializedName("moonset")
-    val moonSet: Int,
     @SerializedName("pop")
     val probabilityOfPrecipitation: Double,
     val pressure: Int,
-    val rain: Double,
-    val snow: Double,
-    val sunrise: Int,
-    val sunset: Int,
+    val snow: Snow,
     @SerializedName("temp")
-    val temperature: Temperature,
+    val temperature: String,
     val uvi: Double,
+    val visibility: Int,
     @SerializedName("weather")
     val aboutWeather: List<AboutWeather>,
     @SerializedName("wind_deg")
@@ -33,5 +26,6 @@ data class Daily(
     @SerializedName("wind_gust")
     val windGust: Double,
     @SerializedName("wind_speed")
-    val windSpeed: Double
+    val windSpeed: Double,
+    val weatherIcon: String,
 )
