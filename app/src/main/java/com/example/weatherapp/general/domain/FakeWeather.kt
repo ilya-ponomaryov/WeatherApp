@@ -38,8 +38,8 @@ private fun getWeatherList(): List<AboutWeather> {
  fun getFakeWeatherForDay(): List<WeatherForDay> {
     val feelsLike = FeelsLike(
         day = 0.0,
-        eve = 0.0,
-        morn = 0.0,
+        evening = 0.0,
+        morning = 0.0,
         night = 0.0
     )
 
