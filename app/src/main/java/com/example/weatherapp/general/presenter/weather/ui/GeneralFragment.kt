@@ -9,8 +9,11 @@ import androidx.fragment.app.viewModels
 import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
-import com.example.weatherapp.general.presenter.weather.adapters.GeneralRvAdapter
 import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
+import com.example.weatherapp.general.presenter.weather.adapters.*
+import com.mikepenz.fastadapter.*
+import com.mikepenz.fastadapter.adapters.GenericItemAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -20,8 +23,6 @@ class GeneralFragment : Fragment() {
 
     private var _binding: GeneralFragmentBinding? = null
     private val binding get() = _binding!!
-
-    private val weatherAdapter = GeneralRvAdapter()
 
     private val city get() = arguments?.getString(ARG_CITY)
 
@@ -52,8 +53,23 @@ class GeneralFragment : Fragment() {
     }
 
     private fun setupWeatherRecycler() {
-        binding.weather.adapter = weatherAdapter
-        viewModel.weather.observe(viewLifecycleOwner) { weatherAdapter.setWeather(it) }
+        val todayItem = ItemAdapter<WeatherForTodayItem>()
+        val dailyItem = GenericItemAdapter()
+
+        val fastAdapter = FastAdapter.with(listOf(todayItem, dailyItem))
+        binding.weather.adapter = fastAdapter
+
+        viewModel.weatherForToday.observe(viewLifecycleOwner) {
+            todayItem.clear()
+            val today = WeatherForTodayItem(it)
+            todayItem.add(today)
+        }
+
+        viewModel.weatherForDay.observe(viewLifecycleOwner) { weatherForDay ->
+            dailyItem.clear()
+            val days = weatherForDay.map { WeatherForDayItem(it) }
+            dailyItem.add(days)
+        }
     }
 
     override fun onDestroyView() {

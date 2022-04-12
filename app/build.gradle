@@ -78,4 +78,15 @@ dependencies {
     //image
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
+    //FastAdapter
+    implementation "com.mikepenz:fastadapter:5.6.0"
+    implementation "com.mikepenz:fastadapter-extensions-binding:5.5.1"
+    implementation "com.mikepenz:fastadapter-extensions-diff:5.5.1" // diff util helpers
+    implementation "com.mikepenz:fastadapter-extensions-drag:5.5.1" // drag support
+    implementation "com.mikepenz:fastadapter-extensions-paged:5.5.1" // paging support
+    implementation "com.mikepenz:fastadapter-extensions-scroll:5.5.1" // scroll helpers
+    implementation "com.mikepenz:fastadapter-extensions-swipe:5.5.1" // swipe support
+    implementation "com.mikepenz:fastadapter-extensions-ui:5.5.1" // pre-defined ui components
+    implementation "com.mikepenz:fastadapter-extensions-utils:5.5.1"
+
 }
