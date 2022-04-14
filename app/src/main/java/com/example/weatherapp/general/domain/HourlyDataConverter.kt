@@ -29,11 +29,11 @@ class HourlyDataConverter {
     private fun distributeDataByDay(newList: List<Hourly>): List<ArrayList<Hourly>> {
         val hours = arrayListOf(0, 3, 6, 9, 12, 15, 18, 21)
 
-        val data = arrayListOf<ArrayList<Hourly>>()
-        val data1 = arrayListOf<Hourly>()
-        val data2 = arrayListOf<Hourly>()
-        val data3 = arrayListOf<Hourly>()
-        val data4 = arrayListOf<Hourly>()
+        val hourlyListByDays = arrayListOf<ArrayList<Hourly>>()
+        val firstDayHourlyList = arrayListOf<Hourly>()
+        val secondDayHourlyList = arrayListOf<Hourly>()
+        val thirdDayHourlyList = arrayListOf<Hourly>()
+        val fourthDayHourlyList = arrayListOf<Hourly>()
 
         val firstDate = Date(newList[0].date.toLong() * 1000)
         var firstDay = firstDate.day
@@ -49,19 +49,19 @@ class HourlyDataConverter {
                     if (localDate.hours == hour) {
                         if (hourlyItem != null) {
                             when (position) {
-                                0 -> data1.add(hourlyItem)
-                                1 -> data2.add(hourlyItem)
-                                2 -> data3.add(hourlyItem)
-                                3 -> data4.add(hourlyItem)
+                                0 -> firstDayHourlyList.add(hourlyItem)
+                                1 -> secondDayHourlyList.add(hourlyItem)
+                                2 -> thirdDayHourlyList.add(hourlyItem)
+                                3 -> fourthDayHourlyList.add(hourlyItem)
                             }
                             hourlyItem = null
                         }
 
                         when (position) {
-                            0 -> data1.add(list)
-                            1 -> data2.add(list)
-                            2 -> data3.add(list)
-                            3 -> data4.add(list)
+                            0 -> firstDayHourlyList.add(list)
+                            1 -> secondDayHourlyList.add(list)
+                            2 -> thirdDayHourlyList.add(list)
+                            3 -> fourthDayHourlyList.add(list)
                         }
                     }
                 }
@@ -71,10 +71,10 @@ class HourlyDataConverter {
                 position = +1
             }
         }
-        data.add(data1)
-        data.add(data2)
-        data.add(data3)
-        data.add(data4)
-        return data
+        hourlyListByDays.add(firstDayHourlyList)
+        hourlyListByDays.add(secondDayHourlyList)
+        hourlyListByDays.add(thirdDayHourlyList)
+        hourlyListByDays.add(fourthDayHourlyList)
+        return hourlyListByDays
     }
 }
