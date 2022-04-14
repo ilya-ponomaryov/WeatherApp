@@ -7,9 +7,9 @@ import kotlin.collections.ArrayList
 
 class HourlyDataConverter {
     fun getHourlyData(hourlyList: List<Hourly>): List<List<Hourly>> {
-        val newList = removeTodayDataFromList(hourlyList)
+        val hourlyWithoutTodayList = removeTodayDataFromList(hourlyList)
 
-        return distributeDataByDay(newList)
+        return distributeDataByDay(hourlyWithoutTodayList)
     }
 
     private fun removeTodayDataFromList(hourlyList: List<Hourly>): List<Hourly> {
