@@ -46,10 +46,10 @@ class GeneralFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.selectCity.setOnClickListener {
+        binding.searchButton.setOnClickListener {
             AddCityDialog().show(parentFragmentManager)
         }
-        viewModel.city.observe(viewLifecycleOwner) { binding.city.text = it }
+        viewModel.city.observe(viewLifecycleOwner) { binding.cityName.text = it }
     }
 
     private fun setupWeatherRecycler() {
