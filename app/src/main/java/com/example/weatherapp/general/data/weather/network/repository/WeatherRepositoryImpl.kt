@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) :
     WeatherRepository {
-    override suspend fun getWeatherForecast(lat: Double, lon: Double): Weather =
+    override suspend fun getWeather(lat: Double, lon: Double): Weather =
         withContext(Dispatchers.IO) {
             val result = service.getWeather(
                 lat,

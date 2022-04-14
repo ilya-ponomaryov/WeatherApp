@@ -7,23 +7,23 @@ import kotlin.collections.ArrayList
 
 class HourlyDataConverter {
     fun getHourlyData(hourlyList: List<Hourly>): List<List<Hourly>> {
-        val newList = separateHourlyList(hourlyList)
+        val newList = removeTodayDataFromList(hourlyList)
 
         return distributeDataByDay(newList)
     }
 
-    private fun separateHourlyList(hourlyList: List<Hourly>): List<Hourly> {
-        val newList = arrayListOf<Hourly>()
+    private fun removeTodayDataFromList(hourlyList: List<Hourly>): List<Hourly> {
+        val hourlyWithoutTodayList = arrayListOf<Hourly>()
         val today = Date(hourlyList[0].date.toLong() * 1000)
 
         for (hourly in hourlyList) {
             val hourlyDate = Date(hourly.date.toLong() * 1000)
 
             if (hourlyDate.day != today.day) {
-                newList.add(hourly)
+                hourlyWithoutTodayList.add(hourly)
             }
         }
-        return newList
+        return hourlyWithoutTodayList
     }
 
     private fun distributeDataByDay(newList: List<Hourly>): List<ArrayList<Hourly>> {

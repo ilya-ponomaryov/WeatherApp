@@ -14,7 +14,7 @@ class WeatherGetter @Inject constructor(
     suspend operator fun invoke(city: String?): WeatherAndLocation =
         withContext(Dispatchers.Default) {
             val locationResult = locationService.getLocation(city)
-            val weatherResult = weatherService.getWeatherForecast(
+            val weatherResult = weatherService.getWeather(
                 locationResult[0].lat,
                 locationResult[0].lon
             )
