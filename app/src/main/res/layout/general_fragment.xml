@@ -6,12 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".general.presenter.weather.ui.GeneralFragment">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/top_panel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
 
         <ImageButton
-            android:id="@+id/location_toolbar_btn"
+            android:id="@+id/location_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_corner"
@@ -23,7 +23,7 @@
             tools:layout_editor_absoluteY="16dp" />
 
         <TextView
-            android:id="@+id/city"
+            android:id="@+id/city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -39,6 +39,7 @@
             android:layout_gravity="end">
 
             <ImageButton
+                android:id="@+id/theme_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_outline_wb_sunny_24"
@@ -50,7 +51,7 @@
                 android:layout_marginEnd="8dp"/>
 
             <ImageButton
-                android:id="@+id/selectCity"
+                android:id="@+id/search_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_outline_search_24"
