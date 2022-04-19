@@ -35,7 +35,7 @@ class GeneralViewModel @Inject constructor(
             val result = getWeather(city)
             _weatherForToday.value = result.weather.weatherForToday
             _weatherForDay.value = result.weather.weatherForDays
-            _city.value = result.location[0].local_names.ru
+            _city.value = result.location[0].localNames.russian
         } catch (e: Exception) {
             _error.emit(ExceptionCatcher.getErrorMessage(e))
         }

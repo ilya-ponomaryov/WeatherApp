@@ -15,8 +15,8 @@ class WeatherGetter @Inject constructor(
         withContext(Dispatchers.Default) {
             val locationResult = locationService.getLocation(city)
             val weatherResult = weatherService.getWeather(
-                locationResult[0].lat,
-                locationResult[0].lon
+                locationResult[0].latitude,
+                locationResult[0].longitude
             )
             WeatherAndLocation(weatherResult, locationResult)
         }
