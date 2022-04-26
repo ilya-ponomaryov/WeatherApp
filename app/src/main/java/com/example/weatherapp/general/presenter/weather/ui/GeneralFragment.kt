@@ -16,7 +16,6 @@ import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
     private val viewModel: GeneralViewModel by viewModels()

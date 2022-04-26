@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DateConverter {
-    fun getDateAsString(unix: Int): String{
+    fun getDateAsString(unix: Int): String {
         val date = getDateFromUnix(unix)
         val weekDay = SimpleDateFormat("EE", Locale("ru")).format(date.time)
         val day = SimpleDateFormat("dd", Locale("ru")).format(date.time)

@@ -12,16 +12,17 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) :
     WeatherRepository {
-    override suspend fun getWeather(lat: Double, lon: Double): Weather =
+    override suspend fun getWeather(latitude: Double, longitude: Double): Weather =
         withContext(Dispatchers.IO) {
             val result = service.getWeather(
-                lat,
-                lon,
+                latitude,
+                longitude,
                 "minutely, alerts",
                 "metric",
                 "ru",
                 Constant.APPID
             )
+
             if (result.isSuccessful) {
                 return@withContext Weather(
                     toTodayEquipped(result.body()!!.current),
