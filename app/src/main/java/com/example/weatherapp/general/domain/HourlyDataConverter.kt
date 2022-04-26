@@ -1,68 +1,80 @@
 package com.example.weatherapp.general.domain
 
-import android.util.Log
+
 import com.example.weatherapp.general.data.weather.models.Hourly
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HourlyDataConverter {
     fun getHourlyData(hourlyList: List<Hourly>): List<List<Hourly>> {
-        val hours = arrayListOf(0, 3, 6, 9, 12, 15, 18, 21)
-        val newList = arrayListOf<Hourly>()
-        val data = arrayListOf<ArrayList<Hourly>>()
-        val data1 = arrayListOf<Hourly>()
-        val data2 = arrayListOf<Hourly>()
-        val data3 = arrayListOf<Hourly>()
-        val data4 = arrayListOf<Hourly>()
+        val hourlyWithoutTodayList = removeTodayDataFromList(hourlyList)
+
+        return distributeDataByDay(hourlyWithoutTodayList)
+    }
+
+    private fun removeTodayDataFromList(hourlyList: List<Hourly>): List<Hourly> {
+        val hourlyWithoutTodayList = arrayListOf<Hourly>()
         val today = Date(hourlyList[0].date.toLong() * 1000)
 
-        for (i in hourlyList) {
-            val d = Date(i.date.toLong() * 1000)
-            if (d.day != today.day) {
-                newList.add(i)
-                Log.d("NewList", newList.toString())
+        for (hourly in hourlyList) {
+            val hourlyDate = Date(hourly.date.toLong() * 1000)
+
+            if (hourlyDate.day != today.day) {
+                hourlyWithoutTodayList.add(hourly)
             }
         }
-        Log.d("NewListSize", newList.size.toString())
-        val b = Date(newList[0].date.toLong() * 1000)
-        var bDay = b.day
-        var p = 0
-        var bData: Hourly? = null
-        for (n in newList) {
-            val localDate = Date(n.date.toLong() * 1000)
-            if (bDay == localDate.day) {
-                for (h in hours) {
-                    if (localDate.hours == h) {
-                        if (bData != null) {
-                                when(p) {
-                                    0 -> data1.add(bData)
-                                    1 -> data2.add(bData)
-                                    2 -> data3.add(bData)
-                                    3 -> data4.add(bData)
-                                }
-                            bData = null
-                        }
-                        Log.d("Hour", h.toString())
-                        when(p) {
-                            0 -> data1.add(n)
-                            1 -> data2.add(n)
-                            2 -> data3.add(n)
-                            3 -> data4.add(n)
+        return hourlyWithoutTodayList
+    }
+
+    private fun distributeDataByDay(newList: List<Hourly>): List<ArrayList<Hourly>> {
+        val hours = arrayListOf(0, 3, 6, 9, 12, 15, 18, 21)
+
+        val hourlyListByDays = arrayListOf<ArrayList<Hourly>>()
+        val firstDayHourlyList = arrayListOf<Hourly>()
+        val secondDayHourlyList = arrayListOf<Hourly>()
+        val thirdDayHourlyList = arrayListOf<Hourly>()
+        val fourthDayHourlyList = arrayListOf<Hourly>()
+
+        val firstDate = Date(newList[0].date.toLong() * 1000)
+        var firstDay = firstDate.day
+
+        var position = 0
+
+        var hourlyItem: Hourly? = null
+
+        for (list in newList) {
+            val localDate = Date(list.date.toLong() * 1000)
+            if (firstDay == localDate.day) {
+                for (hour in hours) {
+                    if (localDate.hours == hour) {
+                        if (hourlyItem != null) {
+                            when (position) {
+                                0 -> firstDayHourlyList.add(hourlyItem)
+                                1 -> secondDayHourlyList.add(hourlyItem)
+                                2 -> thirdDayHourlyList.add(hourlyItem)
+                                3 -> fourthDayHourlyList.add(hourlyItem)
+                            }
+                            hourlyItem = null
                         }
 
-
+                        when (position) {
+                            0 -> firstDayHourlyList.add(list)
+                            1 -> secondDayHourlyList.add(list)
+                            2 -> thirdDayHourlyList.add(list)
+                            3 -> fourthDayHourlyList.add(list)
+                        }
                     }
                 }
             } else {
-                bData = n
-                bDay = localDate.day
-                p=+1
+                hourlyItem = list
+                firstDay = localDate.day
+                position = +1
             }
         }
-        data.add(data1)
-        data.add(data2)
-        data.add(data3)
-        data.add(data4)
-        return data
+        hourlyListByDays.add(firstDayHourlyList)
+        hourlyListByDays.add(secondDayHourlyList)
+        hourlyListByDays.add(thirdDayHourlyList)
+        hourlyListByDays.add(fourthDayHourlyList)
+        return hourlyListByDays
     }
 }

@@ -15,8 +15,8 @@ import javax.inject.Singleton
 class WeatherModule {
     @Provides
     @Singleton
-    fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository =
-        WeatherRepositoryImpl(weatherService)
+    fun provideWeatherRepository(service: WeatherService): WeatherRepository =
+        WeatherRepositoryImpl(service)
 
     @Provides
     @Singleton

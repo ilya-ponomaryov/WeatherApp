@@ -15,8 +15,8 @@ import javax.inject.Singleton
 class LocationModule {
     @Provides
     @Singleton
-    fun provideLocationRepository(locationService: LocationService): LocationRepository =
-        LocationRepositoryImpl(locationService)
+    fun provideLocationRepository(service: LocationService): LocationRepository =
+        LocationRepositoryImpl(service)
 
     @Provides
     @Singleton
