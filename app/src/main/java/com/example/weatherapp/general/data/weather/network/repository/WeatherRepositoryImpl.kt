@@ -6,30 +6,24 @@ import com.example.weatherapp.common.utils.toTodayEquipped
 import com.example.weatherapp.general.data.weather.models.Weather
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) :
     WeatherRepository {
-    override suspend fun getWeather(latitude: Double, longitude: Double): Weather =
-        withContext(Dispatchers.IO) {
-            val result = service.getWeather(
-                latitude,
-                longitude,
-                "minutely, alerts",
-                "metric",
-                "ru",
-                Constant.APPID
+    override fun getWeather(latitude: Double, longitude: Double): Single<Weather> {
+        return service.getWeather(
+            latitude,
+            longitude,
+            "minutely, alerts",
+            "metric",
+            "ru",
+            Constant.APPID
+        ).map { weatherData ->
+            Weather(
+                toTodayEquipped(weatherData.current),
+                toDailyEquippedList(weatherData.daily, weatherData.hourly)
             )
-
-            if (result.isSuccessful) {
-                return@withContext Weather(
-                    toTodayEquipped(result.body()!!.current),
-                    toDailyEquippedList(result.body()!!.daily, result.body()!!.hourly)
-                )
-            } else {
-                throw Exception("Error")
-            }
         }
+    }
 }
