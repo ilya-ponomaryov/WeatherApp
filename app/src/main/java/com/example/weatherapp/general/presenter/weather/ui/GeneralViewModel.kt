@@ -1,5 +1,6 @@
 package com.example.weatherapp.general.presenter.weather.ui
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.common.utils.ExceptionCatcher
@@ -10,8 +11,8 @@ import com.example.weatherapp.general.domain.getFakeWeatherForDay
 import com.example.weatherapp.general.domain.getFakeWeatherForToday
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -31,6 +32,7 @@ class GeneralViewModel @Inject constructor(
     private val _error = MutableSingleEventFlow<String>()
     val error: SharedFlow<String> = _error.asSharedFlow()
 
+    @SuppressLint("CheckResult")
     fun loadWeather(city: String?) {
         getWeather(city)
             .subscribeOn(Schedulers.io())

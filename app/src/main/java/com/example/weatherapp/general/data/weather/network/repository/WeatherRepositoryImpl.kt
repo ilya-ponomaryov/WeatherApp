@@ -6,7 +6,7 @@ import com.example.weatherapp.common.utils.toTodayEquipped
 import com.example.weatherapp.general.data.weather.models.Weather
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) :

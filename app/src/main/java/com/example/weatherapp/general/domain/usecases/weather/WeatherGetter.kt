@@ -3,7 +3,7 @@ package com.example.weatherapp.general.domain.usecases.weather
 import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
 import com.example.weatherapp.general.domain.LocationRepository
 import com.example.weatherapp.general.domain.WeatherRepository
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
 import javax.inject.Inject
 
 class WeatherGetter @Inject constructor(
