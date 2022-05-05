@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
-import com.example.weatherapp.general.data.weather.models.WeatherForDay
-import com.example.weatherapp.general.data.weather.models.WeatherForToday
-import com.example.weatherapp.general.domain.getFakeWeatherForDay
-import com.example.weatherapp.general.domain.getFakeWeatherForToday
-import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
+import com.example.weatherapp.general.usecases.weather.models.WeatherForDay
+import com.example.weatherapp.general.usecases.weather.models.WeatherForToday
+import com.example.weatherapp.general.usecases.getFakeWeatherForDay
+import com.example.weatherapp.general.usecases.getFakeWeatherForToday
+import com.example.weatherapp.general.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

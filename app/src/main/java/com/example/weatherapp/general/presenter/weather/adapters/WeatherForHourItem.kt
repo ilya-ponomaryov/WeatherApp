@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.WeatherForHourBinding
-import com.example.weatherapp.general.data.weather.models.WeatherForHour
+import com.example.weatherapp.general.usecases.weather.models.WeatherForHour
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 class WeatherForHourItem(

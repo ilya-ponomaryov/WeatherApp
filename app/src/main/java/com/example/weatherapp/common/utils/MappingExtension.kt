@@ -1,8 +1,8 @@
 package com.example.weatherapp.common.utils
 
-import com.example.weatherapp.general.data.weather.models.*
-import com.example.weatherapp.general.domain.DateConverter
-import com.example.weatherapp.general.domain.HourlyDataConverter
+import com.example.weatherapp.general.usecases.weather.models.*
+import com.example.weatherapp.general.usecases.DateConverter
+import com.example.weatherapp.general.usecases.HourlyDataConverter
 import java.util.*
 
 fun toTodayEquipped(current: Current): WeatherForToday {

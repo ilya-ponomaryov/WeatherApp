@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.WeatherForTodayBinding
-import com.example.weatherapp.general.data.weather.models.WeatherForToday
+import com.example.weatherapp.general.usecases.weather.models.WeatherForToday
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 
