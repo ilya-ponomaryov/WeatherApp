@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.presenter.weather.ui
+package com.example.weatherapp.general
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,9 @@ import androidx.fragment.app.viewModels
 import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
-import com.example.weatherapp.general.presenter.location.ui.AddCityDialog
-import com.example.weatherapp.general.presenter.weather.adapters.*
+import com.example.weatherapp.general.dialogs.AddCityDialog
+import com.example.weatherapp.general.ui.WeatherForDayItem
+import com.example.weatherapp.general.ui.WeatherForTodayItem
 import com.mikepenz.fastadapter.*
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter

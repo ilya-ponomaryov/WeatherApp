@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.repositories.location.di
+package com.example.weatherapp.general.di
 
 import com.example.weatherapp.general.repositories.location.network.LocationService
 import com.example.weatherapp.general.repositories.location.network.repository.LocationRepositoryImpl

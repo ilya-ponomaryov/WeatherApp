@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.presenter.location.ui
+package com.example.weatherapp.general.dialogs
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.AddCityDialogLayoutBinding
-import com.example.weatherapp.general.presenter.weather.ui.GeneralFragmentDirections
+import com.example.weatherapp.general.GeneralFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "Dialog"

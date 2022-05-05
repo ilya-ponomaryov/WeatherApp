@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.usecases.di
+package com.example.weatherapp.general.di
 
 import com.example.weatherapp.general.usecases.WeatherRepository
 import com.example.weatherapp.general.usecases.LocationRepository

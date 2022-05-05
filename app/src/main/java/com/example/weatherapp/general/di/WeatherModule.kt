@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.repositories.weather.di
+package com.example.weatherapp.general.di
 
 import com.example.weatherapp.general.repositories.weather.network.WeatherService
 import com.example.weatherapp.general.repositories.weather.network.repository.WeatherRepositoryImpl
