@@ -2,6 +2,7 @@ package com.example.weatherapp.general.di
 
 import com.example.weatherapp.general.usecases.WeatherRepository
 import com.example.weatherapp.general.usecases.LocationRepository
+import com.example.weatherapp.general.usecases.UseCase
 import com.example.weatherapp.general.usecases.weather.WeatherGetter
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,5 @@ class WeatherDomainModule {
     fun provideGetWeatherFromNetwork(
         weatherRepository: WeatherRepository,
         locationRepository: LocationRepository,
-    ) = WeatherGetter(weatherRepository, locationRepository)
+    ): UseCase = WeatherGetter(weatherRepository, locationRepository)
 }
