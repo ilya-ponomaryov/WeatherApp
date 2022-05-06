@@ -2,7 +2,7 @@ package com.example.weatherapp.general.usecases
 
 import com.example.weatherapp.general.usecases.weather.models.*
 
-fun getFakeWeatherForToday(): WeatherForToday {
+fun getStubWeatherForToday(): WeatherForToday {
     return WeatherForToday(
         clouds = 0,
         dewPoint = 0.0,
@@ -35,7 +35,7 @@ private fun getWeatherList(): List<AboutWeather> {
     )
 }
 
- fun getFakeWeatherForDay(): List<WeatherForDay> {
+ fun getStubWeatherForDay(): List<WeatherForDay> {
     val feelsLike = FeelsLike(
         day = 0.0,
         evening = 0.0,

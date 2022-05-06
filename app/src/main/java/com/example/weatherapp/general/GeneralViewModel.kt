@@ -6,8 +6,8 @@ import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
 import com.example.weatherapp.general.usecases.weather.models.WeatherForDay
 import com.example.weatherapp.general.usecases.weather.models.WeatherForToday
-import com.example.weatherapp.general.usecases.getFakeWeatherForDay
-import com.example.weatherapp.general.usecases.getFakeWeatherForToday
+import com.example.weatherapp.general.usecases.getStubWeatherForDay
+import com.example.weatherapp.general.usecases.getStubWeatherForToday
 import com.example.weatherapp.general.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -18,10 +18,10 @@ import javax.inject.Inject
 class GeneralViewModel @Inject constructor(
     private val getWeather: WeatherGetter
 ) : ViewModel() {
-    private val _weatherForToday = MutableStateFlow<WeatherForToday>(getFakeWeatherForToday())
+    private val _weatherForToday = MutableStateFlow<WeatherForToday>(getStubWeatherForToday())
     val weatherForToday: StateFlow<WeatherForToday> = _weatherForToday.asStateFlow()
 
-    private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(getFakeWeatherForDay())
+    private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(getStubWeatherForDay())
     val weatherForDay: StateFlow<List<WeatherForDay>> = _weatherForDay.asStateFlow()
 
     private val _city = MutableStateFlow<String>("Ваш город")
