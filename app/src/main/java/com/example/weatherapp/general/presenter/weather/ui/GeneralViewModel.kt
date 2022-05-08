@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
+import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
 import com.example.weatherapp.general.data.weather.models.WeatherForDay
 import com.example.weatherapp.general.data.weather.models.WeatherForToday
 import com.example.weatherapp.general.domain.getFakeWeatherForDay
@@ -38,15 +39,18 @@ class GeneralViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { weatherAndLocation ->
-                    _weatherForToday.value = weatherAndLocation.weather.weatherForToday
-                    _weatherForDay.value = weatherAndLocation.weather.weatherForDays
-                    _city.value = weatherAndLocation.location[0].localNames.russian
-                },
-                { throwable ->
-                    Log.d("ViewModel", throwable.message.toString())
-                    _error.tryEmit(ExceptionCatcher.getErrorMessage(Exception(throwable)))
-                }
+                { weatherAndLocation -> observeWeatherAndLocation(weatherAndLocation)},
+                { throwable -> observeError(throwable)}
             )
+    }
+
+    private fun observeWeatherAndLocation(weatherAndLocation: WeatherAndLocation) {
+        _weatherForToday.value = weatherAndLocation.weather.weatherForToday
+        _weatherForDay.value = weatherAndLocation.weather.weatherForDays
+        _city.value = weatherAndLocation.location[0].localNames.russian
+    }
+
+    private fun observeError(throwable: Throwable) {
+        _error.tryEmit(ExceptionCatcher.getErrorMessage(Exception(throwable)))
     }
 }
