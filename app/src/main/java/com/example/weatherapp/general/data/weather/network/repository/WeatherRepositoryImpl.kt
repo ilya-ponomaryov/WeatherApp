@@ -4,6 +4,7 @@ import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.common.utils.toDailyEquippedList
 import com.example.weatherapp.common.utils.toTodayEquipped
 import com.example.weatherapp.general.data.weather.models.Weather
+import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
 import io.reactivex.Single
@@ -19,11 +20,13 @@ class WeatherRepositoryImpl @Inject constructor(private val service: WeatherServ
             "metric",
             "ru",
             Constant.APPID
-        ).map { weatherData ->
-            Weather(
-                toTodayEquipped(weatherData.current),
-                toDailyEquippedList(weatherData.daily, weatherData.hourly)
-            )
-        }
+        ).map { weatherData -> convertToWeather(weatherData)}
+    }
+
+    private fun convertToWeather(weatherData: WeatherData): Weather {
+        return Weather(
+            toTodayEquipped(weatherData.current),
+            toDailyEquippedList(weatherData.daily, weatherData.hourly)
+        )
     }
 }
