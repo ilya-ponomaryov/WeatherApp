@@ -1,5 +1,6 @@
 package com.example.weatherapp.general.domain.usecases.weather
 
+import com.example.weatherapp.general.data.location.models.Location
 import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
 import com.example.weatherapp.general.domain.LocationRepository
 import com.example.weatherapp.general.domain.WeatherRepository
@@ -12,13 +13,15 @@ class WeatherGetter @Inject constructor(
 ) {
     operator fun invoke(city: String?): Single<WeatherAndLocation> {
         return locationService.getLocation(city)
-            .flatMap { location ->
-                weatherService.getWeather(
-                    location[0].latitude,
-                    location[0].longitude
-                ).map { weather ->
-                    WeatherAndLocation(weather, location)
-                }
-            }
+            .flatMap { location -> getWeatherByLocation(location)}
+    }
+
+    private fun getWeatherByLocation(location: Location): Single<WeatherAndLocation> {
+        return weatherService.getWeather(
+            location[0].latitude,
+            location[0].longitude
+        ).map { weather ->
+            WeatherAndLocation(weather, location)
+        }
     }
 }
