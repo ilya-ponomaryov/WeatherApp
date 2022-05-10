@@ -1,6 +1,5 @@
 package com.example.weatherapp.general.data.weather.network.repository
 
-import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.common.utils.toDailyEquippedList
 import com.example.weatherapp.common.utils.toTodayEquipped
 import com.example.weatherapp.general.data.weather.models.Weather
@@ -16,10 +15,6 @@ class WeatherRepositoryImpl @Inject constructor(private val service: WeatherServ
         return service.getWeather(
             latitude,
             longitude,
-            "minutely, alerts",
-            "metric",
-            "ru",
-            Constant.APPID
         ).map { weatherData -> convertToWeather(weatherData)}
     }
 

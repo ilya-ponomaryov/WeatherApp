@@ -10,5 +10,5 @@ import javax.inject.Inject
 class LocationRepositoryImpl @Inject constructor(private val service: LocationService) :
     LocationRepository {
     override fun getLocation(cityName: String): Single<Location> =
-        service.getCity(cityName, 1, Constant.APPID)
+        service.getCity(cityName)
 }
