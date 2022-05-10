@@ -34,7 +34,7 @@ class GeneralViewModel @Inject constructor(
     val error: SharedFlow<String> = _error.asSharedFlow()
 
     @SuppressLint("CheckResult")
-    fun loadWeather(city: String?) {
+    fun loadWeather(city: String) {
         getWeather(city)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

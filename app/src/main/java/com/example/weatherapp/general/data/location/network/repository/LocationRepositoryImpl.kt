@@ -9,13 +9,6 @@ import javax.inject.Inject
 
 class LocationRepositoryImpl @Inject constructor(private val service: LocationService) :
     LocationRepository {
-    override fun getLocation(cityName: String?): Single<Location> {
-        val city = if (!cityName.isNullOrEmpty() && cityName.isNotBlank()) {
-            cityName
-        } else {
-            "Тамбов"
-        }
-        return service.getCity(city, 1, Constant.APPID)
-    }
-
+    override fun getLocation(cityName: String): Single<Location> =
+        service.getCity(cityName, 1, Constant.APPID)
 }

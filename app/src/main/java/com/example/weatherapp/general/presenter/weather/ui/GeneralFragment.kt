@@ -41,7 +41,7 @@ class GeneralFragment : Fragment() {
 
         viewModel.error.observe(viewLifecycleOwner) { showToast(it) }
 
-        viewModel.loadWeather(city)
+        city?.let { viewModel.loadWeather(it) }
     }
 
     private fun setupToolbar() {
