@@ -35,14 +35,12 @@ class GeneralViewModel @Inject constructor(
     private val _error = MutableSingleEventFlow<String>()
     val error: SharedFlow<String> = _error.asSharedFlow()
 
-    @SuppressLint("CheckResult")
-    fun loadWeather(city: String) {
-        compositeDisposable.add(
-            getWeather(city)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(::observeWeatherAndLocation, ::observeError)
-        )
-    }
+    fun loadWeather(city: String) = getWeather(city)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(::observeWeatherAndLocation, ::observeError)
+        .apply(compositeDisposable::add)
+
+
 
     private fun observeWeatherAndLocation(weatherAndLocation: WeatherAndLocation) {
         _weatherForToday.value = weatherAndLocation.weather.weatherForToday

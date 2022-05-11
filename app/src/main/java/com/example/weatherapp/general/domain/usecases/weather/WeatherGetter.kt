@@ -10,9 +10,8 @@ class WeatherGetter @Inject constructor(
     private val weatherService: WeatherRepository,
     private val locationService: LocationRepository
 ) {
-    operator fun invoke(city: String) =
-        locationService.getLocation(city)
-            .flatMap(::getWeatherAndLocation)
+    operator fun invoke(city: String) = locationService.getLocation(city)
+        .flatMap(::getWeatherAndLocation)
 
 
     private fun getWeatherAndLocation(location: Location) = weatherService

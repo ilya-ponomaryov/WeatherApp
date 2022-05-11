@@ -12,8 +12,7 @@ import javax.inject.Inject
 class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) :
     WeatherRepository {
     override fun getWeather(latitude: Double, longitude: Double) =
-        service.getWeather(latitude, longitude)
-            .map(::convertToWeather)
+        service.getWeather(latitude, longitude).map(::convertToWeather)
             .subscribeOn(Schedulers.io())
 
     private fun convertToWeather(weatherData: WeatherData) = Weather(
