@@ -36,7 +36,6 @@ class GeneralViewModel @Inject constructor(
     @SuppressLint("CheckResult")
     fun loadWeather(city: String) {
         getWeather(city)
-            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { weatherAndLocation -> observeWeatherAndLocation(weatherAndLocation)},

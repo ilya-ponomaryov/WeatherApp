@@ -7,6 +7,7 @@ import com.example.weatherapp.general.data.weather.models.WeatherData
 import com.example.weatherapp.general.data.weather.network.WeatherService
 import com.example.weatherapp.general.domain.WeatherRepository
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) :
@@ -16,6 +17,7 @@ class WeatherRepositoryImpl @Inject constructor(private val service: WeatherServ
             latitude,
             longitude,
         ).map { weatherData -> convertToWeather(weatherData)}
+            .subscribeOn(Schedulers.io())
     }
 
     private fun convertToWeather(weatherData: WeatherData): Weather {
