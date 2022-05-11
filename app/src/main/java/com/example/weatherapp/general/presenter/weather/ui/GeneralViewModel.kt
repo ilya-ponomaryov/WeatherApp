@@ -13,7 +13,7 @@ import com.example.weatherapp.general.domain.getFakeWeatherForToday
 import com.example.weatherapp.general.domain.usecases.weather.WeatherGetter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -21,6 +21,8 @@ import javax.inject.Inject
 class GeneralViewModel @Inject constructor(
     private val getWeather: WeatherGetter
 ) : ViewModel() {
+    private val compositeDisposable = CompositeDisposable()
+
     private val _weatherForToday = MutableStateFlow<WeatherForToday>(getFakeWeatherForToday())
     val weatherForToday: StateFlow<WeatherForToday> = _weatherForToday.asStateFlow()
 
@@ -35,9 +37,11 @@ class GeneralViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun loadWeather(city: String) {
-        getWeather(city)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::observeWeatherAndLocation, ::observeError)
+        compositeDisposable.add(
+            getWeather(city)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(::observeWeatherAndLocation, ::observeError)
+        )
     }
 
     private fun observeWeatherAndLocation(weatherAndLocation: WeatherAndLocation) {
@@ -48,5 +52,10 @@ class GeneralViewModel @Inject constructor(
 
     private fun observeError(throwable: Throwable) {
         _error.tryEmit(ExceptionCatcher.getErrorMessage(Exception(throwable)))
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 }
