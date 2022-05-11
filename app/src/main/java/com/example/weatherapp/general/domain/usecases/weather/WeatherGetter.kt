@@ -13,10 +13,10 @@ class WeatherGetter @Inject constructor(
 ) {
     operator fun invoke(city: String): Single<WeatherAndLocation> {
         return locationService.getLocation(city)
-            .flatMap { location -> getWeatherByLocation(location)}
+            .flatMap { location -> getWeatherAndLocation(location)}
     }
 
-    private fun getWeatherByLocation(location: Location): Single<WeatherAndLocation> {
+    private fun getWeatherAndLocation(location: Location): Single<WeatherAndLocation> {
         return weatherService.getWeather(
             location[0].latitude,
             location[0].longitude
