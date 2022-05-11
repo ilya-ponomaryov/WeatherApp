@@ -4,24 +4,19 @@ import com.example.weatherapp.general.data.location.models.Location
 import com.example.weatherapp.general.data.weather.models.WeatherAndLocation
 import com.example.weatherapp.general.domain.LocationRepository
 import com.example.weatherapp.general.domain.WeatherRepository
-import io.reactivex.Single
 import javax.inject.Inject
 
 class WeatherGetter @Inject constructor(
     private val weatherService: WeatherRepository,
     private val locationService: LocationRepository
 ) {
-    operator fun invoke(city: String): Single<WeatherAndLocation> {
-        return locationService.getLocation(city)
-            .flatMap { location -> getWeatherAndLocation(location)}
-    }
+    operator fun invoke(city: String) =
+        locationService.getLocation(city)
+            .flatMap(::getWeatherAndLocation)
 
-    private fun getWeatherAndLocation(location: Location): Single<WeatherAndLocation> {
-        return weatherService.getWeather(
-            location[0].latitude,
-            location[0].longitude
-        ).map { weather ->
-            WeatherAndLocation(weather, location)
-        }
-    }
+
+    private fun getWeatherAndLocation(location: Location) = weatherService
+        .getWeather(location[0].latitude, location[0].longitude)
+        .map { weather -> WeatherAndLocation(weather, location) }
+
 }
