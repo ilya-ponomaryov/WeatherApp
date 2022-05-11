@@ -1,7 +1,5 @@
 package com.example.weatherapp.general.presenter.weather.ui
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
@@ -37,18 +35,18 @@ class GeneralViewModel @Inject constructor(
 
     fun loadWeather(city: String) = getWeather(city)
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(::observeWeatherAndLocation, ::observeError)
+        .subscribe(::onResult, ::onError)
         .apply(compositeDisposable::add)
 
 
 
-    private fun observeWeatherAndLocation(weatherAndLocation: WeatherAndLocation) {
+    private fun onResult(weatherAndLocation: WeatherAndLocation) {
         _weatherForToday.value = weatherAndLocation.weather.weatherForToday
         _weatherForDay.value = weatherAndLocation.weather.weatherForDays
         _city.value = weatherAndLocation.location[0].localNames.russian
     }
 
-    private fun observeError(throwable: Throwable) {
+    private fun onError(throwable: Throwable) {
         _error.tryEmit(ExceptionCatcher.getErrorMessage(Exception(throwable)))
     }
 
