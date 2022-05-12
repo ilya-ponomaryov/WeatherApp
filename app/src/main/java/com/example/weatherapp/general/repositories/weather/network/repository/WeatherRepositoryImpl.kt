@@ -2,8 +2,8 @@ package com.example.weatherapp.general.repositories.weather.network.repository
 
 import com.example.weatherapp.common.utils.toDailyEquippedList
 import com.example.weatherapp.common.utils.toTodayEquipped
-import com.example.weatherapp.general.domain.WeatherRepository
 import com.example.weatherapp.general.repositories.weather.network.WeatherService
+import com.example.weatherapp.general.usecases.WeatherRepository
 import com.example.weatherapp.general.usecases.weather.models.Weather
 import com.example.weatherapp.general.usecases.weather.models.WeatherData
 import io.reactivex.schedulers.Schedulers

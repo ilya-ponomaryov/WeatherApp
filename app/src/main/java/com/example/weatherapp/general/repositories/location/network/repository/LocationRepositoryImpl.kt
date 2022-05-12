@@ -1,7 +1,7 @@
 package com.example.weatherapp.general.repositories.location.network.repository
 
-import com.example.weatherapp.general.domain.LocationRepository
 import com.example.weatherapp.general.repositories.location.network.LocationService
+import com.example.weatherapp.general.usecases.LocationRepository
 import com.example.weatherapp.general.usecases.location.models.Location
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
