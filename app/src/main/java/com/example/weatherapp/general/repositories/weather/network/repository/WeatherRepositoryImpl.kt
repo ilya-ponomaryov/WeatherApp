@@ -1,7 +1,7 @@
 package com.example.weatherapp.general.repositories.weather.network.repository
 
-import com.example.weatherapp.common.utils.toDailyEquippedList
-import com.example.weatherapp.common.utils.toTodayEquipped
+import com.example.weatherapp.general.repositories.toDailyEquippedList
+import com.example.weatherapp.general.repositories.toTodayEquipped
 import com.example.weatherapp.general.repositories.weather.network.WeatherService
 import com.example.weatherapp.general.usecases.WeatherRepository
 import com.example.weatherapp.general.usecases.weather.models.Weather
