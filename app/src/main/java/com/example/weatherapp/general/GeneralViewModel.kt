@@ -19,14 +19,14 @@ class GeneralViewModel @Inject constructor(
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
+    private val _city = MutableStateFlow<String>("Ваш город")
+    val city: StateFlow<String> = _city.asStateFlow()
+
     private val _weatherForToday = MutableStateFlow<WeatherForToday>(WeatherForToday())
     val weatherForToday: StateFlow<WeatherForToday> = _weatherForToday.asStateFlow()
 
     private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(listOf())
     val weatherForDay: StateFlow<List<WeatherForDay>> = _weatherForDay.asStateFlow()
-
-    private val _city = MutableStateFlow<String>("Ваш город")
-    val city: StateFlow<String> = _city.asStateFlow()
 
     private val _error = MutableSingleEventFlow<String>()
     val error: SharedFlow<String> = _error.asSharedFlow()
@@ -35,8 +35,6 @@ class GeneralViewModel @Inject constructor(
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(::onResult, ::onError)
         .apply(compositeDisposable::add)
-
-
 
     private fun onResult(weatherAndCity: WeatherAndCity) {
         _weatherForToday.value = weatherAndCity.weather.weatherForToday
