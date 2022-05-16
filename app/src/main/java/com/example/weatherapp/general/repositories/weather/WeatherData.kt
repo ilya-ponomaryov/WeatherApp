@@ -1,5 +1,8 @@
-package com.example.weatherapp.general.usecases.weather.models
+package com.example.weatherapp.general.repositories.weather
 
+import com.example.weatherapp.general.usecases.weather.models.Current
+import com.example.weatherapp.general.usecases.weather.models.Daily
+import com.example.weatherapp.general.usecases.weather.models.Hourly
 import com.google.gson.annotations.SerializedName
 
 data class WeatherData(
