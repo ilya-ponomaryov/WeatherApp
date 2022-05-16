@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.usecases
+package com.example.weatherapp.general.repositories.weather
 
 import java.text.SimpleDateFormat
 import java.util.*
