@@ -17,11 +17,9 @@ class WeatherGetterImpl @Inject constructor(
     override operator fun invoke(city: String) = locationService.getLocation(city)
         .flatMap(::getWeatherAndCity)
 
-
     private fun getWeatherAndCity(city: City) = weatherService
         .getWeather(city.latitude, city.longitude)
         .map { weather -> WeatherAndCity(weather, city) }
-
 }
 
 interface WeatherRepository {
