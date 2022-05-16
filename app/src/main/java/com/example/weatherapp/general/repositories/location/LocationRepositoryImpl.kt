@@ -1,7 +1,7 @@
 package com.example.weatherapp.general.repositories.location
 
-import com.example.weatherapp.general.repositories.location.models.Location
-import com.example.weatherapp.general.usecases.location.City
+import com.example.weatherapp.general.repositories.location.models.LocationItem
+import com.example.weatherapp.general.usecases.weather.models.City
 import com.example.weatherapp.general.usecases.weather.LocationRepository
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +15,7 @@ class LocationRepositoryImpl @Inject constructor(
             .map(::convertToCity)
             .subscribeOn(Schedulers.io())
 
-    private fun convertToCity(location: Location) = City(
+    private fun convertToCity(location: List<LocationItem>) = City(
         location[0].localNames.russian,
         location[0].latitude,
         location[0].longitude

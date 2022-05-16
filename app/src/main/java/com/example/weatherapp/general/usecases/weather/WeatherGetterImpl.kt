@@ -1,6 +1,6 @@
 package com.example.weatherapp.general.usecases.weather
 
-import com.example.weatherapp.general.usecases.location.City
+import com.example.weatherapp.general.usecases.weather.models.City
 import com.example.weatherapp.general.usecases.weather.models.Weather
 import com.example.weatherapp.general.usecases.weather.models.WeatherAndCity
 import io.reactivex.Single
