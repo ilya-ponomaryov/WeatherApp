@@ -19,6 +19,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class GeneralModule {
     @Provides
+    fun provideGetWeatherFromNetwork(
+        weatherRepository: WeatherRepository,
+        locationRepository: LocationRepository,
+    ): WeatherGetter = WeatherGetterImpl(weatherRepository, locationRepository)
+
+    @Provides
     @Singleton
     fun provideWeatherRepository(service: WeatherService): WeatherRepository =
         WeatherRepositoryImpl(service)
@@ -37,10 +43,4 @@ class GeneralModule {
     @Singleton
     fun provideLocationService(retrofit: Retrofit): LocationService =
         retrofit.create(LocationService::class.java)
-
-    @Provides
-    fun provideGetWeatherFromNetwork(
-        weatherRepository: WeatherRepository,
-        locationRepository: LocationRepository,
-    ): WeatherGetter = WeatherGetterImpl(weatherRepository, locationRepository)
 }
