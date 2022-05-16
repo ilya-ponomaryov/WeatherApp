@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.repositories.location.network
+package com.example.weatherapp.general.repositories.location
 
 import com.example.weatherapp.common.utils.Constant
 import com.example.weatherapp.general.usecases.location.models.Location

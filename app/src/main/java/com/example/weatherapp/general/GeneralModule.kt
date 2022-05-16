@@ -1,9 +1,9 @@
 package com.example.weatherapp.general
 
-import com.example.weatherapp.general.repositories.location.network.LocationService
-import com.example.weatherapp.general.repositories.location.network.repository.LocationRepositoryImpl
-import com.example.weatherapp.general.repositories.weather.network.WeatherService
-import com.example.weatherapp.general.repositories.weather.network.repository.WeatherRepositoryImpl
+import com.example.weatherapp.general.repositories.location.LocationService
+import com.example.weatherapp.general.repositories.location.LocationRepositoryImpl
+import com.example.weatherapp.general.repositories.weather.WeatherService
+import com.example.weatherapp.general.repositories.weather.WeatherRepositoryImpl
 import com.example.weatherapp.general.usecases.LocationRepository
 import com.example.weatherapp.general.usecases.UseCase
 import com.example.weatherapp.general.usecases.WeatherRepository

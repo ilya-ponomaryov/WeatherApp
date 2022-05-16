@@ -1,6 +1,5 @@
-package com.example.weatherapp.general.repositories.location.network.repository
+package com.example.weatherapp.general.repositories.location
 
-import com.example.weatherapp.general.repositories.location.network.LocationService
 import com.example.weatherapp.general.usecases.LocationRepository
 import com.example.weatherapp.general.usecases.location.models.Location
 import io.reactivex.Single
