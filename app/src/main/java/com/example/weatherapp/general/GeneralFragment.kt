@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.weatherapp.common.utils.observe
 import com.example.weatherapp.common.utils.showToast
 import com.example.weatherapp.databinding.GeneralFragmentBinding
-import com.example.weatherapp.general.dialogs.AddCityDialog
+import com.example.weatherapp.dialogs.AddCityDialog
 import com.example.weatherapp.general.ui.WeatherForDayItem
 import com.example.weatherapp.general.ui.WeatherForTodayItem
 import com.mikepenz.fastadapter.*

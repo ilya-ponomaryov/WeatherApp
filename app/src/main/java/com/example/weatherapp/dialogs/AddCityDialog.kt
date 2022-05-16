@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.dialogs
+package com.example.weatherapp.dialogs
 
 import android.os.Bundle
 import android.util.Log
