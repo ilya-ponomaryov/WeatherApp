@@ -3,7 +3,7 @@ package com.example.weatherapp.general
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
-import com.example.weatherapp.general.usecases.weather.WeatherGetterImpl
+import com.example.weatherapp.general.usecases.weather.WeatherGetter
 import com.example.weatherapp.general.usecases.weather.models.WeatherAndCity
 import com.example.weatherapp.general.usecases.weather.models.WeatherForDay
 import com.example.weatherapp.general.usecases.weather.models.WeatherForToday
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GeneralViewModel @Inject constructor(
-    private val getWeather: WeatherGetterImpl
+    private val getWeather: WeatherGetter
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
