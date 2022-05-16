@@ -3,8 +3,6 @@ package com.example.weatherapp.general
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
-import com.example.weatherapp.general.usecases.getStubWeatherForDay
-import com.example.weatherapp.general.usecases.getStubWeatherForToday
 import com.example.weatherapp.general.usecases.weather.WeatherGetterImpl
 import com.example.weatherapp.general.usecases.weather.models.WeatherAndLocation
 import com.example.weatherapp.general.usecases.weather.models.WeatherForDay
@@ -21,10 +19,10 @@ class GeneralViewModel @Inject constructor(
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
-    private val _weatherForToday = MutableStateFlow<WeatherForToday>(getStubWeatherForToday())
+    private val _weatherForToday = MutableStateFlow<WeatherForToday>(WeatherForToday())
     val weatherForToday: StateFlow<WeatherForToday> = _weatherForToday.asStateFlow()
 
-    private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(getStubWeatherForDay())
+    private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(listOf(WeatherForDay()))
     val weatherForDay: StateFlow<List<WeatherForDay>> = _weatherForDay.asStateFlow()
 
     private val _city = MutableStateFlow<String>("Ваш город")

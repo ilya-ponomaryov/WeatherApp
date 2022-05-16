@@ -3,29 +3,29 @@ package com.example.weatherapp.general.usecases.weather.models
 import com.google.gson.annotations.SerializedName
 
 data class WeatherForHour(
-    val clouds: Int,
+    val clouds: Int = 0,
     @SerializedName("dew_point")
-    val dewPoint: Double,
+    val dewPoint: Double = 0.0,
     @SerializedName("dt")
-    val hour: String,
+    val hour: String = "0",
     @SerializedName("feels_like")
-    val feelsLike: Double,
-    val humidity: Int,
+    val feelsLike: Double = 0.0,
+    val humidity: Int = 0,
     @SerializedName("pop")
-    val probabilityOfPrecipitation: Double,
-    val pressure: Int,
-    val snow: Snow,
+    val probabilityOfPrecipitation: Double = 0.0,
+    val pressure: Int = 0,
+    val snow: Snow = Snow(),
     @SerializedName("temp")
-    val temperature: String,
-    val uvi: Double,
-    val visibility: Int,
+    val temperature: String = "0",
+    val uvi: Double = 0.0,
+    val visibility: Int = 0,
     @SerializedName("weather")
-    val aboutWeather: List<AboutWeather>,
+    val aboutWeather: List<AboutWeather> = listOf(AboutWeather()),
     @SerializedName("wind_deg")
-    val windDegrees: Int,
+    val windDegrees: Int = 0,
     @SerializedName("wind_gust")
-    val windGust: Double,
+    val windGust: Double = 0.0,
     @SerializedName("wind_speed")
-    val windSpeed: Double,
-    val weatherIcon: String,
+    val windSpeed: Double = 0.0,
+    val weatherIcon: String = "http://openweathermap.org/img/w/" + "04d" + ".png",
 )

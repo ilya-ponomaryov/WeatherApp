@@ -1,8 +1,8 @@
 package com.example.weatherapp.general.usecases.weather.models
 
 data class AboutWeather(
-    val description: String,
-    val icon: String,
-    val id: Int,
-    val main: String
+    val description: String = "Описание",
+    val icon: String = "http://openweathermap.org/img/w/" + "04d" + ".png",
+    val id: Int = 0,
+    val main: String = "main"
 )
