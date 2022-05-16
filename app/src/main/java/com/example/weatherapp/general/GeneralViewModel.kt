@@ -22,7 +22,7 @@ class GeneralViewModel @Inject constructor(
     private val _weatherForToday = MutableStateFlow<WeatherForToday>(WeatherForToday())
     val weatherForToday: StateFlow<WeatherForToday> = _weatherForToday.asStateFlow()
 
-    private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(listOf(WeatherForDay()))
+    private val _weatherForDay = MutableStateFlow<List<WeatherForDay>>(listOf())
     val weatherForDay: StateFlow<List<WeatherForDay>> = _weatherForDay.asStateFlow()
 
     private val _city = MutableStateFlow<String>("Ваш город")
