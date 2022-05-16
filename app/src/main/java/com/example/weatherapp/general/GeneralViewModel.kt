@@ -5,7 +5,7 @@ import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
 import com.example.weatherapp.general.usecases.getStubWeatherForDay
 import com.example.weatherapp.general.usecases.getStubWeatherForToday
-import com.example.weatherapp.general.usecases.weather.WeatherGetter
+import com.example.weatherapp.general.usecases.weather.WeatherGetterImpl
 import com.example.weatherapp.general.usecases.weather.models.WeatherAndLocation
 import com.example.weatherapp.general.usecases.weather.models.WeatherForDay
 import com.example.weatherapp.general.usecases.weather.models.WeatherForToday
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GeneralViewModel @Inject constructor(
-    private val getWeather: WeatherGetter
+    private val getWeather: WeatherGetterImpl
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 

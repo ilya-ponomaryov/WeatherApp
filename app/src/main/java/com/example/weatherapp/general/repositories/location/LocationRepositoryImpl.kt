@@ -1,7 +1,7 @@
 package com.example.weatherapp.general.repositories.location
 
-import com.example.weatherapp.general.usecases.LocationRepository
 import com.example.weatherapp.general.usecases.location.models.Location
+import com.example.weatherapp.general.usecases.weather.LocationRepository
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

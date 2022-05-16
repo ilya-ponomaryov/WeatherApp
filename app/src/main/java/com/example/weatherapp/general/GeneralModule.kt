@@ -4,10 +4,10 @@ import com.example.weatherapp.general.repositories.location.LocationService
 import com.example.weatherapp.general.repositories.location.LocationRepositoryImpl
 import com.example.weatherapp.general.repositories.weather.WeatherService
 import com.example.weatherapp.general.repositories.weather.WeatherRepositoryImpl
-import com.example.weatherapp.general.usecases.LocationRepository
-import com.example.weatherapp.general.usecases.UseCase
-import com.example.weatherapp.general.usecases.WeatherRepository
+import com.example.weatherapp.general.usecases.weather.LocationRepository
 import com.example.weatherapp.general.usecases.weather.WeatherGetter
+import com.example.weatherapp.general.usecases.weather.WeatherGetterImpl
+import com.example.weatherapp.general.usecases.weather.WeatherRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,5 +42,5 @@ class GeneralModule {
     fun provideGetWeatherFromNetwork(
         weatherRepository: WeatherRepository,
         locationRepository: LocationRepository,
-    ): UseCase = WeatherGetter(weatherRepository, locationRepository)
+    ): WeatherGetter = WeatherGetterImpl(weatherRepository, locationRepository)
 }

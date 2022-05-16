@@ -1,16 +1,15 @@
 package com.example.weatherapp.general.usecases.weather
 
-import com.example.weatherapp.general.usecases.LocationRepository
-import com.example.weatherapp.general.usecases.UseCase
-import com.example.weatherapp.general.usecases.WeatherRepository
 import com.example.weatherapp.general.usecases.location.models.Location
+import com.example.weatherapp.general.usecases.weather.models.Weather
 import com.example.weatherapp.general.usecases.weather.models.WeatherAndLocation
+import io.reactivex.Single
 import javax.inject.Inject
 
-class WeatherGetter @Inject constructor(
+class WeatherGetterImpl @Inject constructor(
     private val weatherService: WeatherRepository,
     private val locationService: LocationRepository
-): UseCase {
+): WeatherGetter {
     override operator fun invoke(city: String) = locationService.getLocation(city)
         .flatMap(::getWeatherAndLocation)
 
@@ -19,4 +18,16 @@ class WeatherGetter @Inject constructor(
         .getWeather(location[0].latitude, location[0].longitude)
         .map { weather -> WeatherAndLocation(weather, location) }
 
+}
+
+interface WeatherGetter {
+    operator fun invoke(city: String): Single<WeatherAndLocation>
+}
+
+interface LocationRepository {
+    fun getLocation(cityName: String): Single<Location>
+}
+
+interface WeatherRepository {
+    fun getWeather(latitude: Double, longitude: Double): Single<Weather>
 }
