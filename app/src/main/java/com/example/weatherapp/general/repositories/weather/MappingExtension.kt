@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.repositories
+package com.example.weatherapp.general.repositories.weather
 
 import com.example.weatherapp.general.usecases.weather.models.*
 import com.example.weatherapp.general.usecases.DateConverter
