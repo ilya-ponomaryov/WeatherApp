@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class GeneralModule {
     @Provides
-    fun provideGetWeatherFromNetwork(
+    fun provideWeatherGetter(
         weatherRepository: WeatherRepository,
         locationRepository: LocationRepository,
     ): WeatherGetter = WeatherGetterImpl(weatherRepository, locationRepository)

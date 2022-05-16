@@ -19,7 +19,7 @@ class WeatherGetterImpl @Inject constructor(
 
     private fun getWeatherAndCity(city: City) = weatherService
         .getWeather(city.latitude, city.longitude)
-        .map { weather -> WeatherAndCity(weather, city) }
+        .map { weather -> WeatherAndCity( city, weather) }
 }
 
 interface WeatherRepository {
