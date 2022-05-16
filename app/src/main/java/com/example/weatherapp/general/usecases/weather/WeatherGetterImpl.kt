@@ -1,8 +1,8 @@
 package com.example.weatherapp.general.usecases.weather
 
-import com.example.weatherapp.general.usecases.location.models.Location
+import com.example.weatherapp.general.usecases.location.City
 import com.example.weatherapp.general.usecases.weather.models.Weather
-import com.example.weatherapp.general.usecases.weather.models.WeatherAndLocation
+import com.example.weatherapp.general.usecases.weather.models.WeatherAndCity
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -11,21 +11,21 @@ class WeatherGetterImpl @Inject constructor(
     private val locationService: LocationRepository
 ): WeatherGetter {
     override operator fun invoke(city: String) = locationService.getLocation(city)
-        .flatMap(::getWeatherAndLocation)
+        .flatMap(::getWeatherAndCity)
 
 
-    private fun getWeatherAndLocation(location: Location) = weatherService
-        .getWeather(location[0].latitude, location[0].longitude)
-        .map { weather -> WeatherAndLocation(weather, location) }
+    private fun getWeatherAndCity(city: City) = weatherService
+        .getWeather(city.latitude, city.longitude)
+        .map { weather -> WeatherAndCity(weather, city) }
 
 }
 
 interface WeatherGetter {
-    operator fun invoke(city: String): Single<WeatherAndLocation>
+    operator fun invoke(city: String): Single<WeatherAndCity>
 }
 
 interface LocationRepository {
-    fun getLocation(cityName: String): Single<Location>
+    fun getLocation(cityName: String): Single<City>
 }
 
 interface WeatherRepository {

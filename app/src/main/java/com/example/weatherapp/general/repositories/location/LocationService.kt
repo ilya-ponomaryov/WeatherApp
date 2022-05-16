@@ -1,7 +1,7 @@
 package com.example.weatherapp.general.repositories.location
 
 import com.example.weatherapp.common.utils.Constant
-import com.example.weatherapp.general.usecases.location.models.Location
+import com.example.weatherapp.general.repositories.location.models.Location
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

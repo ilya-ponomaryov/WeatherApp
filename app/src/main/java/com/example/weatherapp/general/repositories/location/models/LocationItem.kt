@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.usecases.location.models
+package com.example.weatherapp.general.repositories.location.models
 
 import com.google.gson.annotations.SerializedName
 

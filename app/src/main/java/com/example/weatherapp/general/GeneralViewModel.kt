@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.weatherapp.common.utils.ExceptionCatcher
 import com.example.weatherapp.common.utils.MutableSingleEventFlow
 import com.example.weatherapp.general.usecases.weather.WeatherGetterImpl
-import com.example.weatherapp.general.usecases.weather.models.WeatherAndLocation
+import com.example.weatherapp.general.usecases.weather.models.WeatherAndCity
 import com.example.weatherapp.general.usecases.weather.models.WeatherForDay
 import com.example.weatherapp.general.usecases.weather.models.WeatherForToday
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,10 +38,10 @@ class GeneralViewModel @Inject constructor(
 
 
 
-    private fun onResult(weatherAndLocation: WeatherAndLocation) {
-        _weatherForToday.value = weatherAndLocation.weather.weatherForToday
-        _weatherForDay.value = weatherAndLocation.weather.weatherForDays
-        _city.value = weatherAndLocation.location[0].localNames.russian
+    private fun onResult(weatherAndCity: WeatherAndCity) {
+        _weatherForToday.value = weatherAndCity.weather.weatherForToday
+        _weatherForDay.value = weatherAndCity.weather.weatherForDays
+        _city.value = weatherAndCity.city.cityName
     }
 
     private fun onError(throwable: Throwable) {
