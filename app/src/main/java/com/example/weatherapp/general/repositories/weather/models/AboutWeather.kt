@@ -1,4 +1,4 @@
-package com.example.weatherapp.general.usecases.weather.models
+package com.example.weatherapp.general.repositories.weather.models
 
 data class AboutWeather(
     val description: String = "Описание",

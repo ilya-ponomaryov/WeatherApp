@@ -1,7 +1,7 @@
 package com.example.weatherapp.general.repositories.weather
 
 
-import com.example.weatherapp.general.usecases.weather.models.Hourly
+import com.example.weatherapp.general.repositories.weather.models.Hourly
 import java.util.*
 import kotlin.collections.ArrayList
 

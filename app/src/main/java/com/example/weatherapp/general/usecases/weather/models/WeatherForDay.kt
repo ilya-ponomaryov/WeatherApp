@@ -7,8 +7,6 @@ data class WeatherForDay(
     @SerializedName("dew_point")
     val dewPoint: Double = 0.0,
     val date: String = "00.00.00",
-    @SerializedName("feels_like")
-    val feelsLike: FeelsLike = FeelsLike(),
     val humidity: Int = 0,
     @SerializedName("moon_phase")
     val moonPhase: Double = 0.0,
@@ -23,8 +21,6 @@ data class WeatherForDay(
     val sunrise: Int =0,
     val sunset: Int = 0,
     val uvi: Double = 0.0,
-    @SerializedName("weather")
-    val aboutWeather: List<AboutWeather> = listOf(AboutWeather()),
     @SerializedName("wind_deg")
     val windDegrees: Int = 0,
     @SerializedName("wind_gust")

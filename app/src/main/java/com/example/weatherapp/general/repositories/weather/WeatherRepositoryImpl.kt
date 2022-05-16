@@ -1,5 +1,6 @@
 package com.example.weatherapp.general.repositories.weather
 
+import com.example.weatherapp.general.repositories.weather.models.WeatherData
 import com.example.weatherapp.general.usecases.weather.WeatherRepository
 import com.example.weatherapp.general.usecases.weather.models.Weather
 import io.reactivex.schedulers.Schedulers

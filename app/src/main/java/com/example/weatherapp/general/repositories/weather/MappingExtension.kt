@@ -1,5 +1,9 @@
 package com.example.weatherapp.general.repositories.weather
 
+import com.example.weatherapp.general.repositories.weather.models.Current
+import com.example.weatherapp.general.repositories.weather.models.Daily
+import com.example.weatherapp.general.repositories.weather.models.Hourly
+import com.example.weatherapp.general.repositories.weather.models.Snow
 import com.example.weatherapp.general.usecases.weather.models.*
 import java.util.*
 
@@ -17,7 +21,6 @@ fun toTodayEquipped(current: Current): WeatherForToday {
         temperature = current.temperature.toInt().toString() + "°",
         uvi = current.uvi,
         visibility = current.visibility,
-        aboutWeather = current.aboutWeather,
         windDegrees = current.windDegrees,
         windGust = current.windGust,
         windSpeed = current.windSpeed,
@@ -48,7 +51,6 @@ fun toDailyEquippedList(
                 clouds = day.clouds,
                 dewPoint = day.dewPoint,
                 date = dailyDate.getDateAsString(day.date),
-                feelsLike = day.feelsLike,
                 humidity = day.humidity,
                 moonPhase = day.moonPhase,
                 moonrise = day.moonrise,
@@ -60,7 +62,6 @@ fun toDailyEquippedList(
                 sunrise = day.sunrise,
                 sunset = day.sunset,
                 uvi = day.uvi,
-                aboutWeather = day.aboutWeather,
                 windDegrees = day.windDegrees,
                 windGust = day.windGust,
                 windSpeed = day.windSpeed,
@@ -96,11 +97,9 @@ fun toHourlyEquippedList(hourly: List<Hourly>): List<WeatherForHour> {
                 humidity = it.humidity,
                 probabilityOfPrecipitation = it.probabilityOfPrecipitation,
                 pressure = it.pressure,
-                snow = snow,
                 temperature = it.temperature.toInt().toString() + "°",
                 uvi = it.uvi,
                 visibility = it.visibility,
-                aboutWeather = it.aboutWeather,
                 windDegrees = it.windDegrees,
                 windGust = it.windGust,
                 windSpeed = it.windSpeed,

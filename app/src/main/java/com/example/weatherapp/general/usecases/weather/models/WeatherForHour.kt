@@ -14,13 +14,10 @@ data class WeatherForHour(
     @SerializedName("pop")
     val probabilityOfPrecipitation: Double = 0.0,
     val pressure: Int = 0,
-    val snow: Snow = Snow(),
     @SerializedName("temp")
     val temperature: String = "0",
     val uvi: Double = 0.0,
     val visibility: Int = 0,
-    @SerializedName("weather")
-    val aboutWeather: List<AboutWeather> = listOf(AboutWeather()),
     @SerializedName("wind_deg")
     val windDegrees: Int = 0,
     @SerializedName("wind_gust")
