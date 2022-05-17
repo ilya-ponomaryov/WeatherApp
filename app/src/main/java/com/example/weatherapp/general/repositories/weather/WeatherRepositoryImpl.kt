@@ -15,7 +15,7 @@ class WeatherRepositoryImpl @Inject constructor(
         .subscribeOn(Schedulers.io())
 
     private fun convertToWeather(weatherData: WeatherData) = Weather(
-        toTodayEquipped(weatherData.current),
+        weatherData.current.toWeatherForToday(),
         toDailyEquippedList(weatherData.daily, weatherData.hourly)
     )
 
