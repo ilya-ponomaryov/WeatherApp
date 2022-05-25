@@ -14,7 +14,7 @@ class HourlyDataConverter {
 
     private fun removeTodayDataFromList(hourlyList: List<Hourly>): List<Hourly> {
         val hourlyWithoutTodayList = arrayListOf<Hourly>()
-        val today = Date(hourlyList[0].date.toLong() * 1000)
+        val today = Date(hourlyList.first().date.toLong() * 1000)
 
         for (hourly in hourlyList) {
             val hourlyDate = Date(hourly.date.toLong() * 1000)
@@ -35,7 +35,7 @@ class HourlyDataConverter {
         val thirdDayHourlyList = arrayListOf<Hourly>()
         val fourthDayHourlyList = arrayListOf<Hourly>()
 
-        val firstDate = Date(newList[0].date.toLong() * 1000)
+        val firstDate = Date(newList.first().date.toLong() * 1000)
         var firstDay = firstDate.day
 
         var position = 0
